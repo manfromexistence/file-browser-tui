@@ -316,7 +316,7 @@ impl Widget for MessageList<'_> {
                     let token_text = format!("({} tokens)", msg.token_count);
                     let header = Line::from(vec![
                         Span::styled(
-                            "Sumon",
+                            "User",
                             Style::default()
                                 .fg(self.theme.accent)
                                 .add_modifier(Modifier::BOLD),
@@ -345,8 +345,8 @@ impl Widget for MessageList<'_> {
 
                     // Width: fit content tightly with minimal padding
                     // Add only 4 for borders (2) + minimal spacing (2)
-                    // Minimum width to show "Sumon X tokens" properly
-                    let header_width = format!("Sumon({} tokens)", msg.token_count).len();
+                    // Minimum width to show "User X tokens" properly
+                    let header_width = format!("User({} tokens)", msg.token_count).len();
                     let needed_width = max_content_width.max(header_width) + 4;
                     let max_width = (area.width * 60 / 100) as usize;
                     let msg_width = (needed_width.min(max_width).max(12)) as u16;
