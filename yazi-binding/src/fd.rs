@@ -18,7 +18,7 @@ impl UserData for Fd {
 			match me.0.read(&mut buf).await {
 				Ok(n) => {
 					buf.truncate(n);
-					lua.create_external_string(buf)?.into_lua_multi(&lua)
+					lua.create_string(buf)?.into_lua_multi(&lua)
 				}
 				Err(e) => (Value::Nil, Error::Io(e)).into_lua_multi(&lua),
 			}

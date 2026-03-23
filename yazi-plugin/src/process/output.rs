@@ -23,10 +23,10 @@ impl UserData for Output {
 	fn add_fields<F: mlua::UserDataFields<Self>>(fields: &mut F) {
 		cached_field!(fields, status, |_, me| Ok(Status::new(me.inner.status)));
 		cached_field_mut!(fields, stdout, |lua, me| {
-			lua.create_external_string(mem::take(&mut me.inner.stdout))
+			lua.create_string(mem::take(&mut me.inner.stdout))
 		});
 		cached_field_mut!(fields, stderr, |lua, me| {
-			lua.create_external_string(mem::take(&mut me.inner.stderr))
+			lua.create_string(mem::take(&mut me.inner.stderr))
 		});
 	}
 }

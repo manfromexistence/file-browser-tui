@@ -47,7 +47,7 @@ impl UserData for Tab {
 		cached_field!(fields, name, |lua, me| {
 			match me.name() {
 				Cow::Borrowed(s) => lua.create_string(s),
-				Cow::Owned(s) => lua.create_external_string(s),
+				Cow::Owned(s) => lua.create_string(s),
 			}
 		});
 
