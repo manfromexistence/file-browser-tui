@@ -40,4 +40,3 @@ macro_rules! render_partial {
 		);
 	}};
 }
-

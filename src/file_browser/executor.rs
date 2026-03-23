@@ -12,7 +12,9 @@ pub struct Executor<'a> {
 
 impl<'a> Executor<'a> {
 	#[inline]
-	pub fn new(app: &'a mut App) -> Self { Self { app } }
+	pub fn new(app: &'a mut App) -> Self {
+		Self { app }
+	}
 
 	#[inline]
 	pub fn execute(&mut self, action: ActionCow) -> Result<Data> {

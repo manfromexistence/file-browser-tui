@@ -1,9 +1,9 @@
 use anyhow::Result;
 use crossterm::event::{Event as CrosstermEvent, EventStream, KeyEvent, KeyEventKind};
-use futures::StreamExt;
-use tokio::{select, sync::mpsc};
 use fb_config::YAZI;
 use fb_shared::{CompletionToken, event::Event};
+use futures::StreamExt;
+use tokio::{select, sync::mpsc};
 
 pub(super) struct Signals {
 	pub(super) tx: mpsc::UnboundedSender<(bool, CompletionToken)>,
@@ -19,10 +19,10 @@ impl Signals {
 
 	#[cfg(unix)]
 	fn handle_sys(n: libc::c_int) -> bool {
-		use libc::{SIGCONT, SIGHUP, SIGINT, SIGQUIT, SIGSTOP, SIGTERM, SIGTSTP};
-		use tracing::error;
 		use fb_proxy::AppProxy;
 		use fb_term::YIELD_TO_SUBPROCESS;
+		use libc::{SIGCONT, SIGHUP, SIGINT, SIGQUIT, SIGSTOP, SIGTERM, SIGTSTP};
+		use tracing::error;
 
 		match n {
 			SIGINT => { /* ignored */ }
@@ -47,7 +47,9 @@ impl Signals {
 
 	#[cfg(windows)]
 	#[inline]
-	fn handle_sys(_: ()) -> bool { unreachable!() }
+	fn handle_sys(_: ()) -> bool {
+		unreachable!()
+	}
 
 	fn handle_term(event: CrosstermEvent) {
 		match event {
@@ -112,4 +114,3 @@ impl Signals {
 		Ok(())
 	}
 }
-

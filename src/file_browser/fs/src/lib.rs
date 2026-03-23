@@ -7,4 +7,3 @@ pub fn init() {
 
 	mounts::init();
 }
-

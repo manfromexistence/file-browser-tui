@@ -13,4 +13,3 @@ macro_rules! errln {
 		writeln!(std::io::stderr(), $($tt)*)
 	}}
 }
-

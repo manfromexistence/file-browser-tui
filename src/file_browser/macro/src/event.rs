@@ -33,4 +33,3 @@ macro_rules! succ {
 		return Ok(fb_shared::data::Data::Nil)
 	};
 }
-

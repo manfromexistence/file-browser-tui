@@ -5,4 +5,3 @@ macro_rules! tab {
 		&mut $cx.core.mgr.tabs.items[tab]
 	}};
 }
-

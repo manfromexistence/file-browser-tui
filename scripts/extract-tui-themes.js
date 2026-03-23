@@ -126,7 +126,7 @@ function convertThemeToRgb(theme) {
 // Main execution
 function main() {
   const themeJsonPath = path.join(__dirname, '..', 'theme.json');
-  const outputPath = path.join(__dirname, '..', 'tui-themes.json');
+  const outputPath = path.join(__dirname, '..', 'themes.json');
   
   console.log('Reading theme.json...');
   const themeData = JSON.parse(fs.readFileSync(themeJsonPath, 'utf8'));
@@ -144,10 +144,10 @@ function main() {
     themes: tuiThemes,
   };
   
-  console.log(`Writing ${tuiThemes.length} themes to tui-themes.json...`);
+  console.log(`Writing ${tuiThemes.length} themes to themes.json...`);
   fs.writeFileSync(outputPath, JSON.stringify(output, null, 2), 'utf8');
   
-  console.log('✓ Done! Created tui-themes.json');
+  console.log('✓ Done! Created themes.json');
   console.log(`  Themes: ${tuiThemes.length}`);
   console.log(`  Output: ${outputPath}`);
   

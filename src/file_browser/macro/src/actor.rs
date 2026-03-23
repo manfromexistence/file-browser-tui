@@ -43,4 +43,3 @@ macro_rules! act {
 		$cx.$name(Default::default())
 	};
 }
-

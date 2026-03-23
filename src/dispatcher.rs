@@ -2,71 +2,70 @@ use std::sync::atomic::Ordering;
 use std::time::{Duration, Instant};
 
 use anyhow::Result;
-use crossterm::event::{KeyEvent, MouseEvent, KeyCode, KeyModifiers};
-use tracing::warn;
+use crossterm::event::{KeyCode, KeyEvent, KeyModifiers, MouseEvent};
 use fb_actor::Ctx;
 use fb_config::keymap::Key;
 use fb_macro::{act, emit, succ};
-use fb_shared::{data::Data, event::{ActionCow, Event, NEED_RENDER}};
+use fb_shared::{
+	data::Data,
+	event::{ActionCow, Event, NEED_RENDER},
+};
 use fb_widgets::input::InputMode;
+use tracing::warn;
 
 use crate::file_browser::{Executor, Router, app::App};
 
 // Helper function to format key events into readable shortcut strings
 fn format_key_event(key: &KeyEvent) -> String {
-    let mut parts = Vec::new();
-    
-    // For Char keys, check if Shift is needed (uppercase letters need Shift)
-    let is_char = matches!(key.code, KeyCode::Char(_));
-    let needs_shift = if let KeyCode::Char(c) = key.code {
-        c.is_uppercase() || "!@#$%^&*()_+{}|:\"<>?".contains(c)
-    } else {
-        false
-    };
-    
-    if key.modifiers.contains(KeyModifiers::CONTROL) {
-        parts.push("Ctrl");
-    }
-    
-    // Only add Shift if it's not a char, or if it's a char that needs explicit Shift
-    if key.modifiers.contains(KeyModifiers::SHIFT) && (!is_char || needs_shift) {
-        parts.push("Shift");
-    }
-    
-    if key.modifiers.contains(KeyModifiers::ALT) {
-        parts.push("Alt");
-    }
-    
-    let key_str = match key.code {
-        KeyCode::Char(c) => {
-            // Always use uppercase for letters
-            if c.is_alphabetic() {
-                c.to_uppercase().to_string()
-            } else {
-                c.to_string()
-            }
-        },
-        KeyCode::F(n) => format!("F{}", n),
-        KeyCode::Backspace => "Backspace".to_string(),
-        KeyCode::Enter => "Enter".to_string(),
-        KeyCode::Left => "Left".to_string(),
-        KeyCode::Right => "Right".to_string(),
-        KeyCode::Up => "Up".to_string(),
-        KeyCode::Down => "Down".to_string(),
-        KeyCode::Home => "Home".to_string(),
-        KeyCode::End => "End".to_string(),
-        KeyCode::PageUp => "PageUp".to_string(),
-        KeyCode::PageDown => "PageDown".to_string(),
-        KeyCode::Tab => "Tab".to_string(),
-        KeyCode::BackTab => "BackTab".to_string(),
-        KeyCode::Delete => "Delete".to_string(),
-        KeyCode::Insert => "Insert".to_string(),
-        KeyCode::Esc => "Esc".to_string(),
-        _ => return "Unknown".to_string(),
-    };
-    
-    parts.push(&key_str);
-    parts.join("+")
+	let mut parts = Vec::new();
+
+	// For Char keys, check if Shift is needed (uppercase letters need Shift)
+	let is_char = matches!(key.code, KeyCode::Char(_));
+	let needs_shift = if let KeyCode::Char(c) = key.code {
+		c.is_uppercase() || "!@#$%^&*()_+{}|:\"<>?".contains(c)
+	} else {
+		false
+	};
+
+	if key.modifiers.contains(KeyModifiers::CONTROL) {
+		parts.push("Ctrl");
+	}
+
+	// Only add Shift if it's not a char, or if it's a char that needs explicit Shift
+	if key.modifiers.contains(KeyModifiers::SHIFT) && (!is_char || needs_shift) {
+		parts.push("Shift");
+	}
+
+	if key.modifiers.contains(KeyModifiers::ALT) {
+		parts.push("Alt");
+	}
+
+	let key_str = match key.code {
+		KeyCode::Char(c) => {
+			// Always use uppercase for letters
+			if c.is_alphabetic() { c.to_uppercase().to_string() } else { c.to_string() }
+		}
+		KeyCode::F(n) => format!("F{}", n),
+		KeyCode::Backspace => "Backspace".to_string(),
+		KeyCode::Enter => "Enter".to_string(),
+		KeyCode::Left => "Left".to_string(),
+		KeyCode::Right => "Right".to_string(),
+		KeyCode::Up => "Up".to_string(),
+		KeyCode::Down => "Down".to_string(),
+		KeyCode::Home => "Home".to_string(),
+		KeyCode::End => "End".to_string(),
+		KeyCode::PageUp => "PageUp".to_string(),
+		KeyCode::PageDown => "PageDown".to_string(),
+		KeyCode::Tab => "Tab".to_string(),
+		KeyCode::BackTab => "BackTab".to_string(),
+		KeyCode::Delete => "Delete".to_string(),
+		KeyCode::Insert => "Insert".to_string(),
+		KeyCode::Esc => "Esc".to_string(),
+		_ => return "Unknown".to_string(),
+	};
+
+	parts.push(&key_str);
+	parts.join("+")
 }
 
 pub(super) struct Dispatcher<'a> {
@@ -75,7 +74,9 @@ pub(super) struct Dispatcher<'a> {
 
 impl<'a> Dispatcher<'a> {
 	#[inline]
-	pub(super) fn new(app: &'a mut App) -> Self { Self { app } }
+	pub(super) fn new(app: &'a mut App) -> Self {
+		Self { app }
+	}
 
 	#[inline]
 	pub(super) fn dispatch(&mut self, event: Event) -> Result<()> {
@@ -125,14 +126,14 @@ impl<'a> Dispatcher<'a> {
 
 	#[inline]
 	fn dispatch_key(&mut self, key: KeyEvent) -> Result<Data> {
-		use crossterm::event::KeyCode;
 		use crate::input::InputAction;
 		use crate::menu::MenuAction;
-		
+		use crossterm::event::KeyCode;
+
 		// If in animation mode, handle navigation keys but allow typing
 		if self.app.bridge.chat_state.animation_mode {
 			let animations = crate::AnimationType::all();
-			
+
 			// Handle navigation keys for animation carousel
 			match key.code {
 				KeyCode::Left => {
@@ -148,7 +149,7 @@ impl<'a> Dispatcher<'a> {
 				}
 				KeyCode::Right => {
 					// Next animation (but not Enter - Enter submits input)
-					self.app.bridge.chat_state.current_animation_index = 
+					self.app.bridge.chat_state.current_animation_index =
 						(self.app.bridge.chat_state.current_animation_index + 1) % animations.len();
 					self.app.bridge.chat_state.animation_start_time = Some(Instant::now());
 					NEED_RENDER.store(1, Ordering::Relaxed);
@@ -160,23 +161,33 @@ impl<'a> Dispatcher<'a> {
 				}
 			}
 		}
-		
+
 		// Global menu navigation keys - work when menu is visible on ANY screen
 		if self.app.bridge.chat_state.show_tachyon_menu {
 			// Check if we're in recording mode in keyboard shortcuts submenu
-			if self.app.bridge.chat_state.menu.recording_mode 
+			if self.app.bridge.chat_state.menu.recording_mode
 				&& self.app.bridge.chat_state.menu.current_submenu == Some(1)
 			{
 				// Get the selected shortcut index (skip "Back" and "Toggle Recording Mode")
 				if let Some(action_index) = self.app.bridge.chat_state.menu.get_selected_shortcut_index() {
 					// Format the key press into a shortcut string
 					let shortcut = format_key_event(&key);
-					
+
 					// Don't record navigation keys or special menu keys
-					if !matches!(key.code, 
-						KeyCode::Up | KeyCode::Down | KeyCode::PageUp | KeyCode::PageDown | 
-						KeyCode::Home | KeyCode::End | KeyCode::Esc | KeyCode::Enter |
-						KeyCode::Char('j') | KeyCode::Char('k') | KeyCode::Char('g') | KeyCode::Char('G')
+					if !matches!(
+						key.code,
+						KeyCode::Up
+							| KeyCode::Down
+							| KeyCode::PageUp
+							| KeyCode::PageDown
+							| KeyCode::Home
+							| KeyCode::End
+							| KeyCode::Esc
+							| KeyCode::Enter
+							| KeyCode::Char('j')
+							| KeyCode::Char('k')
+							| KeyCode::Char('g')
+							| KeyCode::Char('G')
 					) {
 						// Update the keyboard shortcut
 						self.app.bridge.chat_state.menu.update_keyboard_shortcut(action_index, shortcut);
@@ -185,13 +196,17 @@ impl<'a> Dispatcher<'a> {
 					}
 				}
 			}
-			
+
 			match key.code {
 				KeyCode::Up | KeyCode::Char('k') => {
 					self.app.bridge.chat_state.menu.select_prev_menu_item();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -200,7 +215,11 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.select_next_menu_item();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -209,7 +228,11 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.page_up(10);
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -218,7 +241,11 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.page_down(10);
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -227,7 +254,11 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.jump_to_top();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -236,7 +267,11 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.jump_to_bottom();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+						self
+							.app
+							.bridge
+							.chat_state
+							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -257,7 +292,7 @@ impl<'a> Dispatcher<'a> {
 						NEED_RENDER.store(1, Ordering::Relaxed);
 						succ!()
 					}
-					
+
 					// Check if toggle recording button is selected
 					if self.app.bridge.chat_state.menu.is_toggle_recording_selected() {
 						// Toggle the recording mode
@@ -265,13 +300,13 @@ impl<'a> Dispatcher<'a> {
 						NEED_RENDER.store(1, Ordering::Relaxed);
 						succ!()
 					}
-					
+
 					// Get the current theme name before selecting
 					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
-					
+
 					// Select current menu item (enter submenu or execute action)
 					let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
-					
+
 					// If we were in theme submenu and selected a theme, just close the menu
 					// (theme is already applied from navigation/hover)
 					if theme_name.is_some() {
@@ -279,7 +314,7 @@ impl<'a> Dispatcher<'a> {
 						self.app.bridge.chat_state.menu.pick_closing_effect();
 						self.app.bridge.chat_state.show_tachyon_menu = false;
 					}
-					
+
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
@@ -301,7 +336,7 @@ impl<'a> Dispatcher<'a> {
 				_ => {}
 			}
 		}
-		
+
 		// Global '0' key handler - toggle menu overlay on ANY screen
 		if key.code == KeyCode::Char('0') {
 			if self.app.bridge.chat_state.show_tachyon_menu {
@@ -315,26 +350,26 @@ impl<'a> Dispatcher<'a> {
 				self.app.bridge.chat_state.show_tachyon_menu = true;
 				self.app.bridge.chat_state.menu.pick_opening_effect();
 			}
-			
+
 			NEED_RENDER.store(1, Ordering::Relaxed);
 			succ!()
 		}
-		
+
 		// Global keyboard shortcuts - check if any registered shortcut matches
 		let pressed_key = format_key_event(&key);
 		let mappings = &self.app.bridge.chat_state.menu.keyboard_mappings;
-		
+
 		// Check each action to see if its shortcut matches
 		for action in MenuAction::all_actions() {
 			let shortcut = mappings.get(action);
-			
+
 			// Handle shortcuts with "or" (e.g., "0 or Ctrl+P")
 			let matches = if shortcut.contains(" or ") {
 				shortcut.split(" or ").any(|s| s.trim() == pressed_key)
 			} else {
 				shortcut == pressed_key
 			};
-			
+
 			if matches {
 				let submenu_index = match action {
 					MenuAction::ContextControlPanel => None, // Special case - just toggle menu
@@ -364,18 +399,18 @@ impl<'a> Dispatcher<'a> {
 					MenuAction::DeveloperInstructions => Some(23),
 					MenuAction::FeatureFlags => Some(24),
 				};
-				
+
 				// Check if menu is already open with this submenu
 				let is_same_submenu = if let Some(idx) = submenu_index {
-					self.app.bridge.chat_state.show_tachyon_menu 
+					self.app.bridge.chat_state.show_tachyon_menu
 						&& self.app.bridge.chat_state.menu.current_submenu == Some(idx)
 						&& self.app.bridge.chat_state.menu.opened_directly
 				} else {
 					// For ContextControlPanel, check if menu is open at main level
-					self.app.bridge.chat_state.show_tachyon_menu 
+					self.app.bridge.chat_state.show_tachyon_menu
 						&& self.app.bridge.chat_state.menu.current_submenu.is_none()
 				};
-				
+
 				if is_same_submenu {
 					// Toggle off - close the menu
 					self.app.bridge.chat_state.menu_is_closing = true;
@@ -388,7 +423,7 @@ impl<'a> Dispatcher<'a> {
 						self.app.bridge.chat_state.show_tachyon_menu = true;
 						self.app.bridge.chat_state.menu.pick_opening_effect();
 					}
-					
+
 					// Navigate to the submenu directly (without "Back" button)
 					if let Some(idx) = submenu_index {
 						self.app.bridge.chat_state.menu.enter_submenu_directly(idx);
@@ -397,23 +432,23 @@ impl<'a> Dispatcher<'a> {
 						self.app.bridge.chat_state.menu.go_back_to_main();
 					}
 				}
-				
+
 				NEED_RENDER.store(1, Ordering::Relaxed);
 				succ!()
 			}
 		}
-		
+
 		// Handle chat input when in Chat mode or FilePicker mode (chat input is visible)
-		if self.app.bridge.mode == crate::AppMode::Chat 
-			|| self.app.bridge.mode == crate::AppMode::FilePicker 
+		if self.app.bridge.mode == crate::AppMode::Chat
+			|| self.app.bridge.mode == crate::AppMode::FilePicker
 		{
 			// Handle scrolling when messages exist and input is empty
-			if !self.app.bridge.chat_state.messages.is_empty() 
-				&& self.app.bridge.chat_state.input.content.is_empty() 
+			if !self.app.bridge.chat_state.messages.is_empty()
+				&& self.app.bridge.chat_state.input.content.is_empty()
 			{
 				match key.code {
 					KeyCode::Up => {
-						self.app.bridge.chat_state.chat_scroll_offset = 
+						self.app.bridge.chat_state.chat_scroll_offset =
 							self.app.bridge.chat_state.chat_scroll_offset.saturating_sub(1);
 						NEED_RENDER.store(1, Ordering::Relaxed);
 						succ!()
@@ -428,7 +463,7 @@ impl<'a> Dispatcher<'a> {
 			}
 			// Route key to chat input
 			let action = self.app.bridge.chat_state.input.handle_key(key);
-			
+
 			match action {
 				InputAction::Submit(msg) => {
 					// Add message to chat - this exits animation mode
@@ -464,7 +499,7 @@ impl<'a> Dispatcher<'a> {
 	#[inline]
 	fn dispatch_mouse(&mut self, mouse: MouseEvent) -> Result<Data> {
 		use crossterm::event::MouseEventKind;
-		
+
 		// Handle menu mouse events globally when menu is visible
 		if self.app.bridge.chat_state.show_tachyon_menu {
 			match mouse.kind {
@@ -473,7 +508,11 @@ impl<'a> Dispatcher<'a> {
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, false) {
 						// Apply theme preview if hovering over a theme
 						if let Some(theme_name) = self.app.bridge.chat_state.menu.get_hovered_theme_name() {
-							self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
+							self
+								.app
+								.bridge
+								.chat_state
+								.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 						}
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
@@ -488,7 +527,7 @@ impl<'a> Dispatcher<'a> {
 							NEED_RENDER.store(1, Ordering::Relaxed);
 							succ!()
 						}
-						
+
 						// Check if toggle recording button is clicked
 						if self.app.bridge.chat_state.menu.is_toggle_recording_selected() {
 							// Toggle the recording mode
@@ -496,13 +535,13 @@ impl<'a> Dispatcher<'a> {
 							NEED_RENDER.store(1, Ordering::Relaxed);
 							succ!()
 						}
-						
+
 						// Get the current theme name before selecting
 						let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
-						
+
 						// Item was clicked - now select it (enter submenu or execute)
 						let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
-						
+
 						// If we were in theme submenu and clicked a theme, just close the menu
 						// (theme is already applied from hover)
 						if theme_name.is_some() {
@@ -510,7 +549,7 @@ impl<'a> Dispatcher<'a> {
 							self.app.bridge.chat_state.menu.pick_closing_effect();
 							self.app.bridge.chat_state.show_tachyon_menu = false;
 						}
-						
+
 						NEED_RENDER.store(1, Ordering::Relaxed);
 					}
 				}
@@ -529,7 +568,7 @@ impl<'a> Dispatcher<'a> {
 				_ => {}
 			}
 		}
-		
+
 		let cx = &mut Ctx::active(&mut self.app.core, &mut self.app.term);
 		act!(app:mouse, cx, mouse)
 	}
@@ -563,30 +602,29 @@ impl<'a> Dispatcher<'a> {
 	fn dispatch_timer(&mut self) -> Result<Data> {
 		// Timer tick for animations - just trigger a render
 		// The effects are time-based and will automatically show updated colors
-		
+
 		// Update chat state (process LLM responses)
 		self.app.bridge.chat_state.update();
-		
+
 		// Update splash font cycling (every 3 seconds)
-		if self.app.bridge.chat_state.animation_mode 
+		if self.app.bridge.chat_state.animation_mode
 			&& self.app.bridge.chat_state.last_font_change.elapsed() >= Duration::from_secs(3)
 		{
 			let animations = crate::AnimationType::all();
 			let current_anim = animations[self.app.bridge.chat_state.current_animation_index];
 			if current_anim == crate::AnimationType::Splash {
-				self.app.bridge.chat_state.splash_font_index = 
+				self.app.bridge.chat_state.splash_font_index =
 					(self.app.bridge.chat_state.splash_font_index + 1) % 113; // 113 valid fonts
 				self.app.bridge.chat_state.last_font_change = Instant::now();
 			}
 		}
-		
+
 		// Update Menu timing
 		let elapsed = self.app.bridge.chat_state.last_frame_instant.elapsed();
 		self.app.bridge.chat_state.menu.update(elapsed);
 		self.app.bridge.chat_state.last_frame_instant = Instant::now();
-		
+
 		NEED_RENDER.store(1, Ordering::Relaxed);
 		succ!();
 	}
 }
-

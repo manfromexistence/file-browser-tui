@@ -19,4 +19,3 @@ pub fn init_default() {
 	ARGS.with(<_>::default);
 	BOOT.with(<_>::default);
 }
-

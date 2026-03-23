@@ -1,4 +1,10 @@
-use std::{env, error::Error, io::{BufRead, BufReader, Read, Write}, process::{Command, Stdio}, thread};
+use std::{
+	env,
+	error::Error,
+	io::{BufRead, BufReader, Read, Write},
+	process::{Command, Stdio},
+	thread,
+};
 
 use fb_tty::TTY;
 
@@ -68,4 +74,3 @@ fn flash<R: Read + Send + 'static>(src: R) -> thread::JoinHandle<()> {
 		}
 	})
 }
-

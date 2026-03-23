@@ -29,11 +29,11 @@ mod splash;
 mod state;
 mod theme;
 
-use panic::Panic;
+pub use bridge::{AppMode, YaziChatBridge};
 use logs::Logs;
+use panic::Panic;
 pub use root::Root;
 pub use state::AnimationType;
-pub use bridge::{YaziChatBridge, AppMode};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -58,4 +58,3 @@ async fn main() -> anyhow::Result<()> {
 
 	fb_shared::LOCAL_SET.run_until(file_browser::app::App::serve()).await
 }
-

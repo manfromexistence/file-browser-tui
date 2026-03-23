@@ -270,4 +270,3 @@ pub fn from_bytes(mut bytes: &[u8]) -> Result<Packet<'static>, Error> {
 		_ => return Err(Error::Packet("unknown packet kind")),
 	})
 }
-

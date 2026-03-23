@@ -37,4 +37,3 @@ pub fn init() -> anyhow::Result<()> {
 	ADAPTOR.get().start();
 	Ok(())
 }
-

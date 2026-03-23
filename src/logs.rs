@@ -2,10 +2,10 @@ use std::fs::File;
 
 use anyhow::Context;
 use crossterm::style::{Color, Print, ResetColor, SetForegroundColor};
-use tracing_appender::non_blocking::WorkerGuard;
-use tracing_subscriber::EnvFilter;
 use fb_fs::Xdg;
 use fb_shared::{LOG_LEVEL, RoCell};
+use tracing_appender::non_blocking::WorkerGuard;
+use tracing_subscriber::EnvFilter;
 
 static _GUARD: RoCell<WorkerGuard> = RoCell::new();
 
@@ -43,4 +43,3 @@ impl Logs {
 		)?)
 	}
 }
-

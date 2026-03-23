@@ -35,4 +35,3 @@ macro_rules! try_from_spark {
 		}
 	};
 }
-

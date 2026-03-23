@@ -7,4 +7,3 @@ pub fn init() -> anyhow::Result<()> {
 	crate::init_lua()?;
 	Ok(())
 }
-

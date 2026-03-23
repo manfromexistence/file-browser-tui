@@ -44,8 +44,7 @@ async fn run() -> anyhow::Result<()> {
 		Command::Emit(cmd) => {
 			fb_boot::init_default();
 			fb_dds::init();
-			if let Err(e) =
-				fb_dds::Client::shot("dds-emit", CommandPub::receiver()?, &cmd.body()?).await
+			if let Err(e) = fb_dds::Client::shot("dds-emit", CommandPub::receiver()?, &cmd.body()?).await
 			{
 				errln!("Cannot emit command: {e}")?;
 				std::process::exit(1);
@@ -77,8 +76,7 @@ async fn run() -> anyhow::Result<()> {
 		Command::Pub(cmd) => {
 			fb_boot::init_default();
 			fb_dds::init();
-			if let Err(e) = fb_dds::Client::shot(&cmd.kind, CommandPub::receiver()?, &cmd.body()?).await
-			{
+			if let Err(e) = fb_dds::Client::shot(&cmd.kind, CommandPub::receiver()?, &cmd.body()?).await {
 				errln!("Cannot send message: {e}")?;
 				std::process::exit(1);
 			}
@@ -104,4 +102,3 @@ async fn run() -> anyhow::Result<()> {
 
 	Ok(())
 }
-

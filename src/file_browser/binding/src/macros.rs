@@ -271,4 +271,3 @@ macro_rules! impl_file_methods {
 		});
 	};
 }
-

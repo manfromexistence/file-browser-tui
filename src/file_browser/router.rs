@@ -1,6 +1,9 @@
 use anyhow::Result;
 use fb_actor::Ctx;
-use fb_config::{KEYMAP, keymap::{Chord, ChordCow, Key}};
+use fb_config::{
+	KEYMAP,
+	keymap::{Chord, ChordCow, Key},
+};
 use fb_macro::{act, emit};
 use fb_shared::Layer;
 
@@ -11,7 +14,9 @@ pub struct Router<'a> {
 }
 
 impl<'a> Router<'a> {
-	pub fn new(app: &'a mut App) -> Self { Self { app } }
+	pub fn new(app: &'a mut App) -> Self {
+		Self { app }
+	}
 
 	pub fn route(&mut self, key: Key) -> Result<bool> {
 		let core = &mut self.app.core;

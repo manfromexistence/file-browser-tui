@@ -4,8 +4,8 @@ use crate::{AsSftpPath, SftpPath};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Symlink<'a> {
-	pub id:       u32,
-	pub link:     SftpPath<'a>,
+	pub id: u32,
+	pub link: SftpPath<'a>,
 	pub original: SftpPath<'a>,
 }
 
@@ -22,4 +22,3 @@ impl<'a> Symlink<'a> {
 		size_of_val(&self.id) + 4 + self.link.len() + 4 + self.original.len()
 	}
 }
-

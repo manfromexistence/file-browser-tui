@@ -14,4 +14,3 @@ bitflags! {
 		const EXCLUDE  = 0b100000;
 	}
 }
-

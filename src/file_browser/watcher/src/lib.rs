@@ -11,4 +11,3 @@ pub fn init() {
 
 	local::init();
 }
-

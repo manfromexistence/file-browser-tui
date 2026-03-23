@@ -13,4 +13,3 @@ pub fn init() {
 	pool::init();
 	event::Event::init();
 }
-

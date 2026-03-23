@@ -44,4 +44,3 @@ fn generate() -> Result<(), Box<dyn Error>> {
 	generate_to(clap_complete_fig::Fig, cmd, bin, out)?;
 	Ok(())
 }
-

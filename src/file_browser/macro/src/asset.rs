@@ -69,4 +69,3 @@ macro_rules! theme_preset {
 		}
 	}};
 }
-

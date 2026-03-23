@@ -11,4 +11,3 @@ macro_rules! ok_or_not_found {
 		ok_or_not_found!($result, Default::default())
 	};
 }
-

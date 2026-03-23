@@ -7,4 +7,3 @@ macro_rules! try_format {
 		output.write_fmt(format_args!($($arg)*)).map(|_| output)
 	}}
 }
-

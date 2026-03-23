@@ -2,12 +2,15 @@ use std::borrow::Cow;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{AsSftpPath, SftpPath, fs::{Attrs, Flags}};
+use crate::{
+	AsSftpPath, SftpPath,
+	fs::{Attrs, Flags},
+};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Open<'a> {
-	pub id:    u32,
-	pub path:  SftpPath<'a>,
+	pub id: u32,
+	pub path: SftpPath<'a>,
 	pub flags: Flags,
 	pub attrs: Cow<'a, Attrs>,
 }
@@ -24,4 +27,3 @@ impl<'a> Open<'a> {
 		size_of_val(&self.id) + 4 + self.path.len() + size_of_val(&self.flags) + self.attrs.len()
 	}
 }
-

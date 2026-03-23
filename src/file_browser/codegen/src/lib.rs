@@ -132,4 +132,3 @@ pub fn from_lua(input: TokenStream) -> TokenStream {
 	}
 	.into()
 }
-

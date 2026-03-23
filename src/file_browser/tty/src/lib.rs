@@ -5,5 +5,6 @@ fb_macro::mod_flat!(windows);
 
 pub static TTY: fb_shared::RoCell<Tty> = fb_shared::RoCell::new();
 
-pub fn init() { TTY.with(<_>::default); }
-
+pub fn init() {
+	TTY.with(<_>::default);
+}
