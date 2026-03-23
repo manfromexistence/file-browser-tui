@@ -177,6 +177,14 @@ impl<'a> Dispatcher<'a> {
 						succ!()
 					}
 					
+					// Check if toggle recording button is selected
+					if self.app.bridge.chat_state.menu.is_toggle_recording_selected() {
+						// Toggle the recording mode
+						self.app.bridge.chat_state.menu.toggle_recording_mode();
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					}
+					
 					// Get the current theme name before selecting
 					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
 					
@@ -313,6 +321,14 @@ impl<'a> Dispatcher<'a> {
 						if self.app.bridge.chat_state.menu.is_toggle_mode_selected() {
 							// Toggle the theme mode
 							self.app.bridge.chat_state.toggle_theme_mode();
+							NEED_RENDER.store(1, Ordering::Relaxed);
+							succ!()
+						}
+						
+						// Check if toggle recording button is clicked
+						if self.app.bridge.chat_state.menu.is_toggle_recording_selected() {
+							// Toggle the recording mode
+							self.app.bridge.chat_state.menu.toggle_recording_mode();
 							NEED_RENDER.store(1, Ordering::Relaxed);
 							succ!()
 						}
