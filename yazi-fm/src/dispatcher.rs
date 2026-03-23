@@ -2,7 +2,7 @@ use std::sync::atomic::Ordering;
 use std::time::{Duration, Instant};
 
 use anyhow::Result;
-use crossterm::event::{KeyEvent, MouseEvent};
+use crossterm::event::{KeyEvent, MouseEvent, KeyCode, KeyModifiers};
 use tracing::warn;
 use yazi_actor::Ctx;
 use yazi_config::keymap::Key;
@@ -11,6 +11,45 @@ use yazi_shared::{data::Data, event::{ActionCow, Event, NEED_RENDER}};
 use yazi_widgets::input::InputMode;
 
 use crate::{Executor, Router, app::App};
+
+// Helper function to format key events into readable shortcut strings
+fn format_key_event(key: &KeyEvent) -> String {
+    let mut parts = Vec::new();
+    
+    if key.modifiers.contains(KeyModifiers::CONTROL) {
+        parts.push("Ctrl");
+    }
+    if key.modifiers.contains(KeyModifiers::SHIFT) {
+        parts.push("Shift");
+    }
+    if key.modifiers.contains(KeyModifiers::ALT) {
+        parts.push("Alt");
+    }
+    
+    let key_str = match key.code {
+        KeyCode::Char(c) => c.to_uppercase().to_string(),
+        KeyCode::F(n) => format!("F{}", n),
+        KeyCode::Backspace => "Backspace".to_string(),
+        KeyCode::Enter => "Enter".to_string(),
+        KeyCode::Left => "Left".to_string(),
+        KeyCode::Right => "Right".to_string(),
+        KeyCode::Up => "Up".to_string(),
+        KeyCode::Down => "Down".to_string(),
+        KeyCode::Home => "Home".to_string(),
+        KeyCode::End => "End".to_string(),
+        KeyCode::PageUp => "PageUp".to_string(),
+        KeyCode::PageDown => "PageDown".to_string(),
+        KeyCode::Tab => "Tab".to_string(),
+        KeyCode::BackTab => "BackTab".to_string(),
+        KeyCode::Delete => "Delete".to_string(),
+        KeyCode::Insert => "Insert".to_string(),
+        KeyCode::Esc => "Esc".to_string(),
+        _ => return "Unknown".to_string(),
+    };
+    
+    parts.push(&key_str);
+    parts.join("+")
+}
 
 pub(super) struct Dispatcher<'a> {
 	app: &'a mut App,
@@ -105,6 +144,29 @@ impl<'a> Dispatcher<'a> {
 		
 		// Global menu navigation keys - work when menu is visible on ANY screen
 		if self.app.bridge.chat_state.show_tachyon_menu {
+			// Check if we're in recording mode in keyboard shortcuts submenu
+			if self.app.bridge.chat_state.menu.recording_mode 
+				&& self.app.bridge.chat_state.menu.current_submenu == Some(1)
+			{
+				// Get the selected shortcut index (skip "Back" and "Toggle Recording Mode")
+				if let Some(action_index) = self.app.bridge.chat_state.menu.get_selected_shortcut_index() {
+					// Format the key press into a shortcut string
+					let shortcut = format_key_event(&key);
+					
+					// Don't record navigation keys or special menu keys
+					if !matches!(key.code, 
+						KeyCode::Up | KeyCode::Down | KeyCode::PageUp | KeyCode::PageDown | 
+						KeyCode::Home | KeyCode::End | KeyCode::Esc | KeyCode::Enter |
+						KeyCode::Char('j') | KeyCode::Char('k') | KeyCode::Char('g') | KeyCode::Char('G')
+					) {
+						// Update the keyboard shortcut
+						self.app.bridge.chat_state.menu.update_keyboard_shortcut(action_index, shortcut);
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					}
+				}
+			}
+			
 			match key.code {
 				KeyCode::Up | KeyCode::Char('k') => {
 					self.app.bridge.chat_state.menu.select_prev_menu_item();
@@ -237,6 +299,65 @@ impl<'a> Dispatcher<'a> {
 			
 			NEED_RENDER.store(1, Ordering::Relaxed);
 			succ!()
+		}
+		
+		// Global keyboard shortcuts - check if any registered shortcut matches
+		if !self.app.bridge.chat_state.show_tachyon_menu {
+			use crate::tui::menu::MenuAction;
+			
+			let pressed_key = format_key_event(&key);
+			let mappings = &self.app.bridge.chat_state.menu.keyboard_mappings;
+			
+			// Check each action to see if its shortcut matches
+			for action in MenuAction::all_actions() {
+				let shortcut = mappings.get(action);
+				if shortcut == pressed_key {
+					// Match found! Open menu and navigate to the corresponding submenu
+					let submenu_index = match action {
+						MenuAction::ContextControlPanel => 0, // Special case - just open menu
+						MenuAction::Theme => 0,
+						MenuAction::KeyboardShortcuts => 1,
+						MenuAction::Providers => 2,
+						MenuAction::PluginsApps => 3,
+						MenuAction::Skills => 4,
+						MenuAction::Sandbox => 5,
+						MenuAction::WebSearch => 6,
+						MenuAction::McpServers => 7,
+						MenuAction::MemoryHistory => 8,
+						MenuAction::MultiAgent => 9,
+						MenuAction::Notifications => 10,
+						MenuAction::VoiceRealtime => 11,
+						MenuAction::ImageVision => 12,
+						MenuAction::Profiles => 13,
+						MenuAction::Worktree => 14,
+						MenuAction::Authentication => 15,
+						MenuAction::NetworkProxy => 16,
+						MenuAction::HooksEvents => 17,
+						MenuAction::SessionResume => 18,
+						MenuAction::ApprovalPolicy => 19,
+						MenuAction::ShellEnvironment => 20,
+						MenuAction::ExecutionRules => 21,
+						MenuAction::ProjectTrust => 22,
+						MenuAction::DeveloperInstructions => 23,
+						MenuAction::FeatureFlags => 24,
+					};
+					
+					// Open menu if not already open
+					if !self.app.bridge.chat_state.show_tachyon_menu {
+						self.app.bridge.chat_state.menu_is_closing = false;
+						self.app.bridge.chat_state.show_tachyon_menu = true;
+						self.app.bridge.chat_state.menu.pick_opening_effect();
+					}
+					
+					// Navigate to the submenu (unless it's ContextControlPanel which just opens menu)
+					if !matches!(action, MenuAction::ContextControlPanel) {
+						self.app.bridge.chat_state.menu.enter_submenu(submenu_index);
+					}
+					
+					NEED_RENDER.store(1, Ordering::Relaxed);
+					succ!()
+				}
+			}
 		}
 		
 		// Handle chat input when in Chat mode or FilePicker mode (chat input is visible)
