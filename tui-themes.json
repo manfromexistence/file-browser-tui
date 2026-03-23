@@ -1,0 +1,6449 @@
+{
+  "version": "1.0.0",
+  "themes": [
+    {
+      "name": "modern-minimal",
+      "title": "Modern Minimal",
+      "description": "A theme based on the Modern Minimal color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "t3-chat",
+      "title": "T3 Chat",
+      "description": "A theme based on the T3 Chat color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "twitter",
+      "title": "Twitter",
+      "description": "A theme based on the Twitter color palette.",
+      "dark": {
+        "background": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "mocha-mousse",
+      "title": "Mocha Mousse",
+      "description": "A theme based on the Mocha Mousse color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "bubblegum",
+      "title": "Bubblegum",
+      "description": "A theme based on the Bubblegum color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "doom-64",
+      "title": "Doom 64",
+      "description": "A theme based on the Doom 64 color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "catppuccin",
+      "title": "Catppuccin",
+      "description": "A theme based on the Catppuccin color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "graphite",
+      "title": "Graphite",
+      "description": "A theme based on the Graphite color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "perpetuity",
+      "title": "Perpetuity",
+      "description": "A theme based on the Perpetuity color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "kodama-grove",
+      "title": "Kodama Grove",
+      "description": "A theme based on the Kodama Grove color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "cosmic-night",
+      "title": "Cosmic Night",
+      "description": "A theme based on the Cosmic Night color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "tangerine",
+      "title": "Tangerine",
+      "description": "A theme based on the Tangerine color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "quantum-rose",
+      "title": "Quantum Rose",
+      "description": "A theme based on the Quantum Rose color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "nature",
+      "title": "Nature",
+      "description": "A theme based on the Nature color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "bold-tech",
+      "title": "Bold Tech",
+      "description": "A theme based on the Bold Tech color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "elegant-luxury",
+      "title": "Elegant Luxury",
+      "description": "A theme based on the Elegant Luxury color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "amber-minimal",
+      "title": "Amber Minimal",
+      "description": "A theme based on the Amber Minimal color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "supabase",
+      "title": "Supabase",
+      "description": "A theme based on the Supabase color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "neo-brutalism",
+      "title": "Neo Brutalism",
+      "description": "A theme based on the Neo Brutalism color palette.",
+      "dark": {
+        "background": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "input": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "solar-dusk",
+      "title": "Solar Dusk",
+      "description": "A theme based on the Solar Dusk color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "claymorphism",
+      "title": "Claymorphism",
+      "description": "A theme based on the Claymorphism color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "cyberpunk",
+      "title": "Cyberpunk",
+      "description": "A theme based on the Cyberpunk color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "pastel-dreams",
+      "title": "Pastel Dreams",
+      "description": "A theme based on the Pastel Dreams color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "clean-slate",
+      "title": "Clean Slate",
+      "description": "A theme based on the Clean Slate color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "caffeine",
+      "title": "Caffeine",
+      "description": "A theme based on the Caffeine color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "ocean-breeze",
+      "title": "Ocean Breeze",
+      "description": "A theme based on the Ocean Breeze color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "retro-arcade",
+      "title": "Retro Arcade",
+      "description": "A theme based on the Retro Arcade color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "midnight-bloom",
+      "title": "Midnight Bloom",
+      "description": "A theme based on the Midnight Bloom color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "candyland",
+      "title": "Candyland",
+      "description": "A theme based on the Candyland color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "northern-lights",
+      "title": "Northern Lights",
+      "description": "A theme based on the Northern Lights color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "vintage-paper",
+      "title": "Vintage Paper",
+      "description": "A theme based on the Vintage Paper color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "sunset-horizon",
+      "title": "Sunset Horizon",
+      "description": "A theme based on the Sunset Horizon color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "starry-night",
+      "title": "Starry Night",
+      "description": "A theme based on the Starry Night color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "claude",
+      "title": "Claude",
+      "description": "A theme based on the Claude color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "vercel",
+      "title": "Vercel",
+      "description": "A theme based on the Vercel color palette.",
+      "dark": {
+        "background": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "primary": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        }
+      }
+    },
+    {
+      "name": "mono",
+      "title": "Mono",
+      "description": "A theme based on the Mono color palette.",
+      "dark": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      },
+      "light": {
+        "background": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "input": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "ring": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    }
+  ]
+}

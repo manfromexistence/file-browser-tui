@@ -10,7 +10,7 @@ use yazi_macro::{act, emit, succ};
 use yazi_shared::{data::Data, event::{ActionCow, Event, NEED_RENDER}};
 use yazi_widgets::input::InputMode;
 
-use crate::{Executor, Router, app::App};
+use crate::{Executor, Router, app::App, tui::theme::ChatTheme};
 
 pub(super) struct Dispatcher<'a> {
 	app: &'a mut App,
@@ -137,8 +137,27 @@ impl<'a> Dispatcher<'a> {
 					succ!()
 				}
 				KeyCode::Enter => {
+					// Check if a theme was selected before selecting the item
+					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
+					
 					// Select current menu item (enter submenu or execute action)
-					self.app.bridge.chat_state.menu.select_current_item();
+					let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
+					
+					// If a theme was selected, apply it
+					if let Some(name) = theme_name {
+						if let Some(new_theme) = ChatTheme::by_name(&name, crate::tui::theme::ThemeVariant::Dark) {
+							// Update theme in state
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							// Update theme in menu
+							self.app.bridge.chat_state.menu.theme = new_theme;
+							
+							// Close menu after theme selection
+							self.app.bridge.chat_state.menu_is_closing = true;
+							self.app.bridge.chat_state.menu.pick_closing_effect();
+							self.app.bridge.chat_state.show_tachyon_menu = false;
+						}
+					}
+					
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
@@ -252,8 +271,27 @@ impl<'a> Dispatcher<'a> {
 				MouseEventKind::Down(_) => {
 					// Handle click - select and potentially enter submenu
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, true) {
+						// Check if a theme was selected before selecting the item
+						let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
+						
 						// Item was clicked - now select it (enter submenu or execute)
-						self.app.bridge.chat_state.menu.select_current_item();
+						let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
+						
+						// If a theme was selected, apply it
+						if let Some(name) = theme_name {
+							if let Some(new_theme) = ChatTheme::by_name(&name, crate::tui::theme::ThemeVariant::Dark) {
+								// Update theme in state
+								self.app.bridge.chat_state.theme = new_theme.clone();
+								// Update theme in menu
+								self.app.bridge.chat_state.menu.theme = new_theme;
+								
+								// Close menu after theme selection
+								self.app.bridge.chat_state.menu_is_closing = true;
+								self.app.bridge.chat_state.menu.pick_closing_effect();
+								self.app.bridge.chat_state.show_tachyon_menu = false;
+							}
+						}
+						
 						NEED_RENDER.store(1, Ordering::Relaxed);
 					}
 				}

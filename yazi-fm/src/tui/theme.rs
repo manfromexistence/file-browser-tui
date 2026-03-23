@@ -1,4 +1,6 @@
 use ratatui::style::{Color, Modifier, Style};
+use serde::{Deserialize, Serialize};
+use std::sync::OnceLock;
 // Temporarily disabled - MachineFormat issue
 // use serializer::{DxLlmValue, MachineFormat, machine_to_document};
 
@@ -8,6 +10,57 @@ pub enum ThemeVariant {
     #[allow(dead_code)]
     Light,
 }
+
+// Structures for loading themes from JSON
+#[derive(Debug, Deserialize, Serialize, Clone)]
+struct RgbColor {
+    r: u8,
+    g: u8,
+    b: u8,
+}
+
+impl From<RgbColor> for Color {
+    fn from(rgb: RgbColor) -> Self {
+        Color::Rgb(rgb.r, rgb.g, rgb.b)
+    }
+}
+
+#[derive(Debug, Deserialize, Clone)]
+struct ThemeColors {
+    background: RgbColor,
+    foreground: RgbColor,
+    card: RgbColor,
+    card_foreground: RgbColor,
+    primary: RgbColor,
+    primary_foreground: RgbColor,
+    secondary: RgbColor,
+    secondary_foreground: RgbColor,
+    muted: RgbColor,
+    muted_foreground: RgbColor,
+    accent: RgbColor,
+    accent_foreground: RgbColor,
+    destructive: RgbColor,
+    destructive_foreground: RgbColor,
+    border: RgbColor,
+    input: RgbColor,
+    ring: RgbColor,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct ThemeDefinition {
+    pub name: String,
+    pub title: String,
+    pub description: String,
+    dark: ThemeColors,
+    light: ThemeColors,
+}
+
+#[derive(Debug, Deserialize)]
+struct ThemeRegistry {
+    themes: Vec<ThemeDefinition>,
+}
+
+static THEME_REGISTRY: OnceLock<ThemeRegistry> = OnceLock::new();
 
 #[derive(Debug, Clone)]
 pub struct ChatTheme {
@@ -74,6 +127,84 @@ pub struct ModeColors {
 }
 
 impl ChatTheme {
+    /// Load all available themes from tui-themes.json
+    pub fn load_themes() -> &'static ThemeRegistry {
+        THEME_REGISTRY.get_or_init(|| {
+            let themes_json = include_str!("../../../tui-themes.json");
+            serde_json::from_str(themes_json)
+                .expect("Failed to parse tui-themes.json")
+        })
+    }
+
+    /// Get a list of all available theme names and titles
+    pub fn available_themes() -> Vec<(String, String)> {
+        Self::load_themes()
+            .themes
+            .iter()
+            .map(|t| (t.name.clone(), t.title.clone()))
+            .collect()
+    }
+
+    /// Create a theme from a theme definition
+    pub fn from_definition(def: &ThemeDefinition, variant: ThemeVariant) -> Self {
+        let colors = match variant {
+            ThemeVariant::Dark => &def.dark,
+            ThemeVariant::Light => &def.light,
+        };
+
+        let primary: Color = colors.primary.clone().into();
+        let accent: Color = colors.accent.clone().into();
+        
+        Self {
+            variant,
+            bg: colors.background.clone().into(),
+            fg: colors.foreground.clone().into(),
+            card: colors.card.clone().into(),
+            card_fg: colors.card_foreground.clone().into(),
+            popover: colors.card.clone().into(),
+            popover_fg: colors.card_foreground.clone().into(),
+            primary,
+            primary_fg: colors.primary_foreground.clone().into(),
+            secondary: colors.secondary.clone().into(),
+            secondary_fg: colors.secondary_foreground.clone().into(),
+            muted: colors.muted.clone().into(),
+            muted_fg: colors.muted_foreground.clone().into(),
+            accent,
+            accent_fg: colors.accent_foreground.clone().into(),
+            destructive: colors.destructive.clone().into(),
+            destructive_fg: colors.destructive_foreground.clone().into(),
+            border: colors.border.clone().into(),
+            border_focused: primary,
+            input: colors.input.clone().into(),
+            ring: colors.ring.clone().into(),
+            // Legacy compatibility
+            user_msg_bg: colors.card.clone().into(),
+            ai_msg_bg: colors.muted.clone().into(),
+            accent_secondary: accent,
+            shimmer_colors: vec![
+                colors.border.clone().into(),
+                primary,
+                colors.muted_foreground.clone().into(),
+                primary,
+                colors.border.clone().into(),
+            ],
+            mode_colors: ModeColors {
+                agent: primary,
+                plan: colors.ring.clone().into(),
+                ask: colors.accent.clone().into(),
+            },
+        }
+    }
+
+    /// Create a theme by name
+    pub fn by_name(name: &str, variant: ThemeVariant) -> Option<Self> {
+        Self::load_themes()
+            .themes
+            .iter()
+            .find(|t| t.name == name)
+            .map(|def| Self::from_definition(def, variant))
+    }
+
     #[allow(dead_code)]
     pub fn new(variant: ThemeVariant) -> Self {
         // Try to load from theme.sr, fallback to hardcoded if it fails

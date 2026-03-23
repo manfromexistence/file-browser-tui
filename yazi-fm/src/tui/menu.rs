@@ -18,7 +18,7 @@ pub struct Menu {
     pub last_tick: Duration,
     pub auto_cycle_timer: Duration,
     effects: EffectsRepository,
-    theme: ChatTheme,
+    pub theme: ChatTheme,
     rng: SimpleRng,
     pub selected_menu_item: usize,
     pub hovered_menu_item: Option<usize>, // Track hovered item
@@ -66,20 +66,13 @@ impl Menu {
             ("25. Feature Flags", ""),
         ];
 
+        // Load available themes from theme.rs
+        // We'll populate the theme submenu dynamically when entering it
+
         // Submenus for each category (indexed by main menu position)
         let submenus = vec![
-            // 1. Theme submenu (index 0)
-            vec![
-                ("1. Theme Selector", ""),
-                ("2. Dark Themes", ""),
-                ("3. Light Themes", ""),
-                ("4. Custom Theme", ""),
-                ("5. Syntax Highlighting", ""),
-                ("6. UI Colors", ""),
-                ("7. Font Settings", ""),
-                ("8. Icon Theme", ""),
-                ("9. Transparency", ""),
-            ],
+            // 1. Theme submenu (index 0) - will be populated dynamically
+            vec![],
             // 2. Keyboard Shortcuts submenu (index 1)
             vec![
                 ("1. View Shortcuts", ""),
@@ -303,6 +296,51 @@ impl Menu {
         }
     }
 
+    pub fn enter_submenu(&mut self, index: usize) {
+        // Special handling for Theme submenu (index 0)
+        if index == 0 {
+            // Load available themes dynamically
+            let available_themes = ChatTheme::available_themes();
+            
+            let mut submenu_items = vec![
+                ("Back".to_string(), String::new()),
+            ];
+            
+            // Add all available themes
+            for (i, (name, title)) in available_themes.iter().enumerate() {
+                submenu_items.push((format!("{}. {}", i + 1, title), name.clone()));
+            }
+            
+            self.menu_items = submenu_items;
+            self.current_submenu = Some(index);
+            self.selected_menu_item = 0;
+            self.scroll_offset = 0;
+            self.hovered_menu_item = None;
+        } else if index < self.submenus.len() {
+            self.current_submenu = Some(index);
+            
+            // Build submenu with "Back" at top, then items
+            let mut submenu_items = vec![
+                ("Back".to_string(), String::new()),
+            ];
+            submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
+            self.menu_items = submenu_items;
+            self.selected_menu_item = 0; // Start at "Back"
+            self.scroll_offset = 0;
+            self.hovered_menu_item = None;
+        }
+    }
+
+    pub fn get_selected_theme_name(&self) -> Option<String> {
+        // Only return theme name if we're in the theme submenu (index 0)
+        if self.current_submenu == Some(0) && self.selected_menu_item > 0 {
+            // The description field contains the theme name
+            Some(self.menu_items[self.selected_menu_item].1.clone())
+        } else {
+            None
+        }
+    }
+
     pub fn update(&mut self, elapsed: std::time::Duration) {
         self.last_tick = Duration::from_millis(elapsed.as_millis() as u32);
         // Removed auto-cycling - animations only change on menu toggle
@@ -333,22 +371,6 @@ impl Menu {
             self.selected_menu_item = self.menu_items.len() - 1;
         } else {
             self.selected_menu_item -= 1;
-        }
-    }
-
-    pub fn enter_submenu(&mut self, index: usize) {
-        if index < self.submenus.len() {
-            self.current_submenu = Some(index);
-            
-            // Build submenu with "Back" at top, then items
-            let mut submenu_items = vec![
-                ("Back".to_string(), String::new()),
-            ];
-            submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
-            self.menu_items = submenu_items;
-            self.selected_menu_item = 0; // Start at "Back"
-            self.scroll_offset = 0;
-            self.hovered_menu_item = None;
         }
     }
 

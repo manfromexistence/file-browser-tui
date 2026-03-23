@@ -6499,6 +6499,8 @@ dependencies = [
  "rand 0.8.5",
  "ratatui",
  "scopeguard",
+ "serde",
+ "serde_json",
  "signal-hook-tokio",
  "sysinfo",
  "tachyonfx",
