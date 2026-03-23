@@ -25,3 +25,5 @@ Now, you have added some text color on the command line item. Please remove that
 previously the items were inside the menu but now its around the whole screen so please put them insid ethe munu again adn also in the right there is som space tyhat we are not covering so please cover them add scroll funcationality inside the menu
 
 Currently the yazi file picker screen file picker screen bottom border is less the full bottom as you can see from the screenshot so please make the bottom border be more in the bottom.
+
+Now when we press 0, it's showing a menu. We have to work on the menu list so it will be a menu for AI coding CLI. It only needs a command pattern menu. Ask me clarification questions about who the menu items should be for so that we can add menu items related to our project. 
