@@ -4,6 +4,7 @@ use ratatui::layout::Rect;
 use tachyonfx::{Duration, Effect, SimpleRng};
 use super::menu_effects::EffectsRepository;
 use super::submenus;
+use super::keyboard_mappings::KeyboardMappings;
 
 pub struct Menu {
     pub active_effect: (&'static str, Effect),
@@ -22,6 +23,7 @@ pub struct Menu {
     pub(super) main_menu: Vec<(&'static str, &'static str)>,
     pub(super) submenus: Vec<Vec<(&'static str, &'static str)>>,
     pub recording_mode: bool,
+    pub keyboard_mappings: KeyboardMappings,
 }
 
 impl Menu {
@@ -32,6 +34,7 @@ impl Menu {
 
         let main_menu = get_main_menu();
         let submenus = submenus::get_all_submenus();
+        let keyboard_mappings = KeyboardMappings::new();
 
         Self {
             active_effect,
@@ -50,6 +53,7 @@ impl Menu {
             main_menu,
             submenus,
             recording_mode: false,
+            keyboard_mappings,
         }
     }
 

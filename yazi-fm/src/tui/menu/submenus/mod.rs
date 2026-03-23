@@ -1,6 +1,6 @@
 // Submenu definitions for all command palette items
 mod theme;
-mod keyboard_shortcuts;
+pub(super) mod keyboard_shortcuts;
 mod providers;
 mod plugins_apps;
 mod skills;

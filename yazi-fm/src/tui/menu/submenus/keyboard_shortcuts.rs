@@ -1,4 +1,19 @@
-// Keyboard Shortcuts submenu
+// Keyboard Shortcuts submenu - uses dynamic mappings
+use crate::tui::menu::keyboard_mappings::{KeyboardMappings, MenuAction};
+
+pub fn get_submenu_with_mappings(mappings: &KeyboardMappings) -> Vec<(String, String)> {
+    MenuAction::all_actions()
+        .into_iter()
+        .enumerate()
+        .map(|(i, action)| {
+            let title = format!("{}. {}", i + 1, action.display_name());
+            let shortcut = mappings.get(action);
+            (title, shortcut)
+        })
+        .collect()
+}
+
+// Static version for initial loading (will be replaced with dynamic version)
 pub fn get_submenu() -> Vec<(&'static str, &'static str)> {
     vec![
         ("1. Context Control Panel", "0 or Ctrl+P"),

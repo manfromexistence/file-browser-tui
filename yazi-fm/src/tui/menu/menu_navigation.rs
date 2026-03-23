@@ -1,6 +1,7 @@
 // Menu navigation and selection logic
 use crate::tui::theme::ChatTheme;
 use super::menu_data::Menu;
+use super::submenus::keyboard_shortcuts;
 
 impl Menu {
     pub fn enter_submenu(&mut self, index: usize) {
@@ -30,7 +31,9 @@ impl Menu {
                 ("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()),
             ];
             
-            submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
+            // Add keyboard shortcuts with dynamic mappings
+            let shortcuts = keyboard_shortcuts::get_submenu_with_mappings(&self.keyboard_mappings);
+            submenu_items.extend(shortcuts);
             
             self.menu_items = submenu_items;
             self.current_submenu = Some(index);
@@ -152,5 +155,40 @@ impl Menu {
 
     pub fn toggle_recording_mode(&mut self) {
         self.recording_mode = !self.recording_mode;
+    }
+    
+    // Get the currently selected keyboard shortcut item for recording
+    #[allow(dead_code)]
+    pub fn get_selected_shortcut_index(&self) -> Option<usize> {
+        if self.current_submenu == Some(1) && self.recording_mode && self.selected_menu_item >= 2 {
+            // Subtract 2 for "Back" and "Toggle Recording Mode"
+            Some(self.selected_menu_item - 2)
+        } else {
+            None
+        }
+    }
+    
+    // Update a keyboard shortcut
+    #[allow(dead_code)]
+    pub fn update_keyboard_shortcut(&mut self, action_index: usize, new_shortcut: String) {
+        use super::keyboard_mappings::MenuAction;
+        
+        let actions = MenuAction::all_actions();
+        if action_index < actions.len() {
+            self.keyboard_mappings.set(actions[action_index], new_shortcut.clone());
+            
+            // Refresh the menu items to show the updated shortcut
+            if self.current_submenu == Some(1) {
+                let mut submenu_items = vec![
+                    ("Back".to_string(), String::new()),
+                    ("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()),
+                ];
+                
+                let shortcuts = keyboard_shortcuts::get_submenu_with_mappings(&self.keyboard_mappings);
+                submenu_items.extend(shortcuts);
+                
+                self.menu_items = submenu_items;
+            }
+        }
     }
 }

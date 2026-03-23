@@ -202,7 +202,7 @@ impl<'a> Dispatcher<'a> {
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
-				KeyCode::Esc | KeyCode::Backspace => {
+				KeyCode::Esc => {
 					// Go back to main menu if in submenu, otherwise close menu
 					if self.app.bridge.chat_state.menu.current_submenu.is_some() {
 						self.app.bridge.chat_state.menu.go_back_to_main();
