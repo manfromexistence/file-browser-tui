@@ -154,7 +154,7 @@ impl ChatState {
 
 		// Try to load DX theme from JSON, fallback to hardcoded if it fails
 		let theme_mode = crate::theme::ThemeVariant::Dark;
-		let theme = ChatTheme::by_name("dx", theme_mode).unwrap_or_else(|| ChatTheme::dark_fallback());
+		let theme = ChatTheme::by_name("dx", theme_mode).unwrap_or_else(ChatTheme::dark_fallback);
 
 		Self {
 			theme: theme.clone(),

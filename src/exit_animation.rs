@@ -122,7 +122,7 @@ fn render_train_frame(rainbow: &RainbowEffect, frame: usize, terminal_width: usi
 
 	// Render tracks
 	for x in 0..terminal_width {
-		let ch = if (x + (elapsed_ms / 300)).is_multiple_of(4) { '╫' } else { '═' };
+		let ch = if (x + (elapsed_ms / 300)) % 4 == 0 { '╫' } else { '═' };
 		let color_idx = (x + (elapsed_ms / 300)) % 50;
 		let c = rainbow.rgb_color_at(color_idx);
 		print!("\x1B[38;2;{};{};{}m{}\x1B[0m", c.r, c.g, c.b, ch);

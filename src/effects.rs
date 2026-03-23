@@ -114,7 +114,7 @@ impl TypingIndicator {
 
 	pub fn is_visible(&self) -> bool {
 		// Blink every 500ms
-		(self.last_update.elapsed().as_millis() / 500).is_multiple_of(2)
+		(self.last_update.elapsed().as_millis() / 500) % 2 == 0
 	}
 }
 

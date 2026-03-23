@@ -12,6 +12,12 @@ pub struct YaziChatBridge {
 	pub mode: AppMode,
 }
 
+impl Default for YaziChatBridge {
+	fn default() -> Self {
+		Self::new()
+	}
+}
+
 impl YaziChatBridge {
 	pub fn new() -> Self {
 		Self {
