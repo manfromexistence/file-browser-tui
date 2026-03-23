@@ -22,7 +22,7 @@ pub struct Menu {
     rng: SimpleRng,
     pub selected_menu_item: usize,
     pub hovered_menu_item: Option<usize>, // Track hovered item
-    pub menu_items: Vec<(&'static str, &'static str)>,
+    pub menu_items: Vec<(String, String)>, // Changed to owned Strings
     pub scroll_offset: usize,
     pub menu_item_areas: Vec<Rect>, // Store clickable areas for each visible item
     pub menu_area: Rect, // Store the overall menu area
@@ -37,257 +37,257 @@ impl Menu {
         let effects = EffectsRepository::new(theme.clone(), &mut rng);
         let active_effect = effects.get_random_opening_effect(&mut rng);
 
-        // Main menu - 26 top-level categories
+        // Main menu - 26 top-level categories (ordered by importance)
         let main_menu = vec![
-            ("Providers", ""),
-            ("Keyboard Shortcuts", ""),
-            ("Theme", ""),
-            ("Worktree", ""),
-            ("Sandbox", ""),
-            ("Model Configuration", ""),
-            ("Approval Policy", ""),
-            ("Web Search", ""),
-            ("MCP Servers", ""),
-            ("Profiles", ""),
-            ("Feature Flags", ""),
-            ("Voice / Realtime", ""),
-            ("Notifications", ""),
-            ("Memory & History", ""),
-            ("Shell Environment", ""),
-            ("Multi-Agent", ""),
-            ("Skills", ""),
-            ("Execution Rules", ""),
-            ("Authentication", ""),
-            ("Developer Instructions", ""),
-            ("Image & Vision", ""),
-            ("Project Trust", ""),
-            ("Plugins & Apps", ""),
-            ("Session Resume", ""),
-            ("Network & Proxy", ""),
-            ("Hooks & Events", ""),
+            ("1. Model Configuration", ""),
+            ("2. Providers", ""),
+            ("3. Approval Policy", ""),
+            ("4. Theme", ""),
+            ("5. Keyboard Shortcuts", ""),
+            ("6. Sandbox", ""),
+            ("7. Feature Flags", ""),
+            ("8. MCP Servers", ""),
+            ("9. Web Search", ""),
+            ("10. Multi-Agent", ""),
+            ("11. Skills", ""),
+            ("12. Execution Rules", ""),
+            ("13. Memory & History", ""),
+            ("14. Profiles", ""),
+            ("15. Authentication", ""),
+            ("16. Developer Instructions", ""),
+            ("17. Shell Environment", ""),
+            ("18. Worktree", ""),
+            ("19. Voice / Realtime", ""),
+            ("20. Image & Vision", ""),
+            ("21. Plugins & Apps", ""),
+            ("22. Session Resume", ""),
+            ("23. Network & Proxy", ""),
+            ("24. Notifications", ""),
+            ("25. Hooks & Events", ""),
+            ("26. Project Trust", ""),
         ];
 
-        // Submenus for each category
+        // Submenus for each category (ordered by main menu)
         let submenus = vec![
-            // Providers submenu (index 0)
+            // Model Configuration submenu (index 0)
             vec![
-                ("OpenAI Provider", ""),
-                ("Anthropic Provider", ""),
-                ("Local LLM Provider", ""),
-                ("Custom Provider", ""),
-                ("Provider Priority", ""),
-                ("API Key Management", ""),
-                ("Model Selection", ""),
-                ("Token Limits", ""),
-                ("Rate Limiting", ""),
+                ("1. Default Model", ""),
+                ("2. Reasoning Effort", ""),
+                ("3. Model Personality", ""),
+                ("4. Review Model", ""),
+                ("5. Service Tier", ""),
+                ("6. Model Catalog JSON", ""),
             ],
-            // Keyboard Shortcuts submenu (index 1)
+            // Providers submenu (index 1)
             vec![
-                ("View Shortcuts", ""),
-                ("Edit Shortcuts", ""),
-                ("Reset Shortcuts", ""),
-                ("Import Keybindings", ""),
-                ("Export Keybindings", ""),
-                ("Vim Mode", ""),
-                ("Emacs Mode", ""),
-                ("Shortcut Conflicts", ""),
+                ("1. OpenAI Provider", ""),
+                ("2. Anthropic Provider", ""),
+                ("3. Local LLM Provider", ""),
+                ("4. Custom Provider", ""),
+                ("5. Provider Priority", ""),
+                ("6. API Key Management", ""),
+                ("7. Model Selection", ""),
+                ("8. Token Limits", ""),
+                ("9. Rate Limiting", ""),
             ],
-            // Theme submenu (index 2)
+            // Approval Policy submenu (index 2)
             vec![
-                ("Theme Selector", ""),
-                ("Dark Themes", ""),
-                ("Light Themes", ""),
-                ("Custom Theme", ""),
-                ("Syntax Highlighting", ""),
-                ("UI Colors", ""),
-                ("Font Settings", ""),
-                ("Icon Theme", ""),
-                ("Transparency", ""),
+                ("1. Policy Mode", ""),
+                ("2. Untrusted Mode", ""),
+                ("3. On-Request Mode", ""),
+                ("4. Never Mode", ""),
+                ("5. Granular Permissions", ""),
             ],
-            // Worktree submenu (index 3)
+            // Theme submenu (index 3)
             vec![
-                ("Worktree Manager", ""),
-                ("Create Worktree", ""),
-                ("Switch Worktree", ""),
-                ("Remove Worktree", ""),
-                ("Worktree Status", ""),
-                ("Branch Management", ""),
-                ("Worktree Settings", ""),
+                ("1. Theme Selector", ""),
+                ("2. Dark Themes", ""),
+                ("3. Light Themes", ""),
+                ("4. Custom Theme", ""),
+                ("5. Syntax Highlighting", ""),
+                ("6. UI Colors", ""),
+                ("7. Font Settings", ""),
+                ("8. Icon Theme", ""),
+                ("9. Transparency", ""),
             ],
-            // Sandbox submenu (index 4)
+            // Keyboard Shortcuts submenu (index 4)
             vec![
-                ("Sandbox Environment", ""),
-                ("Container Settings", ""),
-                ("Resource Limits", ""),
-                ("Network Access", ""),
-                ("File System Access", ""),
-                ("Security Policies", ""),
-                ("Execution Timeout", ""),
-                ("Language Runtimes", ""),
+                ("1. View Shortcuts", ""),
+                ("2. Edit Shortcuts", ""),
+                ("3. Reset Shortcuts", ""),
+                ("4. Import Keybindings", ""),
+                ("5. Export Keybindings", ""),
+                ("6. Vim Mode", ""),
+                ("7. Emacs Mode", ""),
+                ("8. Shortcut Conflicts", ""),
             ],
-            // Model Configuration submenu (index 5)
+            // Sandbox submenu (index 5)
             vec![
-                ("Default Model", ""),
-                ("Reasoning Effort", ""),
-                ("Model Personality", ""),
-                ("Review Model", ""),
-                ("Service Tier", ""),
-                ("Model Catalog JSON", ""),
+                ("1. Sandbox Environment", ""),
+                ("2. Container Settings", ""),
+                ("3. Resource Limits", ""),
+                ("4. Network Access", ""),
+                ("5. File System Access", ""),
+                ("6. Security Policies", ""),
+                ("7. Execution Timeout", ""),
+                ("8. Language Runtimes", ""),
             ],
-            // Approval Policy submenu (index 6)
+            // Feature Flags submenu (index 6)
             vec![
-                ("Policy Mode", ""),
-                ("Untrusted Mode", ""),
-                ("On-Request Mode", ""),
-                ("Never Mode", ""),
-                ("Granular Permissions", ""),
+                ("1. Unified Exec", ""),
+                ("2. Shell Snapshot", ""),
+                ("3. Request Rule", ""),
+                ("4. Undo Support", ""),
+                ("5. Search Tool", ""),
+                ("6. Git Commit", ""),
+                ("7. Runtime Metrics", ""),
+                ("8. SQLite State", ""),
+                ("9. Child Agents MD", ""),
+                ("10. Image Detail Original", ""),
+                ("11. Request Compression", ""),
+                ("12. Collaboration", ""),
+                ("13. Spawn CSV", ""),
+                ("14. Apps & Connectors", ""),
+                ("15. Tool Suggest", ""),
+                ("16. Plugins", ""),
+                ("17. Image Generation", ""),
+                ("18. MCP Dependency Install", ""),
+                ("19. Env Var Prompt", ""),
+                ("20. Steer Mode", ""),
+                ("21. PowerShell UTF8", ""),
+                ("22. Windows Sandbox", ""),
+                ("23. Windows Sandbox Elevated", ""),
+                ("24. JS REPL", ""),
+                ("25. Auto Approval Agent", ""),
+                ("26. Prevent Sleep", ""),
+                ("27. Suppress Warnings", ""),
             ],
-            // Web Search submenu (index 7)
+            // MCP Servers submenu (index 7)
             vec![
-                ("Search Mode", ""),
-                ("Context Size", ""),
-                ("Allowed Domains", ""),
-                ("User Location", ""),
+                ("1. STDIO Servers", ""),
+                ("2. HTTP Servers", ""),
+                ("3. OAuth Credentials", ""),
+                ("4. OAuth Callback Port", ""),
+                ("5. Server Management", ""),
             ],
-            // MCP Servers submenu (index 8)
+            // Web Search submenu (index 8)
             vec![
-                ("STDIO Servers", ""),
-                ("HTTP Servers", ""),
-                ("OAuth Credentials", ""),
-                ("OAuth Callback Port", ""),
-                ("Server Management", ""),
+                ("1. Search Mode", ""),
+                ("2. Context Size", ""),
+                ("3. Allowed Domains", ""),
+                ("4. User Location", ""),
             ],
-            // Profiles submenu (index 9)
+            // Multi-Agent submenu (index 9)
             vec![
-                ("Active Profile", ""),
-                ("Create Profile", ""),
-                ("Edit Profile", ""),
-                ("Delete Profile", ""),
-                ("Profile Settings", ""),
+                ("1. Max Threads", ""),
+                ("2. Max Depth", ""),
+                ("3. Job Max Runtime", ""),
+                ("4. Role Definitions", ""),
             ],
-            // Feature Flags submenu (index 10)
+            // Skills submenu (index 10)
             vec![
-                ("Unified Exec", ""),
-                ("Shell Snapshot", ""),
-                ("Request Rule", ""),
-                ("Undo Support", ""),
-                ("Search Tool", ""),
-                ("Git Commit", ""),
-                ("Runtime Metrics", ""),
-                ("SQLite State", ""),
-                ("Child Agents MD", ""),
-                ("Image Detail Original", ""),
-                ("Request Compression", ""),
-                ("Collaboration", ""),
-                ("Spawn CSV", ""),
-                ("Apps & Connectors", ""),
-                ("Tool Suggest", ""),
-                ("Plugins", ""),
-                ("Image Generation", ""),
-                ("MCP Dependency Install", ""),
-                ("Env Var Prompt", ""),
-                ("Steer Mode", ""),
-                ("PowerShell UTF8", ""),
-                ("Windows Sandbox", ""),
-                ("Windows Sandbox Elevated", ""),
-                ("JS REPL", ""),
-                ("Auto Approval Agent", ""),
-                ("Prevent Sleep", ""),
-                ("Suppress Warnings", ""),
+                ("1. Per-Skill Toggle", ""),
+                ("2. Skill Path", ""),
+                ("3. Scan Directories", ""),
             ],
-            // Voice / Realtime submenu (index 11)
+            // Execution Rules submenu (index 11)
             vec![
-                ("Microphone Device", ""),
-                ("Speaker Device", ""),
-                ("Audio Format", ""),
-                ("Voice Pipeline", ""),
-                ("TTS Voice", ""),
-                ("Realtime Mode", ""),
+                ("1. Prefix Rules", ""),
+                ("2. Justification", ""),
+                ("3. Rule Management", ""),
             ],
-            // Notifications submenu (index 12)
+            // Memory & History submenu (index 12)
             vec![
-                ("Notify Script", ""),
-                ("TUI Notifications", ""),
-                ("Turn Completion", ""),
+                ("1. Memories Path", ""),
+                ("2. Tool Output Budget", ""),
+                ("3. Session Persistence", ""),
+                ("4. Clear Memories", ""),
             ],
-            // Memory & History submenu (index 13)
+            // Profiles submenu (index 13)
             vec![
-                ("Memories Path", ""),
-                ("Tool Output Budget", ""),
-                ("Session Persistence", ""),
-                ("Clear Memories", ""),
+                ("1. Active Profile", ""),
+                ("2. Create Profile", ""),
+                ("3. Edit Profile", ""),
+                ("4. Delete Profile", ""),
+                ("5. Profile Settings", ""),
             ],
-            // Shell Environment submenu (index 14)
+            // Authentication submenu (index 14)
             vec![
-                ("Policy Type", ""),
-                ("Exclude List", ""),
-                ("Include Only", ""),
+                ("1. Credential Store", ""),
+                ("2. Auth File Path", ""),
             ],
-            // Multi-Agent submenu (index 15)
+            // Developer Instructions submenu (index 15)
             vec![
-                ("Max Threads", ""),
-                ("Max Depth", ""),
-                ("Job Max Runtime", ""),
-                ("Role Definitions", ""),
+                ("1. Inline Instructions", ""),
+                ("2. Instructions File", ""),
+                ("3. Project Instructions", ""),
             ],
-            // Skills submenu (index 16)
+            // Shell Environment submenu (index 16)
             vec![
-                ("Per-Skill Toggle", ""),
-                ("Skill Path", ""),
-                ("Scan Directories", ""),
+                ("1. Policy Type", ""),
+                ("2. Exclude List", ""),
+                ("3. Include Only", ""),
             ],
-            // Execution Rules submenu (index 17)
+            // Worktree submenu (index 17)
             vec![
-                ("Prefix Rules", ""),
-                ("Justification", ""),
-                ("Rule Management", ""),
+                ("1. Worktree Manager", ""),
+                ("2. Create Worktree", ""),
+                ("3. Switch Worktree", ""),
+                ("4. Remove Worktree", ""),
+                ("5. Worktree Status", ""),
+                ("6. Branch Management", ""),
+                ("7. Worktree Settings", ""),
             ],
-            // Authentication submenu (index 18)
+            // Voice / Realtime submenu (index 18)
             vec![
-                ("Credential Store", ""),
-                ("Auth File Path", ""),
+                ("1. Microphone Device", ""),
+                ("2. Speaker Device", ""),
+                ("3. Audio Format", ""),
+                ("4. Voice Pipeline", ""),
+                ("5. TTS Voice", ""),
+                ("6. Realtime Mode", ""),
             ],
-            // Developer Instructions submenu (index 19)
+            // Image & Vision submenu (index 19)
             vec![
-                ("Inline Instructions", ""),
-                ("Instructions File", ""),
-                ("Project Instructions", ""),
+                ("1. View Image Tool", ""),
+                ("2. Image Generation", ""),
+                ("3. Image Detail Original", ""),
             ],
-            // Image & Vision submenu (index 20)
+            // Plugins & Apps submenu (index 20)
             vec![
-                ("View Image Tool", ""),
-                ("Image Generation", ""),
-                ("Image Detail Original", ""),
+                ("1. Plugin Management", ""),
+                ("2. Marketplace Discovery", ""),
+                ("3. Connector Apps", ""),
+                ("4. Suggestion Allowlist", ""),
             ],
-            // Project Trust submenu (index 21)
+            // Session Resume submenu (index 21)
             vec![
-                ("Root Markers", ""),
-                ("Trust Mode", ""),
+                ("1. Resume Last", ""),
+                ("2. Resume All", ""),
+                ("3. Fork Session", ""),
             ],
-            // Plugins & Apps submenu (index 22)
+            // Network & Proxy submenu (index 22)
             vec![
-                ("Plugin Management", ""),
-                ("Marketplace Discovery", ""),
-                ("Connector Apps", ""),
-                ("Suggestion Allowlist", ""),
+                ("1. OpenAI Base URL", ""),
+                ("2. Sandbox Network", ""),
+                ("3. Custom Providers", ""),
             ],
-            // Session Resume submenu (index 23)
+            // Notifications submenu (index 23)
             vec![
-                ("Resume Last", ""),
-                ("Resume All", ""),
-                ("Fork Session", ""),
+                ("1. Notify Script", ""),
+                ("2. TUI Notifications", ""),
+                ("3. Turn Completion", ""),
             ],
-            // Network & Proxy submenu (index 24)
+            // Hooks & Events submenu (index 24)
             vec![
-                ("OpenAI Base URL", ""),
-                ("Sandbox Network", ""),
-                ("Custom Providers", ""),
+                ("1. User Prompt Submit", ""),
+                ("2. Notify Hook", ""),
+                ("3. Request Permissions", ""),
             ],
-            // Hooks & Events submenu (index 25)
+            // Project Trust submenu (index 25)
             vec![
-                ("User Prompt Submit", ""),
-                ("Notify Hook", ""),
-                ("Request Permissions", ""),
+                ("1. Root Markers", ""),
+                ("2. Trust Mode", ""),
             ],
         ];
 
@@ -298,9 +298,12 @@ impl Menu {
             effects,
             theme,
             rng,
-            selected_menu_item: 0,
+            selected_menu_item: 0, // Start at first item
             hovered_menu_item: None,
-            menu_items: main_menu.clone(),
+            menu_items: {
+                // Just convert main menu to owned Strings
+                main_menu.iter().map(|(a, b)| (a.to_string(), b.to_string())).collect()
+            },
             scroll_offset: 0,
             menu_item_areas: Vec::new(),
             menu_area: Rect::default(),
@@ -346,11 +349,14 @@ impl Menu {
     pub fn enter_submenu(&mut self, index: usize) {
         if index < self.submenus.len() {
             self.current_submenu = Some(index);
-            // Build submenu with "Back" at the top
-            let mut submenu_items = vec![("Back", "")];
-            submenu_items.extend_from_slice(&self.submenus[index]);
+            
+            // Build submenu with "Back" at top, then items
+            let mut submenu_items = vec![
+                ("Back".to_string(), String::new()),
+            ];
+            submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
             self.menu_items = submenu_items;
-            self.selected_menu_item = 0;
+            self.selected_menu_item = 0; // Start at "Back"
             self.scroll_offset = 0;
             self.hovered_menu_item = None;
         }
@@ -358,8 +364,9 @@ impl Menu {
 
     pub fn go_back_to_main(&mut self) {
         self.current_submenu = None;
-        self.menu_items = self.main_menu.clone();
-        self.selected_menu_item = 0;
+        // Rebuild main menu
+        self.menu_items = self.main_menu.iter().map(|(a, b)| (a.to_string(), b.to_string())).collect();
+        self.selected_menu_item = 0; // Start at first item
         self.scroll_offset = 0;
         self.hovered_menu_item = None;
     }
@@ -419,10 +426,26 @@ impl Menu {
             // Store menu area for mouse detection
             self.menu_area = content_area;
 
+            // Determine menu title based on context
+            let menu_title = if let Some(submenu_idx) = self.current_submenu {
+                // In submenu - show parent menu name and item count (excluding "Back")
+                let parent_name = self.main_menu[submenu_idx].0.trim_start_matches(|c: char| c.is_numeric() || c == '.' || c.is_whitespace());
+                let item_count = self.menu_items.len() - 1; // Exclude "Back" from count
+                format!("{} ({} items)", parent_name, item_count)
+            } else {
+                // In main menu
+                let item_count = self.menu_items.len();
+                format!("Command Palette ({} categories)", item_count)
+            };
+
             Block::default()
                 .borders(ratatui::widgets::Borders::ALL)
                 .border_style(Style::default().fg(self.theme.border))
                 .border_type(ratatui::widgets::BorderType::Rounded)
+                .title(Span::styled(
+                    format!(" {} ", menu_title),
+                    Style::default().fg(self.theme.accent).add_modifier(Modifier::BOLD)
+                ))
                 .style(Style::default().bg(content_bg))
                 .render(content_area, buf);
 
@@ -454,7 +477,7 @@ impl Menu {
             let mut current_y = padded_area.y;
 
             for idx in self.scroll_offset..end_idx {
-                let (title, _description) = self.menu_items[idx];
+                let (title, _description) = &self.menu_items[idx];
                 let is_selected = idx == self.selected_menu_item;
                 let is_hovered = self.hovered_menu_item == Some(idx);
 
@@ -466,16 +489,14 @@ impl Menu {
                 });
                 current_y += 1;
 
-                // Ensure text fits within the exact width
-                let line_text = format!(" {}", title);
-                let final_text = if line_text.len() > exact_width {
-                    // Truncate if too long
+                // Format the line
+                let item_text = format!(" {}", title);
+                let line_text = if item_text.len() > exact_width {
                     let truncate_at = exact_width.saturating_sub(3);
-                    format!("{}...", &line_text[..truncate_at])
+                    format!("{}...", &item_text[..truncate_at])
                 } else {
-                    // Pad to exact width to fill the background
-                    let padding = exact_width.saturating_sub(line_text.len());
-                    format!("{}{}", line_text, " ".repeat(padding))
+                    let padding = exact_width.saturating_sub(item_text.len());
+                    format!("{}{}", item_text, " ".repeat(padding))
                 };
 
                 let (fg, bg) = if is_selected {
@@ -492,7 +513,7 @@ impl Menu {
                     Style::default().fg(fg).bg(bg)
                 };
 
-                lines.push(Line::from(Span::styled(final_text, style)));
+                lines.push(Line::from(Span::styled(line_text, style)));
             }
 
             // Fill remaining lines with empty background to cover content behind
