@@ -54,3 +54,6 @@ Make it like this:
 ... all the menus items in the command palette as they all have own menu right
 
 Awesome now add a keyboard shortcut submenu at the bottom of the back menu item. Please put a toggle add, like the theme menu, where by default we are just viewing. When we toggle it will record the key press on every selected menu we highlight so that we can change the menu trigger on the fly from the menu keyboard shortcut menu 
+
+Today is 24th March 2026 and I am creating a TUI for Codex Rust CLI. Now I have used Yazi's Rust codebase for showing files and a file browser in my TUI. Now the TUI UI is almost complete. I have created the TUI separately so that when the TUI is done I can configure it with Codex Rust CLI.
+Now the files and folders are in here in Yazi's codebase so the slug-based is to make this Yazi's codebase like our dx codebase. What should we do? Like, suggest me things to so that in Codex Rust codebasewe can configure our tui fast to make this fork our dx instead of Yazi. The folders are obviously slack-based but are looking bad. Maybe give me suggestions so that we can make these slug-based folder names nicer for our dx. Please do the latest web search about Codex-Rust CLI and give me the best plan and suggestions
