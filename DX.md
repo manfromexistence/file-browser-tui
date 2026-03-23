@@ -39,3 +39,9 @@ so codex-rust cli has lot more hidden features in configs . toml that people don
 Today is 23rd March 2026 now I creating a brand new website and currently using vercel ai sdk now I want to support all providers more than 100+ so please list all npm packages with the most providers
 
 Awesome! Now we have to consolidate our theme settings so that the themes are changeable and easy to set new theme. So in the root you can see themes.css file and theme.json file so make our tui to absorb that theme and use it throughout our whole tui. And in our tui at theme menu, please list all the themes from that theme.json and when we select different themes, our tui should change based on that theme. And in the themes.json, there are many other keys and values that we are not using in our tui, so please make sure to use as much data from that theme.json as possible in that tui. And create a script to enhance the themes.json to only have keys and values that we can use in our tui. And create a new themes.js, don't create any new themes.json, just create a script to update the themes.json to have only the themes key and values that we can use in our tui. And then apply it in our tui so that all the themes according to the theme.json are listed and also usable in our tui. So when we go to the themes in the menu and select different themes from that menu, that should reflect that change. 
+
+Now, please update our keyboard shortcut submenu to have:
+One keyboard key place recording on or view toggle in the top
+Show all the menu on the left by serial number
+Show what triggered that menu on the right
+For the Context Control panel, it will be the top and it will toggle on pressing Zero or CTRL+P
