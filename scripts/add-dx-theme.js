@@ -37,22 +37,22 @@ const dxTheme = {
       "foreground": "oklch(0 0 0)",         // rgb(0, 0, 0)
       "card": "oklch(1 0 0)",               // rgb(255, 255, 255)
       "card-foreground": "oklch(0 0 0)",    // rgb(0, 0, 0)
-      "popover": "oklch(0.99 0 0)",         // rgb(252, 252, 252)
+      "popover": "oklch(1 0 0)",            // rgb(255, 255, 255)
       "popover-foreground": "oklch(0 0 0)", // rgb(0, 0, 0)
-      "primary": "oklch(0.55 0.20 145)",    // rgb(0, 160, 60) - green
+      "primary": "oklch(0.58 0.08 145)",    // rgb(109, 139, 111) - green
       "primary-foreground": "oklch(1 0 0)", // rgb(255, 255, 255)
-      "secondary": "oklch(0.92 0 0)",       // rgb(235, 235, 235)
+      "secondary": "oklch(0.91 0 0)",       // rgb(232, 232, 232)
       "secondary-foreground": "oklch(0 0 0)", // rgb(0, 0, 0)
-      "muted": "oklch(0.96 0 0)",           // rgb(245, 245, 245)
-      "muted-foreground": "oklch(0.32 0 0)", // rgb(82, 82, 82)
-      "accent": "oklch(0.55 0.20 145)",     // rgb(0, 160, 60) - green
+      "muted": "oklch(0.95 0 0)",           // rgb(243, 243, 243)
+      "muted-foreground": "oklch(0.29 0 0)", // rgb(75, 75, 75)
+      "accent": "oklch(0.58 0.08 145)",     // rgb(109, 139, 111) - green
       "accent-foreground": "oklch(1 0 0)",  // rgb(255, 255, 255)
-      "destructive": "oklch(0.60 0.22 25)", // rgb(229, 75, 79)
+      "destructive": "oklch(0.60 0.08 25)", // rgb(184, 131, 129)
       "destructive-foreground": "oklch(1 0 0)", // rgb(255, 255, 255)
-      "border": "oklch(0.89 0 0)",          // rgb(228, 228, 228)
-      "input": "oklch(0.92 0 0)",           // rgb(235, 235, 235)
-      "ring": "oklch(0.55 0.20 145)",       // rgb(0, 160, 60) - green
-      "chart-1": "oklch(0.55 0.20 145)",
+      "border": "oklch(0.88 0 0)",          // rgb(223, 224, 223)
+      "input": "oklch(0.91 0 0)",           // rgb(232, 232, 232)
+      "ring": "oklch(0.58 0.08 145)",       // rgb(109, 139, 111) - green
+      "chart-1": "oklch(0.58 0.08 145)",
       "chart-2": "oklch(0.50 0.18 200)",
       "chart-3": "oklch(0.45 0.16 250)",
       "chart-4": "oklch(0.40 0.14 300)",
@@ -62,24 +62,24 @@ const dxTheme = {
     "dark": {
       "background": "oklch(0 0 0)",         // rgb(0, 0, 0)
       "foreground": "oklch(1 0 0)",         // rgb(255, 255, 255)
-      "card": "oklch(0.04 0 0)",            // rgb(9, 9, 9)
+      "card": "oklch(0.05 0 0)",            // rgb(14, 14, 14)
       "card-foreground": "oklch(1 0 0)",    // rgb(255, 255, 255)
-      "popover": "oklch(0.07 0 0)",         // rgb(18, 18, 18)
+      "popover": "oklch(0.05 0 0)",         // rgb(14, 14, 14)
       "popover-foreground": "oklch(1 0 0)", // rgb(255, 255, 255)
-      "primary": "oklch(0.65 0.22 145)",    // rgb(0, 201, 80) - green
+      "primary": "oklch(0.68 0.06 145)",    // rgb(132, 166, 135) - green
       "primary-foreground": "oklch(1 0 0)", // rgb(255, 255, 255)
       "secondary": "oklch(0.13 0 0)",       // rgb(34, 34, 34)
       "secondary-foreground": "oklch(1 0 0)", // rgb(255, 255, 255)
       "muted": "oklch(0.11 0 0)",           // rgb(29, 29, 29)
-      "muted-foreground": "oklch(0.64 0 0)", // rgb(164, 164, 164)
-      "accent": "oklch(0.65 0.22 145)",     // rgb(0, 201, 80) - green
+      "muted-foreground": "oklch(0.61 0 0)", // rgb(155, 155, 155)
+      "accent": "oklch(0.68 0.06 145)",     // rgb(132, 166, 135) - green
       "accent-foreground": "oklch(1 0 0)",  // rgb(255, 255, 255)
-      "destructive": "oklch(0.68 0.20 25)", // rgb(255, 91, 91)
+      "destructive": "oklch(0.70 0.06 25)", // rgb(203, 154, 151)
       "destructive-foreground": "oklch(0 0 0)", // rgb(0, 0, 0)
       "border": "oklch(0.14 0 0)",          // rgb(36, 36, 36)
-      "input": "oklch(0.20 0 0)",           // rgb(51, 51, 51)
-      "ring": "oklch(0.64 0 0)",            // rgb(164, 164, 164)
-      "chart-1": "oklch(0.65 0.22 145)",
+      "input": "oklch(0.19 0 0)",           // rgb(48, 48, 48)
+      "ring": "oklch(0.61 0 0)",            // rgb(155, 155, 155)
+      "chart-1": "oklch(0.68 0.06 145)",
       "chart-2": "oklch(0.60 0.20 200)",
       "chart-3": "oklch(0.55 0.18 250)",
       "chart-4": "oklch(0.50 0.16 300)",

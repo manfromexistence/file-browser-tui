@@ -50,14 +50,15 @@ struct ThemeColors {
 pub struct ThemeDefinition {
     pub name: String,
     pub title: String,
+    #[allow(dead_code)]
     pub description: String,
     dark: ThemeColors,
     light: ThemeColors,
 }
 
 #[derive(Debug, Deserialize)]
-struct ThemeRegistry {
-    themes: Vec<ThemeDefinition>,
+pub(crate) struct ThemeRegistry {
+    pub(crate) themes: Vec<ThemeDefinition>,
 }
 
 static THEME_REGISTRY: OnceLock<ThemeRegistry> = OnceLock::new();
@@ -223,89 +224,88 @@ impl ChatTheme {
     }
 
     pub fn dark_fallback() -> Self {
-        // Dark mode from your CSS theme - oklch values converted to RGB
-        // Using --primary (green) as the main accent throughout the UI
+        // Dark mode DX theme - matches tui-themes.json exactly
         Self {
             variant: ThemeVariant::Dark,
-            bg: Color::Rgb(0, 0, 0),                 // --background
-            fg: Color::Rgb(255, 255, 255),           // --foreground
-            card: Color::Rgb(9, 9, 9),               // --card
-            card_fg: Color::Rgb(255, 255, 255),      // --card-foreground
-            popover: Color::Rgb(18, 18, 18),         // --popover
-            popover_fg: Color::Rgb(255, 255, 255),   // --popover-foreground
-            primary: Color::Rgb(0, 201, 80),         // --primary (green)
-            primary_fg: Color::Rgb(255, 255, 255),   // --primary-foreground
-            secondary: Color::Rgb(34, 34, 34),       // --secondary
-            secondary_fg: Color::Rgb(255, 255, 255), // --secondary-foreground
-            muted: Color::Rgb(29, 29, 29),           // --muted
-            muted_fg: Color::Rgb(164, 164, 164),     // --muted-foreground
-            accent: Color::Rgb(0, 201, 80),          // Use primary green as accent
-            accent_fg: Color::Rgb(255, 255, 255),    // --accent-foreground
-            destructive: Color::Rgb(255, 91, 91),    // --destructive
-            destructive_fg: Color::Rgb(0, 0, 0),     // --destructive-foreground
-            border: Color::Rgb(36, 36, 36),          // --border
-            border_focused: Color::Rgb(0, 201, 80),  // Use primary green for focus
-            input: Color::Rgb(51, 51, 51),           // --input
-            ring: Color::Rgb(164, 164, 164),         // --ring
+            bg: Color::Rgb(0, 0, 0),                 // background
+            fg: Color::Rgb(255, 255, 255),           // foreground
+            card: Color::Rgb(14, 14, 14),            // card
+            card_fg: Color::Rgb(255, 255, 255),      // card-foreground
+            popover: Color::Rgb(14, 14, 14),         // popover (same as card)
+            popover_fg: Color::Rgb(255, 255, 255),   // popover-foreground
+            primary: Color::Rgb(0, 255, 42),         // primary (bright green)
+            primary_fg: Color::Rgb(0, 0, 0),         // primary-foreground (black for contrast)
+            secondary: Color::Rgb(34, 34, 34),       // secondary
+            secondary_fg: Color::Rgb(255, 255, 255), // secondary-foreground
+            muted: Color::Rgb(29, 29, 29),           // muted
+            muted_fg: Color::Rgb(155, 155, 155),     // muted-foreground
+            accent: Color::Rgb(0, 255, 42),          // accent (bright green)
+            accent_fg: Color::Rgb(0, 0, 0),          // accent-foreground (black for contrast)
+            destructive: Color::Rgb(203, 154, 151),  // destructive
+            destructive_fg: Color::Rgb(0, 0, 0),     // destructive-foreground
+            border: Color::Rgb(36, 36, 36),          // border
+            border_focused: Color::Rgb(0, 255, 42),  // bright green for focus
+            input: Color::Rgb(48, 48, 48),           // input
+            ring: Color::Rgb(155, 155, 155),         // ring
             // Legacy compatibility
-            user_msg_bg: Color::Rgb(9, 9, 9),         // card
-            ai_msg_bg: Color::Rgb(18, 18, 18),        // popover
-            accent_secondary: Color::Rgb(0, 201, 80), // primary green
+            user_msg_bg: Color::Rgb(14, 14, 14),     // card
+            ai_msg_bg: Color::Rgb(29, 29, 29),       // muted
+            accent_secondary: Color::Rgb(0, 255, 42), // bright green
             shimmer_colors: vec![
                 Color::Rgb(36, 36, 36),    // border
-                Color::Rgb(0, 201, 80),    // primary green
-                Color::Rgb(164, 164, 164), // muted_fg
-                Color::Rgb(0, 201, 80),    // primary green
+                Color::Rgb(0, 255, 42),    // bright green
+                Color::Rgb(155, 155, 155), // muted_fg
+                Color::Rgb(0, 255, 42),    // bright green
                 Color::Rgb(36, 36, 36),    // border
             ],
             mode_colors: ModeColors {
-                agent: Color::Rgb(0, 201, 80), // primary green
-                plan: Color::Rgb(255, 174, 4), // chart-1 yellow
-                ask: Color::Rgb(38, 113, 244), // chart-2 blue
+                agent: Color::Rgb(0, 255, 42),   // bright green
+                plan: Color::Rgb(155, 155, 155), // ring
+                ask: Color::Rgb(0, 255, 42),     // accent
             },
         }
     }
 
     #[allow(dead_code)]
     fn light_fallback() -> Self {
-        // Light mode from theme.css - shadcn-ui/Vercel design system
+        // Light mode DX theme - matches tui-themes.json exactly
         Self {
             variant: ThemeVariant::Light,
-            bg: Color::Rgb(252, 252, 252),             // --background
-            fg: Color::Rgb(0, 0, 0),                   // --foreground
-            card: Color::Rgb(255, 255, 255),           // --card
-            card_fg: Color::Rgb(0, 0, 0),              // --card-foreground
-            popover: Color::Rgb(252, 252, 252),        // --popover
-            popover_fg: Color::Rgb(0, 0, 0),           // --popover-foreground
-            primary: Color::Rgb(0, 0, 0),              // --primary
-            primary_fg: Color::Rgb(255, 255, 255),     // --primary-foreground
-            secondary: Color::Rgb(235, 235, 235),      // --secondary
-            secondary_fg: Color::Rgb(0, 0, 0),         // --secondary-foreground
-            muted: Color::Rgb(245, 245, 245),          // --muted
-            muted_fg: Color::Rgb(82, 82, 82),          // --muted-foreground
-            accent: Color::Rgb(235, 235, 235),         // --accent
-            accent_fg: Color::Rgb(0, 0, 0),            // --accent-foreground
-            destructive: Color::Rgb(229, 75, 79),      // --destructive
-            destructive_fg: Color::Rgb(255, 255, 255), // --destructive-foreground
-            border: Color::Rgb(228, 228, 228),         // --border
-            border_focused: Color::Rgb(0, 0, 0),       // --ring
-            input: Color::Rgb(235, 235, 235),          // --input
-            ring: Color::Rgb(0, 0, 0),                 // --ring
+            bg: Color::Rgb(252, 252, 252),           // background
+            fg: Color::Rgb(0, 0, 0),                 // foreground
+            card: Color::Rgb(255, 255, 255),         // card
+            card_fg: Color::Rgb(0, 0, 0),            // card-foreground
+            popover: Color::Rgb(255, 255, 255),      // popover (same as card)
+            popover_fg: Color::Rgb(0, 0, 0),         // popover-foreground
+            primary: Color::Rgb(0, 255, 42),         // primary (bright green)
+            primary_fg: Color::Rgb(0, 0, 0),         // primary-foreground (black for contrast)
+            secondary: Color::Rgb(232, 232, 232),    // secondary
+            secondary_fg: Color::Rgb(0, 0, 0),       // secondary-foreground
+            muted: Color::Rgb(243, 243, 243),        // muted
+            muted_fg: Color::Rgb(75, 75, 75),        // muted-foreground
+            accent: Color::Rgb(0, 255, 42),          // accent (bright green)
+            accent_fg: Color::Rgb(0, 0, 0),          // accent-foreground (black for contrast)
+            destructive: Color::Rgb(184, 131, 129),  // destructive
+            destructive_fg: Color::Rgb(255, 255, 255), // destructive-foreground
+            border: Color::Rgb(223, 224, 223),       // border
+            border_focused: Color::Rgb(0, 255, 42),  // bright green for focus
+            input: Color::Rgb(232, 232, 232),        // input
+            ring: Color::Rgb(0, 255, 42),            // ring (bright green)
             // Legacy compatibility
-            user_msg_bg: Color::Rgb(255, 255, 255), // card
-            ai_msg_bg: Color::Rgb(252, 252, 252),   // popover
-            accent_secondary: Color::Rgb(235, 235, 235), // accent
+            user_msg_bg: Color::Rgb(255, 255, 255),  // card
+            ai_msg_bg: Color::Rgb(243, 243, 243),    // muted
+            accent_secondary: Color::Rgb(0, 255, 42), // bright green
             shimmer_colors: vec![
-                Color::Rgb(228, 228, 228), // border
-                Color::Rgb(235, 235, 235), // accent
-                Color::Rgb(82, 82, 82),    // muted_fg
-                Color::Rgb(235, 235, 235), // accent
-                Color::Rgb(228, 228, 228), // border
+                Color::Rgb(223, 224, 223), // border
+                Color::Rgb(0, 255, 42),    // bright green
+                Color::Rgb(75, 75, 75),    // muted_fg
+                Color::Rgb(0, 255, 42),    // bright green
+                Color::Rgb(223, 224, 223), // border
             ],
             mode_colors: ModeColors {
-                agent: Color::Rgb(0, 160, 60), // darker green for light mode
-                plan: Color::Rgb(200, 130, 0), // darker yellow for light mode
-                ask: Color::Rgb(30, 90, 200),  // darker blue for light mode
+                agent: Color::Rgb(0, 255, 42),   // bright green
+                plan: Color::Rgb(0, 255, 42),    // ring
+                ask: Color::Rgb(0, 255, 42),     // accent
             },
         }
     }

@@ -150,12 +150,16 @@ pub struct ChatState {
 impl ChatState {
     pub fn new() -> Self {
         let (llm_tx, llm_rx) = channel();
-        let theme = ChatTheme::dark_fallback();
+        
+        // Try to load DX theme from JSON, fallback to hardcoded if it fails
+        let theme_mode = crate::tui::theme::ThemeVariant::Dark;
+        let theme = ChatTheme::by_name("dx", theme_mode)
+            .unwrap_or_else(|| ChatTheme::dark_fallback());
 
         Self {
             theme: theme.clone(),
-            theme_mode: crate::tui::theme::ThemeVariant::Dark,
-            current_theme_name: "vercel".to_string(), // Default theme
+            theme_mode,
+            current_theme_name: "dx".to_string(), // Use DX as default theme
             input: InputState::new(),
             messages: Vec::new(),
             is_loading: false,

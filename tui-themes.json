@@ -4,7 +4,7 @@
     {
       "name": "dx",
       "title": "DX",
-      "description": "The default DX theme with green accents.",
+      "description": "The default DX theme with bright green accents.",
       "dark": {
         "background": {
           "r": 0,
@@ -27,14 +27,14 @@
           "b": 255
         },
         "primary": {
-          "r": 132,
-          "g": 166,
-          "b": 135
+          "r": 0,
+          "g": 255,
+          "b": 42
         },
         "primary_foreground": {
-          "r": 255,
-          "g": 255,
-          "b": 255
+          "r": 0,
+          "g": 0,
+          "b": 0
         },
         "secondary": {
           "r": 34,
@@ -57,14 +57,14 @@
           "b": 155
         },
         "accent": {
-          "r": 132,
-          "g": 166,
-          "b": 135
+          "r": 0,
+          "g": 255,
+          "b": 42
         },
         "accent_foreground": {
-          "r": 255,
-          "g": 255,
-          "b": 255
+          "r": 0,
+          "g": 0,
+          "b": 0
         },
         "destructive": {
           "r": 203,
@@ -114,14 +114,14 @@
           "b": 0
         },
         "primary": {
-          "r": 109,
-          "g": 139,
-          "b": 111
+          "r": 0,
+          "g": 255,
+          "b": 42
         },
         "primary_foreground": {
-          "r": 255,
-          "g": 255,
-          "b": 255
+          "r": 0,
+          "g": 0,
+          "b": 0
         },
         "secondary": {
           "r": 232,
@@ -144,14 +144,14 @@
           "b": 75
         },
         "accent": {
-          "r": 109,
-          "g": 139,
-          "b": 111
+          "r": 0,
+          "g": 255,
+          "b": 42
         },
         "accent_foreground": {
-          "r": 255,
-          "g": 255,
-          "b": 255
+          "r": 0,
+          "g": 0,
+          "b": 0
         },
         "destructive": {
           "r": 184,
@@ -174,9 +174,9 @@
           "b": 232
         },
         "ring": {
-          "r": 109,
-          "g": 139,
-          "b": 111
+          "r": 0,
+          "g": 255,
+          "b": 42
         }
       }
     },
