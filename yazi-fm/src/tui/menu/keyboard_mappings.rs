@@ -146,7 +146,6 @@ impl KeyboardMappings {
             .unwrap_or_else(|| "Not Set".to_string())
     }
 
-    #[allow(dead_code)]
     pub fn set(&self, action: MenuAction, shortcut: String) {
         self.mappings.write().unwrap().insert(action, shortcut);
     }

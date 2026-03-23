@@ -158,7 +158,6 @@ impl Menu {
     }
     
     // Get the currently selected keyboard shortcut item for recording
-    #[allow(dead_code)]
     pub fn get_selected_shortcut_index(&self) -> Option<usize> {
         if self.current_submenu == Some(1) && self.recording_mode && self.selected_menu_item >= 2 {
             // Subtract 2 for "Back" and "Toggle Recording Mode"
@@ -169,7 +168,6 @@ impl Menu {
     }
     
     // Update a keyboard shortcut
-    #[allow(dead_code)]
     pub fn update_keyboard_shortcut(&mut self, action_index: usize, new_shortcut: String) {
         use super::keyboard_mappings::MenuAction;
         

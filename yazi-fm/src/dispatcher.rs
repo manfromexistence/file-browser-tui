@@ -16,18 +16,36 @@ use crate::{Executor, Router, app::App};
 fn format_key_event(key: &KeyEvent) -> String {
     let mut parts = Vec::new();
     
+    // For Char keys, check if Shift is needed (uppercase letters need Shift)
+    let is_char = matches!(key.code, KeyCode::Char(_));
+    let needs_shift = if let KeyCode::Char(c) = key.code {
+        c.is_uppercase() || "!@#$%^&*()_+{}|:\"<>?".contains(c)
+    } else {
+        false
+    };
+    
     if key.modifiers.contains(KeyModifiers::CONTROL) {
         parts.push("Ctrl");
     }
-    if key.modifiers.contains(KeyModifiers::SHIFT) {
+    
+    // Only add Shift if it's not a char, or if it's a char that needs explicit Shift
+    if key.modifiers.contains(KeyModifiers::SHIFT) && (!is_char || needs_shift) {
         parts.push("Shift");
     }
+    
     if key.modifiers.contains(KeyModifiers::ALT) {
         parts.push("Alt");
     }
     
     let key_str = match key.code {
-        KeyCode::Char(c) => c.to_uppercase().to_string(),
+        KeyCode::Char(c) => {
+            // Always use uppercase for letters
+            if c.is_alphabetic() {
+                c.to_uppercase().to_string()
+            } else {
+                c.to_string()
+            }
+        },
         KeyCode::F(n) => format!("F{}", n),
         KeyCode::Backspace => "Backspace".to_string(),
         KeyCode::Enter => "Enter".to_string(),
@@ -311,7 +329,15 @@ impl<'a> Dispatcher<'a> {
 			// Check each action to see if its shortcut matches
 			for action in MenuAction::all_actions() {
 				let shortcut = mappings.get(action);
-				if shortcut == pressed_key {
+				
+				// Handle shortcuts with "or" (e.g., "0 or Ctrl+P")
+				let matches = if shortcut.contains(" or ") {
+					shortcut.split(" or ").any(|s| s.trim() == pressed_key)
+				} else {
+					shortcut == pressed_key
+				};
+				
+				if matches {
 					// Match found! Open menu and navigate to the corresponding submenu
 					let submenu_index = match action {
 						MenuAction::ContextControlPanel => 0, // Special case - just open menu
