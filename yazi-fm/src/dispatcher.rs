@@ -127,6 +127,7 @@ impl<'a> Dispatcher<'a> {
 	fn dispatch_key(&mut self, key: KeyEvent) -> Result<Data> {
 		use crossterm::event::KeyCode;
 		use crate::tui::input::InputAction;
+		use crate::tui::menu::MenuAction;
 		
 		// If in animation mode, handle navigation keys but allow typing
 		if self.app.bridge.chat_state.animation_mode {
@@ -320,54 +321,67 @@ impl<'a> Dispatcher<'a> {
 		}
 		
 		// Global keyboard shortcuts - check if any registered shortcut matches
-		if !self.app.bridge.chat_state.show_tachyon_menu {
-			use crate::tui::menu::MenuAction;
+		let pressed_key = format_key_event(&key);
+		let mappings = &self.app.bridge.chat_state.menu.keyboard_mappings;
+		
+		// Check each action to see if its shortcut matches
+		for action in MenuAction::all_actions() {
+			let shortcut = mappings.get(action);
 			
-			let pressed_key = format_key_event(&key);
-			let mappings = &self.app.bridge.chat_state.menu.keyboard_mappings;
+			// Handle shortcuts with "or" (e.g., "0 or Ctrl+P")
+			let matches = if shortcut.contains(" or ") {
+				shortcut.split(" or ").any(|s| s.trim() == pressed_key)
+			} else {
+				shortcut == pressed_key
+			};
 			
-			// Check each action to see if its shortcut matches
-			for action in MenuAction::all_actions() {
-				let shortcut = mappings.get(action);
-				
-				// Handle shortcuts with "or" (e.g., "0 or Ctrl+P")
-				let matches = if shortcut.contains(" or ") {
-					shortcut.split(" or ").any(|s| s.trim() == pressed_key)
-				} else {
-					shortcut == pressed_key
+			if matches {
+				let submenu_index = match action {
+					MenuAction::ContextControlPanel => None, // Special case - just toggle menu
+					MenuAction::Theme => Some(0),
+					MenuAction::KeyboardShortcuts => Some(1),
+					MenuAction::Providers => Some(2),
+					MenuAction::PluginsApps => Some(3),
+					MenuAction::Skills => Some(4),
+					MenuAction::Sandbox => Some(5),
+					MenuAction::WebSearch => Some(6),
+					MenuAction::McpServers => Some(7),
+					MenuAction::MemoryHistory => Some(8),
+					MenuAction::MultiAgent => Some(9),
+					MenuAction::Notifications => Some(10),
+					MenuAction::VoiceRealtime => Some(11),
+					MenuAction::ImageVision => Some(12),
+					MenuAction::Profiles => Some(13),
+					MenuAction::Worktree => Some(14),
+					MenuAction::Authentication => Some(15),
+					MenuAction::NetworkProxy => Some(16),
+					MenuAction::HooksEvents => Some(17),
+					MenuAction::SessionResume => Some(18),
+					MenuAction::ApprovalPolicy => Some(19),
+					MenuAction::ShellEnvironment => Some(20),
+					MenuAction::ExecutionRules => Some(21),
+					MenuAction::ProjectTrust => Some(22),
+					MenuAction::DeveloperInstructions => Some(23),
+					MenuAction::FeatureFlags => Some(24),
 				};
 				
-				if matches {
-					// Match found! Open menu and navigate to the corresponding submenu
-					let submenu_index = match action {
-						MenuAction::ContextControlPanel => 0, // Special case - just open menu
-						MenuAction::Theme => 0,
-						MenuAction::KeyboardShortcuts => 1,
-						MenuAction::Providers => 2,
-						MenuAction::PluginsApps => 3,
-						MenuAction::Skills => 4,
-						MenuAction::Sandbox => 5,
-						MenuAction::WebSearch => 6,
-						MenuAction::McpServers => 7,
-						MenuAction::MemoryHistory => 8,
-						MenuAction::MultiAgent => 9,
-						MenuAction::Notifications => 10,
-						MenuAction::VoiceRealtime => 11,
-						MenuAction::ImageVision => 12,
-						MenuAction::Profiles => 13,
-						MenuAction::Worktree => 14,
-						MenuAction::Authentication => 15,
-						MenuAction::NetworkProxy => 16,
-						MenuAction::HooksEvents => 17,
-						MenuAction::SessionResume => 18,
-						MenuAction::ApprovalPolicy => 19,
-						MenuAction::ShellEnvironment => 20,
-						MenuAction::ExecutionRules => 21,
-						MenuAction::ProjectTrust => 22,
-						MenuAction::DeveloperInstructions => 23,
-						MenuAction::FeatureFlags => 24,
-					};
-					
+				// Check if menu is already open with this submenu
+				let is_same_submenu = if let Some(idx) = submenu_index {
+					self.app.bridge.chat_state.show_tachyon_menu 
+						&& self.app.bridge.chat_state.menu.current_submenu == Some(idx)
+						&& self.app.bridge.chat_state.menu.opened_directly
+				} else {
+					// For ContextControlPanel, check if menu is open at main level
+					self.app.bridge.chat_state.show_tachyon_menu 
+						&& self.app.bridge.chat_state.menu.current_submenu.is_none()
+				};
+				
+				if is_same_submenu {
+					// Toggle off - close the menu
+					self.app.bridge.chat_state.menu_is_closing = true;
+					self.app.bridge.chat_state.menu.pick_closing_effect();
+					self.app.bridge.chat_state.show_tachyon_menu = false;
+				} else {
 					// Open menu if not already open
 					if !self.app.bridge.chat_state.show_tachyon_menu {
 						self.app.bridge.chat_state.menu_is_closing = false;
@@ -375,14 +389,17 @@ impl<'a> Dispatcher<'a> {
 						self.app.bridge.chat_state.menu.pick_opening_effect();
 					}
 					
-					// Navigate to the submenu (unless it's ContextControlPanel which just opens menu)
-					if !matches!(action, MenuAction::ContextControlPanel) {
-						self.app.bridge.chat_state.menu.enter_submenu(submenu_index);
+					// Navigate to the submenu directly (without "Back" button)
+					if let Some(idx) = submenu_index {
+						self.app.bridge.chat_state.menu.enter_submenu_directly(idx);
+					} else {
+						// ContextControlPanel - go to main menu
+						self.app.bridge.chat_state.menu.go_back_to_main();
 					}
-					
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
 				}
+				
+				NEED_RENDER.store(1, Ordering::Relaxed);
+				succ!()
 			}
 		}
 		

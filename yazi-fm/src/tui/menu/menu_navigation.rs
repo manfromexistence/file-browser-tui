@@ -5,14 +5,28 @@ use super::submenus::keyboard_shortcuts;
 
 impl Menu {
     pub fn enter_submenu(&mut self, index: usize) {
+        self.enter_submenu_with_mode(index, false);
+    }
+
+    pub fn enter_submenu_directly(&mut self, index: usize) {
+        self.enter_submenu_with_mode(index, true);
+    }
+
+    fn enter_submenu_with_mode(&mut self, index: usize, direct: bool) {
+        self.opened_directly = direct;
+        
         // Special handling for Theme submenu (index 0)
         if index == 0 {
             let available_themes = ChatTheme::available_themes();
             
-            let mut submenu_items = vec![
-                ("Back".to_string(), String::new()),
-                ("Toggle Light/Dark Mode".to_string(), "TOGGLE_MODE".to_string()),
-            ];
+            let mut submenu_items = vec![];
+            
+            // Only add "Back" if not opened directly
+            if !direct {
+                submenu_items.push(("Back".to_string(), String::new()));
+            }
+            
+            submenu_items.push(("Toggle Light/Dark Mode".to_string(), "TOGGLE_MODE".to_string()));
             
             for (i, (name, title)) in available_themes.iter().enumerate() {
                 submenu_items.push((format!("{}. {}", i + 1, title), name.clone()));
@@ -26,10 +40,14 @@ impl Menu {
         } 
         // Special handling for Keyboard Shortcuts submenu (index 1)
         else if index == 1 {
-            let mut submenu_items = vec![
-                ("Back".to_string(), String::new()),
-                ("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()),
-            ];
+            let mut submenu_items = vec![];
+            
+            // Only add "Back" if not opened directly
+            if !direct {
+                submenu_items.push(("Back".to_string(), String::new()));
+            }
+            
+            submenu_items.push(("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()));
             
             // Add keyboard shortcuts with dynamic mappings
             let shortcuts = keyboard_shortcuts::get_submenu_with_mappings(&self.keyboard_mappings);
@@ -44,7 +62,13 @@ impl Menu {
         else if index < self.submenus.len() {
             self.current_submenu = Some(index);
             
-            let mut submenu_items = vec![("Back".to_string(), String::new())];
+            let mut submenu_items = vec![];
+            
+            // Only add "Back" if not opened directly
+            if !direct {
+                submenu_items.push(("Back".to_string(), String::new()));
+            }
+            
             submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
             self.menu_items = submenu_items;
             self.selected_menu_item = 0;
@@ -55,6 +79,7 @@ impl Menu {
 
     pub fn go_back_to_main(&mut self) {
         self.current_submenu = None;
+        self.opened_directly = false;
         self.menu_items = self.main_menu.iter().map(|(a, b)| (a.to_string(), b.to_string())).collect();
         self.selected_menu_item = 0;
         self.scroll_offset = 0;
@@ -159,9 +184,15 @@ impl Menu {
     
     // Get the currently selected keyboard shortcut item for recording
     pub fn get_selected_shortcut_index(&self) -> Option<usize> {
-        if self.current_submenu == Some(1) && self.recording_mode && self.selected_menu_item >= 2 {
-            // Subtract 2 for "Back" and "Toggle Recording Mode"
-            Some(self.selected_menu_item - 2)
+        if self.current_submenu == Some(1) && self.recording_mode {
+            // Calculate offset based on whether "Back" is present
+            let offset = if self.opened_directly { 1 } else { 2 };
+            
+            if self.selected_menu_item >= offset {
+                Some(self.selected_menu_item - offset)
+            } else {
+                None
+            }
         } else {
             None
         }
@@ -177,10 +208,14 @@ impl Menu {
             
             // Refresh the menu items to show the updated shortcut
             if self.current_submenu == Some(1) {
-                let mut submenu_items = vec![
-                    ("Back".to_string(), String::new()),
-                    ("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()),
-                ];
+                let mut submenu_items = vec![];
+                
+                // Only add "Back" if not opened directly
+                if !self.opened_directly {
+                    submenu_items.push(("Back".to_string(), String::new()));
+                }
+                
+                submenu_items.push(("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()));
                 
                 let shortcuts = keyboard_shortcuts::get_submenu_with_mappings(&self.keyboard_mappings);
                 submenu_items.extend(shortcuts);

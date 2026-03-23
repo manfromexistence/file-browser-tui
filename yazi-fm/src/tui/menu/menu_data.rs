@@ -24,6 +24,7 @@ pub struct Menu {
     pub(super) submenus: Vec<Vec<(&'static str, &'static str)>>,
     pub recording_mode: bool,
     pub keyboard_mappings: KeyboardMappings,
+    pub opened_directly: bool, // Track if submenu was opened directly via shortcut
 }
 
 impl Menu {
@@ -54,6 +55,7 @@ impl Menu {
             submenus,
             recording_mode: false,
             keyboard_mappings,
+            opened_directly: false,
         }
     }
 
