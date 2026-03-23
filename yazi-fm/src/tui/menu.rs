@@ -310,6 +310,13 @@ impl Menu {
                 lines.push(Line::from(Span::styled(final_text, style)));
             }
 
+            // Fill remaining lines with empty background to cover content behind
+            let items_shown = end_idx - self.scroll_offset;
+            for _ in items_shown..visible_items {
+                let empty_line = " ".repeat(exact_width);
+                lines.push(Line::from(Span::styled(empty_line, Style::default().bg(content_bg))));
+            }
+
             let main_text = Text::from(lines);
             ratatui::widgets::Paragraph::new(main_text)
                 .render(padded_area, buf);
