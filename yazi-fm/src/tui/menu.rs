@@ -374,6 +374,29 @@ impl Menu {
         }
     }
 
+    /// Get the currently highlighted theme name (for live preview)
+    pub fn get_highlighted_theme_name(&self) -> Option<String> {
+        // Return theme name if we're in the theme submenu (index 0) and not on "Back"
+        if self.current_submenu == Some(0) && self.selected_menu_item > 0 {
+            Some(self.menu_items[self.selected_menu_item].1.clone())
+        } else {
+            None
+        }
+    }
+
+    /// Get the hovered theme name (for live preview on mouse hover)
+    pub fn get_hovered_theme_name(&self) -> Option<String> {
+        // Return theme name if we're in the theme submenu (index 0) and hovering over a theme
+        if self.current_submenu == Some(0) {
+            if let Some(hovered_idx) = self.hovered_menu_item {
+                if hovered_idx > 0 && hovered_idx < self.menu_items.len() {
+                    return Some(self.menu_items[hovered_idx].1.clone());
+                }
+            }
+        }
+        None
+    }
+
     pub fn go_back_to_main(&mut self) {
         self.current_submenu = None;
         // Rebuild main menu

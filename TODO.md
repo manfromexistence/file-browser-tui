@@ -4,19 +4,17 @@
 
 ## In Progress
 
-- [ ] Update Rust theme.rs to load themes from tui-themes.json
-
 ## Pending
-
-- [ ] Add theme list to Theme submenu in menu.rs
-- [ ] Update Rust theme.rs to load themes from tui-themes.json
-- [ ] Add theme list to Theme submenu in menu.rs
-- [ ] Implement theme switching functionality
-- [ ] Test theme switching in TUI
 
 ## Completed
 
 - [x] ~~Create Node.js script to extract TUI-usable theme data from theme.json~~ ✅ (completed: 2026-03-19)
 - [x] ~~Create tui-themes.json with simplified theme structure for TUI~~ ✅ (completed: 2026-03-19)
+- [x] ~~Fix OKLCH to RGB conversion in extraction script~~ ✅ (completed: 2026-03-19)
+- [x] ~~Update Rust theme.rs to load themes from tui-themes.json~~ ✅ (completed: 2026-03-19)
+- [x] ~~Add theme list to Theme submenu in menu.rs~~ ✅ (completed: 2026-03-19)
+- [x] ~~Implement theme switching functionality~~ ✅ (completed: 2026-03-19)
+- [x] ~~Add live theme preview on navigation/hover~~ ✅ (completed: 2026-03-19)
+- [x] ~~Apply theme background color to entire TUI~~ ✅ (completed: 2026-03-19)
 
 ## Blocked / Failed

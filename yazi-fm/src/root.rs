@@ -27,6 +27,15 @@ impl<'a> Root<'a> {
 
 impl Widget for Root<'_> {
 	fn render(self, area: Rect, buf: &mut Buffer) {
+		// Clear the entire screen with theme background color first
+		let bg_color = self.bridge.chat_state.theme.bg;
+		for y in area.top()..area.bottom() {
+			for x in area.left()..area.right() {
+				buf[(x, y)].reset();
+				buf[(x, y)].set_bg(bg_color);
+			}
+		}
+		
 		// PRIORITY 1: Check if we're in animation mode (splash/animations carousel)
 		if self.bridge.chat_state.animation_mode {
 			let animations = AnimationType::all();

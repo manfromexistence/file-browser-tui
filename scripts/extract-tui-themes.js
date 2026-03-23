@@ -17,43 +17,49 @@ function oklchToRgb(oklchStr) {
   const match = oklchStr.match(/oklch\(([\d.]+)\s+([\d.]+)\s+([\d.]+)\)/);
   if (!match) {
     console.warn(`Could not parse OKLCH: ${oklchStr}`);
-    return [0, 0, 0];
+    return [128, 128, 128]; // Return gray as fallback
   }
 
-  const [, L, C, H] = match.map(Number);
+  let [, L, C, H] = match.map(Number);
   
-  // Convert OKLCH to RGB (simplified conversion)
-  // This is an approximation - for production use a proper color library
-  const l = L * 100;
-  const c = C * 100;
-  const h = H;
+  // OKLCH uses L in range 0-1, C in range 0-0.4, H in degrees 0-360
+  // Convert to Lab color space first
+  const l = L * 100; // Convert to 0-100 range
+  const a = C * 100 * Math.cos((H * Math.PI) / 180);
+  const b = C * 100 * Math.sin((H * Math.PI) / 180);
   
-  // Convert to Lab
-  const a = c * Math.cos(h * Math.PI / 180);
-  const b = c * Math.sin(h * Math.PI / 180);
+  // Lab to XYZ conversion
+  let fy = (l + 16) / 116;
+  let fx = a / 500 + fy;
+  let fz = fy - b / 200;
   
-  // Lab to XYZ
-  const fy = (l + 16) / 116;
-  const fx = a / 500 + fy;
-  const fz = fy - b / 200;
+  const delta = 6 / 29;
+  const deltaSquared = delta * delta;
+  const deltaCubed = delta * delta * delta;
   
-  const xr = fx > 0.206897 ? fx ** 3 : (fx - 16/116) / 7.787;
-  const yr = fy > 0.206897 ? fy ** 3 : (fy - 16/116) / 7.787;
-  const zr = fz > 0.206897 ? fz ** 3 : (fz - 16/116) / 7.787;
+  let xr = fx > delta ? fx * fx * fx : 3 * deltaSquared * (fx - 4 / 29);
+  let yr = fy > delta ? fy * fy * fy : 3 * deltaSquared * (fy - 4 / 29);
+  let zr = fz > delta ? fz * fz * fz : 3 * deltaSquared * (fz - 4 / 29);
   
+  // D65 illuminant
   const x = xr * 95.047;
   const y = yr * 100.000;
   const z = zr * 108.883;
   
-  // XYZ to RGB
+  // XYZ to RGB (sRGB color space)
   let r = x *  3.2406 + y * -1.5372 + z * -0.4986;
   let g = x * -0.9689 + y *  1.8758 + z *  0.0415;
   let bl = x *  0.0557 + y * -0.2040 + z *  1.0570;
   
-  // Gamma correction
-  r = r > 0.0031308 ? 1.055 * (r ** (1/2.4)) - 0.055 : 12.92 * r;
-  g = g > 0.0031308 ? 1.055 * (g ** (1/2.4)) - 0.055 : 12.92 * g;
-  bl = bl > 0.0031308 ? 1.055 * (bl ** (1/2.4)) - 0.055 : 12.92 * bl;
+  // Apply gamma correction (sRGB)
+  const gammaCorrect = (c) => {
+    c = c / 100;
+    return c > 0.0031308 ? 1.055 * Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c;
+  };
+  
+  r = gammaCorrect(r);
+  g = gammaCorrect(g);
+  bl = gammaCorrect(bl);
   
   // Clamp and convert to 0-255
   r = Math.max(0, Math.min(255, Math.round(r * 255)));
@@ -144,6 +150,15 @@ function main() {
   console.log('✓ Done! Created tui-themes.json');
   console.log(`  Themes: ${tuiThemes.length}`);
   console.log(`  Output: ${outputPath}`);
+  
+  // Show a sample of the first theme's colors for verification
+  if (tuiThemes.length > 0) {
+    console.log('\nSample colors from first theme:');
+    const firstTheme = tuiThemes[0];
+    console.log(`  Background: rgb(${firstTheme.dark.background.r}, ${firstTheme.dark.background.g}, ${firstTheme.dark.background.b})`);
+    console.log(`  Foreground: rgb(${firstTheme.dark.foreground.r}, ${firstTheme.dark.foreground.g}, ${firstTheme.dark.foreground.b})`);
+    console.log(`  Primary: rgb(${firstTheme.dark.primary.r}, ${firstTheme.dark.primary.g}, ${firstTheme.dark.primary.b})`);
+  }
 }
 
 main();

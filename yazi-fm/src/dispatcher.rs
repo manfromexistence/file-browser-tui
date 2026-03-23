@@ -108,54 +108,89 @@ impl<'a> Dispatcher<'a> {
 			match key.code {
 				KeyCode::Up | KeyCode::Char('k') => {
 					self.app.bridge.chat_state.menu.select_prev_menu_item();
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::Down | KeyCode::Char('j') => {
 					self.app.bridge.chat_state.menu.select_next_menu_item();
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::PageUp => {
 					self.app.bridge.chat_state.menu.page_up(10);
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::PageDown => {
 					self.app.bridge.chat_state.menu.page_down(10);
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::Home | KeyCode::Char('g') => {
 					self.app.bridge.chat_state.menu.jump_to_top();
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::End | KeyCode::Char('G') => {
 					self.app.bridge.chat_state.menu.jump_to_bottom();
+					// Apply theme preview if in theme submenu
+					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
+						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+							self.app.bridge.chat_state.theme = new_theme.clone();
+							self.app.bridge.chat_state.menu.theme = new_theme;
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::Enter => {
-					// Check if a theme was selected before selecting the item
+					// Get the current theme name before selecting
 					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
 					
 					// Select current menu item (enter submenu or execute action)
 					let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
 					
-					// If a theme was selected, apply it
-					if let Some(name) = theme_name {
-						if let Some(new_theme) = ChatTheme::by_name(&name, crate::tui::theme::ThemeVariant::Dark) {
-							// Update theme in state
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							// Update theme in menu
-							self.app.bridge.chat_state.menu.theme = new_theme;
-							
-							// Close menu after theme selection
-							self.app.bridge.chat_state.menu_is_closing = true;
-							self.app.bridge.chat_state.menu.pick_closing_effect();
-							self.app.bridge.chat_state.show_tachyon_menu = false;
-						}
+					// If we were in theme submenu and selected a theme, just close the menu
+					// (theme is already applied from navigation/hover)
+					if theme_name.is_some() {
+						self.app.bridge.chat_state.menu_is_closing = true;
+						self.app.bridge.chat_state.menu.pick_closing_effect();
+						self.app.bridge.chat_state.show_tachyon_menu = false;
 					}
 					
 					NEED_RENDER.store(1, Ordering::Relaxed);
@@ -265,31 +300,32 @@ impl<'a> Dispatcher<'a> {
 			match mouse.kind {
 				MouseEventKind::Moved => {
 					// Handle hover - always process and render if state changed
-					self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, false);
+					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, false) {
+						// Apply theme preview if hovering over a theme
+						if let Some(theme_name) = self.app.bridge.chat_state.menu.get_hovered_theme_name() {
+							if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
+								self.app.bridge.chat_state.theme = new_theme.clone();
+								self.app.bridge.chat_state.menu.theme = new_theme;
+							}
+						}
+					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 				}
 				MouseEventKind::Down(_) => {
 					// Handle click - select and potentially enter submenu
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, true) {
-						// Check if a theme was selected before selecting the item
+						// Get the current theme name before selecting
 						let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
 						
 						// Item was clicked - now select it (enter submenu or execute)
 						let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
 						
-						// If a theme was selected, apply it
-						if let Some(name) = theme_name {
-							if let Some(new_theme) = ChatTheme::by_name(&name, crate::tui::theme::ThemeVariant::Dark) {
-								// Update theme in state
-								self.app.bridge.chat_state.theme = new_theme.clone();
-								// Update theme in menu
-								self.app.bridge.chat_state.menu.theme = new_theme;
-								
-								// Close menu after theme selection
-								self.app.bridge.chat_state.menu_is_closing = true;
-								self.app.bridge.chat_state.menu.pick_closing_effect();
-								self.app.bridge.chat_state.show_tachyon_menu = false;
-							}
+						// If we were in theme submenu and clicked a theme, just close the menu
+						// (theme is already applied from hover)
+						if theme_name.is_some() {
+							self.app.bridge.chat_state.menu_is_closing = true;
+							self.app.bridge.chat_state.menu.pick_closing_effect();
+							self.app.bridge.chat_state.show_tachyon_menu = false;
 						}
 						
 						NEED_RENDER.store(1, Ordering::Relaxed);
