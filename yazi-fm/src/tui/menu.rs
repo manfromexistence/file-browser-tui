@@ -37,13 +37,34 @@ impl Menu {
         let effects = EffectsRepository::new(theme.clone(), &mut rng);
         let active_effect = effects.get_random_opening_effect(&mut rng);
 
-        // Main menu - 5 top-level categories
+        // Main menu - 26 top-level categories
         let main_menu = vec![
             ("Providers", ""),
-            ("Theme", ""),
-            ("Sandbox", ""),
-            ("Worktree", ""),
             ("Keyboard Shortcuts", ""),
+            ("Theme", ""),
+            ("Worktree", ""),
+            ("Sandbox", ""),
+            ("Model Configuration", ""),
+            ("Approval Policy", ""),
+            ("Web Search", ""),
+            ("MCP Servers", ""),
+            ("Profiles", ""),
+            ("Feature Flags", ""),
+            ("Voice / Realtime", ""),
+            ("Notifications", ""),
+            ("Memory & History", ""),
+            ("Shell Environment", ""),
+            ("Multi-Agent", ""),
+            ("Skills", ""),
+            ("Execution Rules", ""),
+            ("Authentication", ""),
+            ("Developer Instructions", ""),
+            ("Image & Vision", ""),
+            ("Project Trust", ""),
+            ("Plugins & Apps", ""),
+            ("Session Resume", ""),
+            ("Network & Proxy", ""),
+            ("Hooks & Events", ""),
         ];
 
         // Submenus for each category
@@ -60,7 +81,18 @@ impl Menu {
                 ("Token Limits", ""),
                 ("Rate Limiting", ""),
             ],
-            // Theme submenu (index 1)
+            // Keyboard Shortcuts submenu (index 1)
+            vec![
+                ("View Shortcuts", ""),
+                ("Edit Shortcuts", ""),
+                ("Reset Shortcuts", ""),
+                ("Import Keybindings", ""),
+                ("Export Keybindings", ""),
+                ("Vim Mode", ""),
+                ("Emacs Mode", ""),
+                ("Shortcut Conflicts", ""),
+            ],
+            // Theme submenu (index 2)
             vec![
                 ("Theme Selector", ""),
                 ("Dark Themes", ""),
@@ -72,17 +104,6 @@ impl Menu {
                 ("Icon Theme", ""),
                 ("Transparency", ""),
             ],
-            // Sandbox submenu (index 2)
-            vec![
-                ("Sandbox Environment", ""),
-                ("Container Settings", ""),
-                ("Resource Limits", ""),
-                ("Network Access", ""),
-                ("File System Access", ""),
-                ("Security Policies", ""),
-                ("Execution Timeout", ""),
-                ("Language Runtimes", ""),
-            ],
             // Worktree submenu (index 3)
             vec![
                 ("Worktree Manager", ""),
@@ -93,16 +114,180 @@ impl Menu {
                 ("Branch Management", ""),
                 ("Worktree Settings", ""),
             ],
-            // Keyboard Shortcuts submenu (index 4)
+            // Sandbox submenu (index 4)
             vec![
-                ("View Shortcuts", ""),
-                ("Edit Shortcuts", ""),
-                ("Reset Shortcuts", ""),
-                ("Import Keybindings", ""),
-                ("Export Keybindings", ""),
-                ("Vim Mode", ""),
-                ("Emacs Mode", ""),
-                ("Shortcut Conflicts", ""),
+                ("Sandbox Environment", ""),
+                ("Container Settings", ""),
+                ("Resource Limits", ""),
+                ("Network Access", ""),
+                ("File System Access", ""),
+                ("Security Policies", ""),
+                ("Execution Timeout", ""),
+                ("Language Runtimes", ""),
+            ],
+            // Model Configuration submenu (index 5)
+            vec![
+                ("Default Model", ""),
+                ("Reasoning Effort", ""),
+                ("Model Personality", ""),
+                ("Review Model", ""),
+                ("Service Tier", ""),
+                ("Model Catalog JSON", ""),
+            ],
+            // Approval Policy submenu (index 6)
+            vec![
+                ("Policy Mode", ""),
+                ("Untrusted Mode", ""),
+                ("On-Request Mode", ""),
+                ("Never Mode", ""),
+                ("Granular Permissions", ""),
+            ],
+            // Web Search submenu (index 7)
+            vec![
+                ("Search Mode", ""),
+                ("Context Size", ""),
+                ("Allowed Domains", ""),
+                ("User Location", ""),
+            ],
+            // MCP Servers submenu (index 8)
+            vec![
+                ("STDIO Servers", ""),
+                ("HTTP Servers", ""),
+                ("OAuth Credentials", ""),
+                ("OAuth Callback Port", ""),
+                ("Server Management", ""),
+            ],
+            // Profiles submenu (index 9)
+            vec![
+                ("Active Profile", ""),
+                ("Create Profile", ""),
+                ("Edit Profile", ""),
+                ("Delete Profile", ""),
+                ("Profile Settings", ""),
+            ],
+            // Feature Flags submenu (index 10)
+            vec![
+                ("Unified Exec", ""),
+                ("Shell Snapshot", ""),
+                ("Request Rule", ""),
+                ("Undo Support", ""),
+                ("Search Tool", ""),
+                ("Git Commit", ""),
+                ("Runtime Metrics", ""),
+                ("SQLite State", ""),
+                ("Child Agents MD", ""),
+                ("Image Detail Original", ""),
+                ("Request Compression", ""),
+                ("Collaboration", ""),
+                ("Spawn CSV", ""),
+                ("Apps & Connectors", ""),
+                ("Tool Suggest", ""),
+                ("Plugins", ""),
+                ("Image Generation", ""),
+                ("MCP Dependency Install", ""),
+                ("Env Var Prompt", ""),
+                ("Steer Mode", ""),
+                ("PowerShell UTF8", ""),
+                ("Windows Sandbox", ""),
+                ("Windows Sandbox Elevated", ""),
+                ("JS REPL", ""),
+                ("Auto Approval Agent", ""),
+                ("Prevent Sleep", ""),
+                ("Suppress Warnings", ""),
+            ],
+            // Voice / Realtime submenu (index 11)
+            vec![
+                ("Microphone Device", ""),
+                ("Speaker Device", ""),
+                ("Audio Format", ""),
+                ("Voice Pipeline", ""),
+                ("TTS Voice", ""),
+                ("Realtime Mode", ""),
+            ],
+            // Notifications submenu (index 12)
+            vec![
+                ("Notify Script", ""),
+                ("TUI Notifications", ""),
+                ("Turn Completion", ""),
+            ],
+            // Memory & History submenu (index 13)
+            vec![
+                ("Memories Path", ""),
+                ("Tool Output Budget", ""),
+                ("Session Persistence", ""),
+                ("Clear Memories", ""),
+            ],
+            // Shell Environment submenu (index 14)
+            vec![
+                ("Policy Type", ""),
+                ("Exclude List", ""),
+                ("Include Only", ""),
+            ],
+            // Multi-Agent submenu (index 15)
+            vec![
+                ("Max Threads", ""),
+                ("Max Depth", ""),
+                ("Job Max Runtime", ""),
+                ("Role Definitions", ""),
+            ],
+            // Skills submenu (index 16)
+            vec![
+                ("Per-Skill Toggle", ""),
+                ("Skill Path", ""),
+                ("Scan Directories", ""),
+            ],
+            // Execution Rules submenu (index 17)
+            vec![
+                ("Prefix Rules", ""),
+                ("Justification", ""),
+                ("Rule Management", ""),
+            ],
+            // Authentication submenu (index 18)
+            vec![
+                ("Credential Store", ""),
+                ("Auth File Path", ""),
+            ],
+            // Developer Instructions submenu (index 19)
+            vec![
+                ("Inline Instructions", ""),
+                ("Instructions File", ""),
+                ("Project Instructions", ""),
+            ],
+            // Image & Vision submenu (index 20)
+            vec![
+                ("View Image Tool", ""),
+                ("Image Generation", ""),
+                ("Image Detail Original", ""),
+            ],
+            // Project Trust submenu (index 21)
+            vec![
+                ("Root Markers", ""),
+                ("Trust Mode", ""),
+            ],
+            // Plugins & Apps submenu (index 22)
+            vec![
+                ("Plugin Management", ""),
+                ("Marketplace Discovery", ""),
+                ("Connector Apps", ""),
+                ("Suggestion Allowlist", ""),
+            ],
+            // Session Resume submenu (index 23)
+            vec![
+                ("Resume Last", ""),
+                ("Resume All", ""),
+                ("Fork Session", ""),
+            ],
+            // Network & Proxy submenu (index 24)
+            vec![
+                ("OpenAI Base URL", ""),
+                ("Sandbox Network", ""),
+                ("Custom Providers", ""),
+            ],
+            // Hooks & Events submenu (index 25)
+            vec![
+                ("User Prompt Submit", ""),
+                ("Notify Hook", ""),
+                ("Request Permissions", ""),
             ],
         ];
 
