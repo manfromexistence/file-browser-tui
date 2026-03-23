@@ -2,6 +2,185 @@
   "version": "1.0.0",
   "themes": [
     {
+      "name": "dx",
+      "title": "DX",
+      "description": "The default DX theme with green accents.",
+      "dark": {
+        "background": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card": {
+          "r": 14,
+          "g": 14,
+          "b": 14
+        },
+        "card_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "primary": {
+          "r": 132,
+          "g": 166,
+          "b": 135
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 34,
+          "g": 34,
+          "b": 34
+        },
+        "secondary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "muted": {
+          "r": 29,
+          "g": 29,
+          "b": 29
+        },
+        "muted_foreground": {
+          "r": 155,
+          "g": 155,
+          "b": 155
+        },
+        "accent": {
+          "r": 132,
+          "g": 166,
+          "b": 135
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 203,
+          "g": 154,
+          "b": 151
+        },
+        "destructive_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "border": {
+          "r": 36,
+          "g": 36,
+          "b": 36
+        },
+        "input": {
+          "r": 48,
+          "g": 48,
+          "b": 48
+        },
+        "ring": {
+          "r": 155,
+          "g": 155,
+          "b": 155
+        }
+      },
+      "light": {
+        "background": {
+          "r": 252,
+          "g": 252,
+          "b": 252
+        },
+        "foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "card": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "card_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "primary": {
+          "r": 109,
+          "g": 139,
+          "b": 111
+        },
+        "primary_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "secondary": {
+          "r": 232,
+          "g": 232,
+          "b": 232
+        },
+        "secondary_foreground": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "muted": {
+          "r": 243,
+          "g": 243,
+          "b": 243
+        },
+        "muted_foreground": {
+          "r": 75,
+          "g": 75,
+          "b": 75
+        },
+        "accent": {
+          "r": 109,
+          "g": 139,
+          "b": 111
+        },
+        "accent_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "destructive": {
+          "r": 184,
+          "g": 131,
+          "b": 129
+        },
+        "destructive_foreground": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "border": {
+          "r": 223,
+          "g": 224,
+          "b": 223
+        },
+        "input": {
+          "r": 232,
+          "g": 232,
+          "b": 232
+        },
+        "ring": {
+          "r": 109,
+          "g": 139,
+          "b": 111
+        }
+      }
+    },
+    {
       "name": "modern-minimal",
       "title": "Modern Minimal",
       "description": "A theme based on the Modern Minimal color palette.",

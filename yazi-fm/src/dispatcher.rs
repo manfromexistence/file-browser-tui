@@ -169,6 +169,14 @@ impl<'a> Dispatcher<'a> {
 					}
 				}
 				KeyCode::Enter => {
+					// Check if toggle mode button is selected
+					if self.app.bridge.chat_state.menu.is_toggle_mode_selected() {
+						// Toggle the theme mode
+						self.app.bridge.chat_state.toggle_theme_mode();
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					}
+					
 					// Get the current theme name before selecting
 					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
 					
@@ -301,6 +309,14 @@ impl<'a> Dispatcher<'a> {
 				MouseEventKind::Down(_) => {
 					// Handle click - select and potentially enter submenu
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, true) {
+						// Check if toggle mode button is clicked
+						if self.app.bridge.chat_state.menu.is_toggle_mode_selected() {
+							// Toggle the theme mode
+							self.app.bridge.chat_state.toggle_theme_mode();
+							NEED_RENDER.store(1, Ordering::Relaxed);
+							succ!()
+						}
+						
 						// Get the current theme name before selecting
 						let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
 						

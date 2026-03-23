@@ -304,6 +304,7 @@ impl Menu {
             
             let mut submenu_items = vec![
                 ("Back".to_string(), String::new()),
+                ("Toggle Light/Dark Mode".to_string(), "TOGGLE_MODE".to_string()),
             ];
             
             // Add all available themes
@@ -376,12 +377,15 @@ impl Menu {
 
     /// Get the currently highlighted theme name (for live preview)
     pub fn get_highlighted_theme_name(&self) -> Option<String> {
-        // Return theme name if we're in the theme submenu (index 0) and not on "Back"
-        if self.current_submenu == Some(0) && self.selected_menu_item > 0 {
-            Some(self.menu_items[self.selected_menu_item].1.clone())
-        } else {
-            None
+        // Return theme name if we're in the theme submenu (index 0) and not on special items
+        if self.current_submenu == Some(0) {
+            let item = &self.menu_items[self.selected_menu_item];
+            // Skip "Back", separators, and toggle button
+            if !item.1.is_empty() && item.1 != "TOGGLE_MODE" {
+                return Some(item.1.clone());
+            }
         }
+        None
     }
 
     /// Get the hovered theme name (for live preview on mouse hover)
@@ -389,12 +393,25 @@ impl Menu {
         // Return theme name if we're in the theme submenu (index 0) and hovering over a theme
         if self.current_submenu == Some(0) {
             if let Some(hovered_idx) = self.hovered_menu_item {
-                if hovered_idx > 0 && hovered_idx < self.menu_items.len() {
-                    return Some(self.menu_items[hovered_idx].1.clone());
+                if hovered_idx < self.menu_items.len() {
+                    let item = &self.menu_items[hovered_idx];
+                    // Skip "Back", separators, and toggle button
+                    if !item.1.is_empty() && item.1 != "TOGGLE_MODE" {
+                        return Some(item.1.clone());
+                    }
                 }
             }
         }
         None
+    }
+
+    /// Check if the selected item is the toggle mode button
+    pub fn is_toggle_mode_selected(&self) -> bool {
+        if self.current_submenu == Some(0) && self.selected_menu_item < self.menu_items.len() {
+            self.menu_items[self.selected_menu_item].1 == "TOGGLE_MODE"
+        } else {
+            false
+        }
     }
 
     pub fn go_back_to_main(&mut self) {
@@ -473,7 +490,7 @@ impl Menu {
                         crate::tui::theme::ThemeVariant::Dark => "Dark",
                         crate::tui::theme::ThemeVariant::Light => "Light",
                     };
-                    format!("{} - {} Mode ({} items) [Press T to toggle]", parent_name, mode_str, item_count)
+                    format!("{} - {} Mode ({} items)", parent_name, mode_str, item_count)
                 } else {
                     format!("{} ({} items)", parent_name, item_count)
                 }
@@ -522,7 +539,7 @@ impl Menu {
             let mut current_y = padded_area.y;
 
             for idx in self.scroll_offset..end_idx {
-                let (title, _description) = &self.menu_items[idx];
+                let (title, description) = &self.menu_items[idx];
                 let is_selected = idx == self.selected_menu_item;
                 let is_hovered = self.hovered_menu_item == Some(idx);
 
@@ -534,8 +551,17 @@ impl Menu {
                 });
                 current_y += 1;
 
-                // Format the line
-                let item_text = format!(" {}", title);
+                // Format the line - add mode indicator for toggle item
+                let item_text = if description == "TOGGLE_MODE" {
+                    let mode_indicator = match theme_mode {
+                        crate::tui::theme::ThemeVariant::Dark => "(Dark)",
+                        crate::tui::theme::ThemeVariant::Light => "(Light)",
+                    };
+                    format!(" {} {}", title, mode_indicator)
+                } else {
+                    format!(" {}", title)
+                };
+                
                 let line_text = if item_text.len() > exact_width {
                     let truncate_at = exact_width.saturating_sub(3);
                     format!("{}...", &item_text[..truncate_at])

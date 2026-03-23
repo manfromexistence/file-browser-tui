@@ -4,6 +4,86 @@
   "homepage": "http://tweakcn.com",
   "items": [
     {
+      "name": "dx",
+      "type": "registry:style",
+      "title": "DX",
+      "description": "The default DX theme with green accents.",
+      "css": {
+        "@layer base": {
+          "body": {
+            "letter-spacing": "var(--tracking-normal)"
+          }
+        }
+      },
+      "cssVars": {
+        "theme": {
+          "font-sans": "Inter, sans-serif",
+          "font-mono": "JetBrains Mono, monospace",
+          "font-serif": "Source Serif 4, serif",
+          "radius": "0.5rem",
+          "tracking-tighter": "calc(var(--tracking-normal) - 0.05em)",
+          "tracking-tight": "calc(var(--tracking-normal) - 0.025em)",
+          "tracking-wide": "calc(var(--tracking-normal) + 0.025em)",
+          "tracking-wider": "calc(var(--tracking-normal) + 0.05em)",
+          "tracking-widest": "calc(var(--tracking-normal) + 0.1em)"
+        },
+        "light": {
+          "background": "oklch(0.99 0 0)",
+          "foreground": "oklch(0 0 0)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0 0 0)",
+          "popover": "oklch(0.99 0 0)",
+          "popover-foreground": "oklch(0 0 0)",
+          "primary": "oklch(0.55 0.20 145)",
+          "primary-foreground": "oklch(1 0 0)",
+          "secondary": "oklch(0.92 0 0)",
+          "secondary-foreground": "oklch(0 0 0)",
+          "muted": "oklch(0.96 0 0)",
+          "muted-foreground": "oklch(0.32 0 0)",
+          "accent": "oklch(0.55 0.20 145)",
+          "accent-foreground": "oklch(1 0 0)",
+          "destructive": "oklch(0.60 0.22 25)",
+          "destructive-foreground": "oklch(1 0 0)",
+          "border": "oklch(0.89 0 0)",
+          "input": "oklch(0.92 0 0)",
+          "ring": "oklch(0.55 0.20 145)",
+          "chart-1": "oklch(0.55 0.20 145)",
+          "chart-2": "oklch(0.50 0.18 200)",
+          "chart-3": "oklch(0.45 0.16 250)",
+          "chart-4": "oklch(0.40 0.14 300)",
+          "chart-5": "oklch(0.35 0.12 350)",
+          "radius": "0.5rem"
+        },
+        "dark": {
+          "background": "oklch(0 0 0)",
+          "foreground": "oklch(1 0 0)",
+          "card": "oklch(0.04 0 0)",
+          "card-foreground": "oklch(1 0 0)",
+          "popover": "oklch(0.07 0 0)",
+          "popover-foreground": "oklch(1 0 0)",
+          "primary": "oklch(0.65 0.22 145)",
+          "primary-foreground": "oklch(1 0 0)",
+          "secondary": "oklch(0.13 0 0)",
+          "secondary-foreground": "oklch(1 0 0)",
+          "muted": "oklch(0.11 0 0)",
+          "muted-foreground": "oklch(0.64 0 0)",
+          "accent": "oklch(0.65 0.22 145)",
+          "accent-foreground": "oklch(1 0 0)",
+          "destructive": "oklch(0.68 0.20 25)",
+          "destructive-foreground": "oklch(0 0 0)",
+          "border": "oklch(0.14 0 0)",
+          "input": "oklch(0.20 0 0)",
+          "ring": "oklch(0.64 0 0)",
+          "chart-1": "oklch(0.65 0.22 145)",
+          "chart-2": "oklch(0.60 0.20 200)",
+          "chart-3": "oklch(0.55 0.18 250)",
+          "chart-4": "oklch(0.50 0.16 300)",
+          "chart-5": "oklch(0.45 0.14 350)",
+          "radius": "0.5rem"
+        }
+      }
+    },
+    {
       "name": "modern-minimal",
       "type": "registry:style",
       "title": "Modern Minimal",
