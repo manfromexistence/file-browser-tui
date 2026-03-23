@@ -162,7 +162,7 @@ impl Menu {
         if index < self.submenus.len() {
             self.current_submenu = Some(index);
             // Build submenu with "Back" at the top
-            let mut submenu_items = vec![("← Back", "")];
+            let mut submenu_items = vec![("Back", "")];
             submenu_items.extend_from_slice(&self.submenus[index]);
             self.menu_items = submenu_items;
             self.selected_menu_item = 0;
@@ -244,7 +244,7 @@ impl Menu {
             let padded_area = Rect {
                 x: content_area.x + 2,
                 y: content_area.y + 1,
-                width: content_area.width.saturating_sub(2),
+                width: content_area.width.saturating_sub(4),
                 height: content_area.height.saturating_sub(2),
             };
 
@@ -281,12 +281,15 @@ impl Menu {
                 });
                 current_y += 1;
 
+                // Ensure text fits within the exact width
                 let line_text = format!(" {}", title);
                 let final_text = if line_text.len() > exact_width {
+                    // Truncate if too long
                     let truncate_at = exact_width.saturating_sub(3);
                     format!("{}...", &line_text[..truncate_at])
                 } else {
-                    let padding = exact_width - line_text.len();
+                    // Pad to exact width to fill the background
+                    let padding = exact_width.saturating_sub(line_text.len());
                     format!("{}{}", line_text, " ".repeat(padding))
                 };
 
