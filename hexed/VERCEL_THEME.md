@@ -1,21 +1,21 @@
-# Vercel Theme for Yazi
+# Vercel Theme for dx
 
-This document describes the Vercel-inspired theme implementation for Yazi file manager.
+This document describes the Vercel-inspired theme implementation for dx file manager.
 
 ## Overview
 
-The Yazi file manager has been configured with a custom theme that uses the Vercel design system colors from `cursed/old/ui/assets/theme.css`. The theme provides a clean, modern dark interface with carefully selected colors that match Vercel's design language.
+The dx file manager has been configured with a custom theme that uses the Vercel design system colors from `cursed/old/ui/assets/theme.css`. The theme provides a clean, modern dark interface with carefully selected colors that match Vercel's design language.
 
-## Running Yazi
+## Running dx
 
-From the yazi folder, simply run:
+From the dx folder, simply run:
 
 ```bash
-cd yazi
+cd dx
 cargo run
 ```
 
-This will automatically build and run the `yazi` binary (from yazi-fm) with the Vercel theme applied.
+This will automatically build and run the `dx` binary (from dx-fm) with the Vercel theme applied.
 
 ## Color Palette
 
@@ -64,17 +64,17 @@ All UI components have been themed consistently:
 
 ## Files Modified
 
-1. **yazi/yazi-config/preset/theme-vercel.toml** - New Vercel theme definition
-2. **yazi/yazi-config/preset/theme-dark.toml** - Replaced with Vercel theme (original backed up as theme-dark.toml.backup)
-3. **yazi/Cargo.toml** - Workspace already configured with yazi-fm as default
+1. **dx/dx-config/preset/theme-vercel.toml** - New Vercel theme definition
+2. **dx/dx-config/preset/theme-dark.toml** - Replaced with Vercel theme (original backed up as theme-dark.toml.backup)
+3. **dx/Cargo.toml** - Workspace already configured with dx-fm as default
 4. **Fixed warnings in**:
-   - yazi/yazi-shared/src/url/buf.rs
-   - yazi/yazi-fs/src/cha/cha.rs
-   - yazi/yazi-fs/src/provider/attrs.rs
-   - yazi/yazi-binding/src/cha.rs
-   - yazi/yazi-scheduler/src/process/shell.rs
-   - yazi/yazi-cli/src/package/delete.rs
-   - yazi/yazi-cli/src/package/deploy.rs
+   - dx/dx-shared/src/url/buf.rs
+   - dx/dx-fs/src/cha/cha.rs
+   - dx/dx-fs/src/provider/attrs.rs
+   - dx/dx-binding/src/cha.rs
+   - dx/dx-scheduler/src/process/shell.rs
+   - dx/dx-cli/src/package/delete.rs
+   - dx/dx-cli/src/package/deploy.rs
 
 ## Build Status
 
@@ -82,7 +82,7 @@ The project builds successfully with only minor future-compatibility warnings fr
 
 ## Theme Structure
 
-The theme follows Yazi's standard theme structure with sections for:
+The theme follows dx's standard theme structure with sections for:
 - App (overall background)
 - Manager (file browser)
 - Tabs
@@ -97,4 +97,4 @@ The theme follows Yazi's standard theme structure with sections for:
 
 ## Customization
 
-To customize the theme further, edit `yazi/yazi-config/preset/theme-dark.toml` and modify the color values. The theme uses standard hex color codes that can be easily adjusted.
+To customize the theme further, edit `dx/dx-config/preset/theme-dark.toml` and modify the color values. The theme uses standard hex color codes that can be easily adjusted.

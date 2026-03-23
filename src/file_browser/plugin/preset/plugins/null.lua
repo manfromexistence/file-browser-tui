@@ -4,7 +4,7 @@ function M:peek(job)
 	local err
 	if job.mime == "null/file1-not-found" then
 		err = string.format(
-			"Cannot find `%s` to detect the file's MIME type. Make sure it's installed and restart Yazi",
+			"Cannot find `%s` to detect the file's MIME type. Make sure it's installed and restart dx",
 			require("mime.local").file1_bin()
 		)
 	else

@@ -1,15 +1,15 @@
 # Codex-Rust CLI TUI Integration Plan
 **Date:** March 24, 2026  
-**Project:** Converting Yazi-based TUI fork to DX (Codex CLI Integration)
+**Project:** Converting dx-based TUI fork to DX (Codex CLI Integration)
 
 ## Executive Summary
 
-Based on current research, OpenAI's Codex CLI is a Rust-based terminal coding agent that reads codebases, writes files, and executes commands locally. Your TUI built on Yazi's codebase is nearly complete and needs to be rebranded and integrated with the Codex Rust CLI ecosystem.
+Based on current research, OpenAI's Codex CLI is a Rust-based terminal coding agent that reads codebases, writes files, and executes commands locally. Your TUI built on dx's codebase is nearly complete and needs to be rebranded and integrated with the Codex Rust CLI ecosystem.
 
 ## Current State Analysis
 
 ### What You Have
-- ✅ Functional TUI built on Yazi's file browser codebase
+- ✅ Functional TUI built on dx's file browser codebase
 - ✅ Custom menu system with Command Palette
 - ✅ Theme system (DX theme with bright green primary)
 - ✅ Keyboard shortcuts system with recording
@@ -18,10 +18,10 @@ Based on current research, OpenAI's Codex CLI is a Rust-based terminal coding ag
 - ✅ File picker and browser functionality
 
 ### What Needs Transformation
-- ❌ Yazi-branded folder names (yazi-fm, yazi-core, etc.)
-- ❌ Yazi-specific terminology in code
+- ❌ dx-branded folder names (dx-fm, dx-core, etc.)
+- ❌ dx-specific terminology in code
 - ❌ Package names and crate structure
-- ❌ Configuration paths (~/.yazi → ~/.codex or ~/.dx)
+- ❌ Configuration paths (~/.dx → ~/.codex or ~/.dx)
 - ❌ Integration points with Codex CLI
 
 ---
@@ -30,18 +30,18 @@ Based on current research, OpenAI's Codex CLI is a Rust-based terminal coding ag
 
 ### 1.1 Folder Structure Transformation
 
-**Current Yazi Structure:**
+**Current dx Structure:**
 ```
-yazi-fm/          → Main frontend
-yazi-core/        → Core logic
-yazi-config/      → Configuration
-yazi-adapter/     → Adapters
-yazi-plugin/      → Plugin system
-yazi-shared/      → Shared utilities
-yazi-proxy/       → Proxy layer
-yazi-dds/         → Data distribution
-yazi-boot/        → Bootstrap
-yazi-cli/         → CLI interface
+dx-fm/          → Main frontend
+dx-core/        → Core logic
+dx-config/      → Configuration
+dx-adapter/     → Adapters
+dx-plugin/      → Plugin system
+dx-shared/      → Shared utilities
+dx-proxy/       → Proxy layer
+dx-dds/         → Data distribution
+dx-boot/        → Bootstrap
+dx-cli/         → CLI interface
 ```
 
 **Proposed DX Structure (Option A - Codex-aligned):**
@@ -82,7 +82,7 @@ Create a migration script to handle the bulk renaming:
 #!/bin/bash
 # rename-to-codex.sh
 
-OLD_PREFIX="yazi"
+OLD_PREFIX="dx"
 NEW_PREFIX="codex"  # or "dx"
 
 # Rename directories
@@ -125,7 +125,7 @@ keywords = ["codex", "tui", "ai", "coding-agent", "terminal"]
 categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
-# Update all yazi-* dependencies to codex-* or dx-*
+# Update all dx-* dependencies to codex-* or dx-*
 codex-core = { path = "../codex-core" }
 codex-config = { path = "../codex-config" }
 # ... etc
@@ -415,7 +415,7 @@ impl AgentsEditor {
 
 ### 4.1 Branding Updates
 
-Replace all Yazi branding with DX/Codex branding:
+Replace all dx branding with DX/Codex branding:
 
 ```rust
 // codex-tui/src/splash.rs
@@ -609,7 +609,7 @@ pub enum CodexTuiError {
 
 ## Success Metrics
 
-- ✅ All Yazi references removed
+- ✅ All dx references removed
 - ✅ Compiles without warnings
 - ✅ Successfully launches Codex CLI
 - ✅ Can send/receive messages via JSONL

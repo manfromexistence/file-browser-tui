@@ -1,7 +1,7 @@
 local M = {}
 
 function M:peek(job)
-	local program = os.getenv("YAZI_FILE_ONE") or "file"
+	local program = os.getenv("dx_FILE_ONE") or "file"
 	local path = tostring(job.file.path)
 	local output, err = Command(program):arg({ "-bL", "--", path }):output()
 

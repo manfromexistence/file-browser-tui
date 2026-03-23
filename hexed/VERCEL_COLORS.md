@@ -1,6 +1,6 @@
-# Vercel Theme Color Reference for Yazi
+# Vercel Theme Color Reference for dx
 
-This document maps the Vercel design system colors from `theme.css` to the Yazi theme configuration.
+This document maps the Vercel design system colors from `theme.css` to the dx theme configuration.
 
 ## Dark Mode Color Palette
 
@@ -8,7 +8,7 @@ Based on `theme.css` `.dark` section with OKLCH color space:
 
 ### Core Colors
 
-| Color Name | OKLCH Value | Hex Value | Usage in Yazi |
+| Color Name | OKLCH Value | Hex Value | Usage in dx |
 |------------|-------------|-----------|---------------|
 | Background | oklch(0 0 0) | #000000 | App background, status bar |
 | Foreground | oklch(1 0 0) | #ffffff | Text, CWD, active items |

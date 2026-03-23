@@ -1,4 +1,7 @@
 PS F:\cli\tui> cargo run
+    Updating crates.io index
+     Locking 1 package to latest compatible version
+      Adding yazi-prebuilt v0.1.0
 warning: declaration of an `unsafe` method
   --> src\file_browser\shared\src\loc\able.rs:67:2
    |
@@ -740,10 +743,9 @@ warning: usage of an `unsafe` block
 
    Compiling fb-dds v26.2.2 (F:\cli\tui\src\file_browser\dds)
 warning: `fb-binding` (lib) generated 2 warnings
-   Compiling dx-tui v26.2.2 (F:\cli\tui)
+warning: dx-tui@26.2.2: Embedded 113 figlet fonts (221566 bytes compressed)
    Compiling fb-parser v26.2.2 (F:\cli\tui\src\file_browser\parser)
    Compiling fb-proxy v26.2.2 (F:\cli\tui\src\file_browser\proxy)
-warning: dx-tui@26.2.2: Embedded 113 figlet fonts (221566 bytes compressed)
 warning: usage of an `unsafe` block
   --> src\file_browser\dds\src\lib.rs:25:2
    |
@@ -804,4 +806,5 @@ warning: usage of an `unsafe` block
    |                                                    ^^^^^^^^^^^^^^^^^^^
 
 warning: `fb-actor` (lib) generated 2 warnings
+   Compiling dx-tui v26.2.2 (F:\cli\tui)
     Building [=======================> ] 743/744: dx(bin)

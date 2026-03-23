@@ -1,6 +1,6 @@
-# yazi-sftp
+# dx-sftp
 
-A fork of [`russh-sftp`](https://github.com/AspectUnk/russh-sftp) used by Yazi, with some changes:
+A fork of [`russh-sftp`](https://github.com/AspectUnk/russh-sftp) used by dx, with some changes:
 
 - Supports paths containing invalid UTF-8
 - Supports retrieving file nlink, username, and group

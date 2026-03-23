@@ -30,7 +30,7 @@ function M:entry()
 	if st.empty then
 		return ya.notify {
 			title = "Zoxide",
-			content = "No directory history found, check Zoxide's doc to set it up and restart Yazi.",
+			content = "No directory history found, check Zoxide's doc to set it up and restart dx.",
 			timeout = 5,
 			level = "error",
 		}
@@ -83,7 +83,7 @@ function M.options()
 		.. " "
 		.. table.concat(default, " ")
 		.. " "
-		.. (os.getenv("YAZI_ZOXIDE_OPTS") or "")
+		.. (os.getenv("dx_ZOXIDE_OPTS") or "")
 end
 
 ---@param cwd string

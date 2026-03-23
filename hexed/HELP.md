@@ -5,12 +5,12 @@
 
 ---
 
-## Blocker: Left Panel Mouse Wheel Scrolling in Yazi File Picker
+## Blocker: Left Panel Mouse Wheel Scrolling in dx File Picker
 
 **Date:** 2026-03-22
 
 **Task Description:**
-Add mouse wheel scroll support to the left panel (parent folder view) in yazi file picker, matching the behavior of the center and right panels.
+Add mouse wheel scroll support to the left panel (parent folder view) in dx file picker, matching the behavior of the center and right panels.
 
 **Attempt 1:**
 - Approach: Added `Parent:scroll()` function in `parent.lua` that emits "parent-arrow" event
@@ -32,7 +32,7 @@ Add mouse wheel scroll support to the left panel (parent folder view) in yazi fi
 - Error: Left panel remains unresponsive to mouse wheel
 
 **Root Cause Analysis:**
-The left panel (parent folder) in yazi has a fundamentally different design than the center and right panels:
+The left panel (parent folder) in dx has a fundamentally different design than the center and right panels:
 
 1. **Window Calculation**: The parent folder's window is calculated to show files around the current directory's position in the parent folder, not based on an independent scrollable offset.
 
@@ -47,11 +47,11 @@ The left panel (parent folder) in yazi has a fundamentally different design than
 
 **Suggested Solutions:**
 
-1. **Modify Yazi Core Design** (Complex):
+1. **Modify dx Core Design** (Complex):
    - Change how the parent folder window is calculated to use an independent offset
    - Ensure the parent folder's offset persists across renders
    - Update the Tab component to properly route mouse events to children
-   - This requires deep understanding of yazi's architecture and may break existing behavior
+   - This requires deep understanding of dx's architecture and may break existing behavior
 
 2. **Alternative UI Pattern** (Simpler):
    - Keep the parent panel as context-only (non-scrollable)
@@ -67,9 +67,9 @@ The left panel (parent folder) in yazi has a fundamentally different design than
 - Language/Runtime: Rust 1.82 (edition 2024), Lua (via mlua)
 - OS: Windows (bash shell)
 - Key Dependencies: 
-  - yazi-core (file manager core logic)
-  - yazi-plugin (Lua plugin system)
-  - yazi-actor (event handling)
+  - dx-core (file manager core logic)
+  - dx-plugin (Lua plugin system)
+  - dx-actor (event handling)
   - ratatui (TUI rendering)
 
 **Additional Context:**
@@ -80,15 +80,15 @@ The left panel (parent folder) in yazi has a fundamentally different design than
 - Mouse events are enabled in config: `mouse_events = [ "click", "scroll" ]`
 
 **Files Modified (Need Revert):**
-- `yazi/yazi-plugin/preset/components/parent.lua` - Added scroll function (reverted)
-- `yazi/yazi-plugin/preset/components/tab.lua` - Added event routing (reverted)
-- `yazi/yazi-actor/src/mgr/parent_arrow.rs` - Created new actor (deleted)
-- `yazi/yazi-actor/src/mgr/mod.rs` - Registered parent_arrow (reverted)
+- `dx/dx-plugin/preset/components/parent.lua` - Added scroll function (reverted)
+- `dx/dx-plugin/preset/components/tab.lua` - Added event routing (reverted)
+- `dx/dx-actor/src/mgr/parent_arrow.rs` - Created new actor (deleted)
+- `dx/dx-actor/src/mgr/mod.rs` - Registered parent_arrow (reverted)
 
 **Recommendation:**
 This issue requires either:
-1. A yazi maintainer who understands the parent folder's intended design
-2. Significant refactoring of yazi's core folder management system
+1. A dx maintainer who understands the parent folder's intended design
+2. Significant refactoring of dx's core folder management system
 3. Acceptance that the parent panel is context-only and not meant to scroll
 
 For now, the left panel remains click-only (clicking on items navigates to them) without mouse wheel scroll support.

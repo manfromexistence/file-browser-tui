@@ -4,7 +4,7 @@
 
 ```
 project-root/
-├── yazi-fm/
+├── dx-fm/
 │   └── src/
 │       ├── tui/              ← Your custom TUI
 │       ├── app/              ← File browser stuff
@@ -24,19 +24,19 @@ project-root/
 │       ├── router.rs
 │       └── ...
 │
-├── yazi-actor/               ← Separate crate
-├── yazi-adapter/             ← Separate crate
-├── yazi-boot/                ← Separate crate
-├── yazi-config/              ← Separate crate
-├── yazi-core/                ← Separate crate
-├── yazi-dds/                 ← Separate crate
-├── ... (20+ yazi-* crates)
+├── dx-actor/               ← Separate crate
+├── dx-adapter/             ← Separate crate
+├── dx-boot/                ← Separate crate
+├── dx-config/              ← Separate crate
+├── dx-core/                ← Separate crate
+├── dx-dds/                 ← Separate crate
+├── ... (20+ dx-* crates)
 └── Cargo.toml
 ```
 
 **Problems:**
 - ❌ TUI code mixed with file browser code
-- ❌ "yazi-" prefix everywhere (not your brand)
+- ❌ "dx-" prefix everywhere (not your brand)
 - ❌ Hard to find your custom code
 - ❌ Confusing structure
 
@@ -63,37 +63,37 @@ project-root/
 │   ├── input.rs              ✨ YOUR TUI
 │   │
 │   ├── file_browser/         📁 ALL FILE BROWSER CODE (nested)
-│   │   ├── app/              (from yazi-fm/src/app)
-│   │   ├── cmp/              (from yazi-fm/src/cmp)
-│   │   ├── confirm/          (from yazi-fm/src/confirm)
-│   │   ├── help/             (from yazi-fm/src/help)
-│   │   ├── input/            (from yazi-fm/src/input)
-│   │   ├── mgr/              (from yazi-fm/src/mgr)
-│   │   ├── notify/           (from yazi-fm/src/notify)
-│   │   ├── pick/             (from yazi-fm/src/pick)
-│   │   ├── spot/             (from yazi-fm/src/spot)
-│   │   ├── tasks/            (from yazi-fm/src/tasks)
-│   │   ├── which/            (from yazi-fm/src/which)
+│   │   ├── app/              (from dx-fm/src/app)
+│   │   ├── cmp/              (from dx-fm/src/cmp)
+│   │   ├── confirm/          (from dx-fm/src/confirm)
+│   │   ├── help/             (from dx-fm/src/help)
+│   │   ├── input/            (from dx-fm/src/input)
+│   │   ├── mgr/              (from dx-fm/src/mgr)
+│   │   ├── notify/           (from dx-fm/src/notify)
+│   │   ├── pick/             (from dx-fm/src/pick)
+│   │   ├── spot/             (from dx-fm/src/spot)
+│   │   ├── tasks/            (from dx-fm/src/tasks)
+│   │   ├── which/            (from dx-fm/src/which)
 │   │   ├── executor.rs
 │   │   ├── router.rs
 │   │   │
-│   │   ├── actor/            📦 (was yazi-actor)
-│   │   ├── adapter/          � (was yazi-adapter)
-│   │   ├── boot/             📦 (was yazi-boot)
-│   │   ├── config/           📦 (was yazi-config)
-│   │   ├── core/             📦 (was yazi-core)
-│   │   ├── dds/              📦 (was yazi-dds)
-│   │   ├── fs/               📦 (was yazi-fs)
-│   │   ├── macro/            📦 (was yazi-macro)
-│   │   ├── parser/           📦 (was yazi-parser)
-│   │   ├── plugin/           📦 (was yazi-plugin)
-│   │   ├── proxy/            📦 (was yazi-proxy)
-│   │   ├── scheduler/        📦 (was yazi-scheduler)
-│   │   ├── shared/           📦 (was yazi-shared)
-│   │   ├── term/             📦 (was yazi-term)
-│   │   ├── vfs/              📦 (was yazi-vfs)
-│   │   ├── watcher/          📦 (was yazi-watcher)
-│   │   ├── widgets/          📦 (was yazi-widgets)
+│   │   ├── actor/            📦 (was dx-actor)
+│   │   ├── adapter/          � (was dx-adapter)
+│   │   ├── boot/             📦 (was dx-boot)
+│   │   ├── config/           📦 (was dx-config)
+│   │   ├── core/             📦 (was dx-core)
+│   │   ├── dds/              📦 (was dx-dds)
+│   │   ├── fs/               📦 (was dx-fs)
+│   │   ├── macro/            📦 (was dx-macro)
+│   │   ├── parser/           📦 (was dx-parser)
+│   │   ├── plugin/           📦 (was dx-plugin)
+│   │   ├── proxy/            📦 (was dx-proxy)
+│   │   ├── scheduler/        📦 (was dx-scheduler)
+│   │   ├── shared/           📦 (was dx-shared)
+│   │   ├── term/             📦 (was dx-term)
+│   │   ├── vfs/              📦 (was dx-vfs)
+│   │   ├── watcher/          📦 (was dx-watcher)
+│   │   ├── widgets/          📦 (was dx-widgets)
 │   │   └── mod.rs
 │   │
 │   ├── lib.rs                🎯 Main library
@@ -109,7 +109,7 @@ project-root/
 **Benefits:**
 - ✅ Flat structure: TUI code directly in `src/` (no extra nesting)
 - ✅ Everything file browser related in one place: `src/file_browser/`
-- ✅ No "yazi" branding pollution
+- ✅ No "dx" branding pollution
 - ✅ Easy to find your custom code (src/menu/, src/theme.rs, etc.)
 - ✅ File browser completely contained in one folder
 - ✅ Supporting crates nested inside `src/file_browser/`
@@ -122,9 +122,9 @@ project-root/
 
 ### Before:
 ```rust
-use yazi_config::Config;
-use yazi_core::Core;
-use yazi_shared::Data;
+use dx_config::Config;
+use dx_core::Core;
+use dx_shared::Data;
 use crate::app::App;
 use crate::tui::Renderer;
 ```
@@ -146,9 +146,9 @@ use crate::theme::ChatTheme;  // Flat in src/
 ### Before:
 ```toml
 [dependencies]
-yazi-actor = { path = "yazi-actor" }
-yazi-config = { path = "yazi-config" }
-yazi-core = { path = "yazi-core" }
+dx-actor = { path = "dx-actor" }
+dx-config = { path = "dx-config" }
+dx-core = { path = "dx-core" }
 ```
 
 ### After:
@@ -244,7 +244,7 @@ pub use router::Router;
 
 6. **Clean up old folders (when satisfied):**
    ```bash
-   rm -rf yazi-*/
+   rm -rf dx-*/
    ```
 
 ---
@@ -254,8 +254,8 @@ pub use router::Router;
 1. ✅ Creates `src/tui/` and `src/file_browser/` directories
 2. ✅ Moves your TUI code to `src/tui/`
 3. ✅ Moves file browser code to `src/file_browser/`
-4. ✅ Moves all yazi-* crates to `file_browser/` (without yazi- prefix)
-5. ✅ Updates all Cargo.toml files (yazi-* → fb-*)
+4. ✅ Moves all dx-* crates to `file_browser/` (without dx- prefix)
+5. ✅ Updates all Cargo.toml files (dx-* → fb-*)
 6. ✅ Updates all imports in Rust files
 7. ✅ Creates module files (mod.rs, lib.rs)
 8. ✅ Creates new workspace Cargo.toml
@@ -293,10 +293,10 @@ $ cargo check
 
 ## Troubleshooting
 
-### Issue: "cannot find crate `yazi_*`"
-**Fix:** Search and replace remaining `yazi_` references:
+### Issue: "cannot find crate `dx_*`"
+**Fix:** Search and replace remaining `dx_` references:
 ```bash
-find src/ -name "*.rs" -exec sed -i 's/yazi_/fb_/g' {} +
+find src/ -name "*.rs" -exec sed -i 's/dx_/fb_/g' {} +
 ```
 
 ### Issue: "unresolved import `crate::app`"
@@ -311,7 +311,7 @@ find src/ -name "*.rs" -exec sed -i 's/yazi_/fb_/g' {} +
 
 1. Update README.md with new structure
 2. Update documentation
-3. Rename binary from "yazi" to "dx" or "codex-tui"
-4. Update config paths (~/.yazi → ~/.dx)
+3. Rename binary from "dx" to "dx" or "codex-tui"
+4. Update config paths (~/.dx → ~/.dx)
 5. Test all functionality
 6. Celebrate! 🎉

@@ -1,5 +1,5 @@
 target/
-yazi-*/completions
+dx-*/completions
 node_modules/
 
 .DS_Store

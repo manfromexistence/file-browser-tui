@@ -47,10 +47,10 @@ foreach ($file in $cargoFiles) {
     Extract-WorkspaceDeps -filePath $file.FullName
 }
 
-# Also scan old yazi-* directories if they exist
-$yaziDirs = Get-ChildItem -Path "." -Filter "yazi-*" -Directory -ErrorAction SilentlyContinue
+# Also scan old dx-* directories if they exist
+$dxDirs = Get-ChildItem -Path "." -Filter "dx-*" -Directory -ErrorAction SilentlyContinue
 
-foreach ($dir in $yaziDirs) {
+foreach ($dir in $dxDirs) {
     $cargoFile = Join-Path $dir.FullName "Cargo.toml"
     if (Test-Path $cargoFile) {
         Write-Host "Processing old: $cargoFile" -ForegroundColor Gray

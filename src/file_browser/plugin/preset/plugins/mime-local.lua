@@ -66,7 +66,7 @@ function M.match_mimetype(line)
 	end
 end
 
-function M.file1_bin() return os.getenv("YAZI_FILE_ONE") or "file" end
+function M.file1_bin() return os.getenv("dx_FILE_ONE") or "file" end
 
 function M.spawn_file1(paths)
 	local bin = M.file1_bin()

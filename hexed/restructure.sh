@@ -21,18 +21,18 @@ mkdir -p src/file_browser
 echo -e "${GREEN}✓ Directories created${NC}"
 echo ""
 
-# Step 2: Move yazi-fm/src/tui/* directly to src/ (flat structure)
+# Step 2: Move dx-fm/src/tui/* directly to src/ (flat structure)
 echo -e "${BLUE}Step 2: Moving TUI code to src/ (flat)...${NC}"
-if [ -d "yazi-fm/src/tui" ]; then
+if [ -d "dx-fm/src/tui" ]; then
     # Move all subdirectories from tui/
-    for dir in yazi-fm/src/tui/*/; do
+    for dir in dx-fm/src/tui/*/; do
         dirname=$(basename "$dir")
         cp -r "$dir" "src/$dirname"
         echo "  Moved: tui/$dirname → src/$dirname"
     done
     
     # Move all .rs files from tui/
-    for file in yazi-fm/src/tui/*.rs; do
+    for file in dx-fm/src/tui/*.rs; do
         if [ -f "$file" ]; then
             filename=$(basename "$file")
             cp "$file" "src/$filename"
@@ -42,13 +42,13 @@ if [ -d "yazi-fm/src/tui" ]; then
     
     echo -e "${GREEN}✓ TUI code moved to src/ (flat)${NC}"
 else
-    echo -e "${YELLOW}⚠ yazi-fm/src/tui not found, skipping${NC}"
+    echo -e "${YELLOW}⚠ dx-fm/src/tui not found, skipping${NC}"
 fi
 echo ""
 
-# Step 3: Move yazi-fm/src/* (except tui) to src/file_browser/
+# Step 3: Move dx-fm/src/* (except tui) to src/file_browser/
 echo -e "${BLUE}Step 3: Moving file browser code to src/file_browser/...${NC}"
-for dir in yazi-fm/src/*/; do
+for dir in dx-fm/src/*/; do
     dirname=$(basename "$dir")
     if [ "$dirname" != "tui" ]; then
         cp -r "$dir" "src/file_browser/$dirname"
@@ -57,7 +57,7 @@ for dir in yazi-fm/src/*/; do
 done
 
 # Move file browser .rs files (executor, router, etc.)
-for file in yazi-fm/src/*.rs; do
+for file in dx-fm/src/*.rs; do
     filename=$(basename "$file")
     # Skip main app files, move only file browser related files
     if [ "$filename" = "executor.rs" ] || [ "$filename" = "router.rs" ]; then
@@ -68,8 +68,8 @@ done
 
 # Move top-level app files to src/
 for file in main.rs dispatcher.rs root.rs panic.rs signals.rs logs.rs chat.rs chat_input.rs chat_components.rs llm.rs; do
-    if [ -f "yazi-fm/src/$file" ]; then
-        cp "yazi-fm/src/$file" "src/$file"
+    if [ -f "dx-fm/src/$file" ]; then
+        cp "dx-fm/src/$file" "src/$file"
         echo "  Moved to src/: $file"
     fi
 done
@@ -77,12 +77,12 @@ done
 echo -e "${GREEN}✓ File browser code moved${NC}"
 echo ""
 
-# Step 4: Move yazi-* crates to src/file_browser/* (nested inside src/)
-echo -e "${BLUE}Step 4: Moving yazi-* crates to src/file_browser/...${NC}"
-for dir in yazi-*/; do
-    if [ "$dir" != "yazi-fm/" ]; then
-        # Remove "yazi-" prefix
-        newname=$(echo "$dir" | sed 's/yazi-//' | sed 's/\/$//')
+# Step 4: Move dx-* crates to src/file_browser/* (nested inside src/)
+echo -e "${BLUE}Step 4: Moving dx-* crates to src/file_browser/...${NC}"
+for dir in dx-*/; do
+    if [ "$dir" != "dx-fm/" ]; then
+        # Remove "dx-" prefix
+        newname=$(echo "$dir" | sed 's/dx-//' | sed 's/\/$//')
         cp -r "$dir" "src/file_browser/$newname"
         echo "  Moved: $dir → src/file_browser/$newname/"
     fi
@@ -93,7 +93,7 @@ echo ""
 # Step 5: Create mod.rs for file_browser module
 echo -e "${BLUE}Step 5: Creating module files...${NC}"
 cat > src/file_browser/mod.rs << 'EOF'
-// File browser module - contains all Yazi file browser functionality
+// File browser module - contains all dx file browser functionality
 
 // File browser UI components
 pub mod app;
@@ -245,18 +245,18 @@ for dir in src/file_browser/*/; do
     cargo_toml="$dir/Cargo.toml"
     
     if [ -f "$cargo_toml" ]; then
-        # Update package name (yazi-* → fb-*)
-        sed -i.bak 's/name = "yazi-/name = "fb-/g' "$cargo_toml"
+        # Update package name (dx-* → fb-*)
+        sed -i.bak 's/name = "dx-/name = "fb-/g' "$cargo_toml"
         
-        # Update dependencies paths (yazi-* → fb-*, and update paths)
-        sed -i.bak 's/yazi-\([a-z]*\) = { path = "..\/yazi-/fb-\1 = { path = "..\/file_browser\//g' "$cargo_toml"
-        sed -i.bak 's/path = "..\/yazi-/path = "..\/file_browser\//g' "$cargo_toml"
-        sed -i.bak 's/yazi-\([a-z]*\) = { workspace/fb-\1 = { workspace/g' "$cargo_toml"
+        # Update dependencies paths (dx-* → fb-*, and update paths)
+        sed -i.bak 's/dx-\([a-z]*\) = { path = "..\/dx-/fb-\1 = { path = "..\/file_browser\//g' "$cargo_toml"
+        sed -i.bak 's/path = "..\/dx-/path = "..\/file_browser\//g' "$cargo_toml"
+        sed -i.bak 's/dx-\([a-z]*\) = { workspace/fb-\1 = { workspace/g' "$cargo_toml"
         
         # Update use statements in Rust files
-        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/use yazi_/use fb_/g' {} +
-        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/yazi_\([a-z_]*\)::/fb_\1::/g' {} +
-        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/extern crate yazi_/extern crate fb_/g' {} +
+        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/use dx_/use fb_/g' {} +
+        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/dx_\([a-z_]*\)::/fb_\1::/g' {} +
+        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/extern crate dx_/extern crate fb_/g' {} +
         
         # Remove backup files
         find "$dir" -name "*.bak" -delete
@@ -269,15 +269,15 @@ echo ""
 
 # Step 8: Update imports in src/ files
 echo -e "${BLUE}Step 8: Updating imports in src/ files...${NC}"
-find src/ -maxdepth 1 -name "*.rs" -type f -exec sed -i.bak 's/use yazi_/use fb_/g' {} +
-find src/ -maxdepth 1 -name "*.rs" -type f -exec sed -i.bak 's/yazi_\([a-z_]*\)::/fb_\1::/g' {} +
+find src/ -maxdepth 1 -name "*.rs" -type f -exec sed -i.bak 's/use dx_/use fb_/g' {} +
+find src/ -maxdepth 1 -name "*.rs" -type f -exec sed -i.bak 's/dx_\([a-z_]*\)::/fb_\1::/g' {} +
 find src/ -maxdepth 1 -name "*.rs" -type f -exec sed -i.bak 's/use crate::tui/use crate/g' {} +
 
 # Update menu and other subdirectories in src/
 for dir in src/*/; do
     if [ "$(basename "$dir")" != "file_browser" ]; then
-        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/use yazi_/use fb_/g' {} +
-        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/yazi_\([a-z_]*\)::/fb_\1::/g' {} +
+        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/use dx_/use fb_/g' {} +
+        find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/dx_\([a-z_]*\)::/fb_\1::/g' {} +
         find "$dir" -name "*.rs" -type f -exec sed -i.bak 's/use crate::tui/use crate/g' {} +
     fi
 done
@@ -326,10 +326,10 @@ echo "1. Review the changes"
 echo "2. Run: cargo check"
 echo "3. Fix any remaining import issues"
 echo "4. Test the application"
-echo "5. Delete old yazi-* folders when satisfied"
+echo "5. Delete old dx-* folders when satisfied"
 echo ""
 echo -e "${BLUE}To delete old folders (CAREFUL!):${NC}"
-echo "  rm -rf yazi-*/"
+echo "  rm -rf dx-*/"
 echo ""
 echo -e "${BLUE}New structure:${NC}"
 echo "  src/"
@@ -339,8 +339,8 @@ echo "    ├── render.rs          (your TUI render)"
 echo "    ├── state.rs           (your TUI state)"
 echo "    ├── file_browser/      (all file browser code + crates)"
 echo "    │   ├── app/"
-echo "    │   ├── actor/         (was yazi-actor)"
-echo "    │   ├── config/        (was yazi-config)"
+echo "    │   ├── actor/         (was dx-actor)"
+echo "    │   ├── config/        (was dx-config)"
 echo "    │   └── ..."
 echo "    ├── main.rs"
 echo "    └── lib.rs"

@@ -1,6 +1,6 @@
 [package]
-name                   = "yazi-actor"
-description            = "Yazi actor model"
+name                   = "dx-actor"
+description            = "dx actor model"
 version.workspace      = true
 edition.workspace      = true
 license.workspace      = true
@@ -17,24 +17,24 @@ default      = [ "vendored-lua" ]
 vendored-lua = [ "mlua/vendored" ]
 
 [dependencies]
-yazi-binding   = { path = "../file_browser/binding", version = "26.2.2" }
-yazi-boot      = { path = "../file_browser/boot", version = "26.2.2" }
-yazi-config    = { path = "../file_browser/config", version = "26.2.2" }
-yazi-core      = { path = "../file_browser/core", version = "26.2.2" }
-yazi-dds       = { path = "../file_browser/dds", version = "26.2.2" }
-yazi-emulator  = { path = "../file_browser/emulator", version = "26.2.2" }
-yazi-fs        = { path = "../file_browser/fs", version = "26.2.2" }
-yazi-macro     = { path = "../file_browser/macro", version = "26.2.2" }
-yazi-parser    = { path = "../file_browser/parser", version = "26.2.2" }
-yazi-plugin    = { path = "../file_browser/plugin", version = "26.2.2" }
-yazi-proxy     = { path = "../file_browser/proxy", version = "26.2.2" }
+dx-binding   = { path = "../file_browser/binding", version = "26.2.2" }
+dx-boot      = { path = "../file_browser/boot", version = "26.2.2" }
+dx-config    = { path = "../file_browser/config", version = "26.2.2" }
+dx-core      = { path = "../file_browser/core", version = "26.2.2" }
+dx-dds       = { path = "../file_browser/dds", version = "26.2.2" }
+dx-emulator  = { path = "../file_browser/emulator", version = "26.2.2" }
+dx-fs        = { path = "../file_browser/fs", version = "26.2.2" }
+dx-macro     = { path = "../file_browser/macro", version = "26.2.2" }
+dx-parser    = { path = "../file_browser/parser", version = "26.2.2" }
+dx-plugin    = { path = "../file_browser/plugin", version = "26.2.2" }
+dx-proxy     = { path = "../file_browser/proxy", version = "26.2.2" }
 fb-scheduler = { path = "../file_browser/scheduler", version = "26.2.2" }
-yazi-shared    = { path = "../file_browser/shared", version = "26.2.2" }
-yazi-term      = { path = "../file_browser/term", version = "26.2.2" }
-yazi-tty       = { path = "../file_browser/tty", version = "26.2.2" }
-yazi-vfs       = { path = "../file_browser/vfs", version = "26.2.2" }
-yazi-watcher   = { path = "../file_browser/watcher", version = "26.2.2" }
-yazi-widgets   = { path = "../file_browser/widgets", version = "26.2.2" }
+dx-shared    = { path = "../file_browser/shared", version = "26.2.2" }
+dx-term      = { path = "../file_browser/term", version = "26.2.2" }
+dx-tty       = { path = "../file_browser/tty", version = "26.2.2" }
+dx-vfs       = { path = "../file_browser/vfs", version = "26.2.2" }
+dx-watcher   = { path = "../file_browser/watcher", version = "26.2.2" }
+dx-widgets   = { path = "../file_browser/widgets", version = "26.2.2" }
 
 # External dependencies
 anyhow       = { workspace = true }

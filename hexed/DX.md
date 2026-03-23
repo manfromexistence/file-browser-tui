@@ -24,7 +24,7 @@ Now, you have added some text color on the command line item. Please remove that
 
 previously the items were inside the menu but now its around the whole screen so please put them insid ethe munu again adn also in the right there is som space tyhat we are not covering so please cover them add scroll funcationality inside the menu
 
-Currently the yazi file picker screen file picker screen bottom border is less the full bottom as you can see from the screenshot so please make the bottom border be more in the bottom.
+Currently the dx file picker screen file picker screen bottom border is less the full bottom as you can see from the screenshot so please make the bottom border be more in the bottom.
 
 Now when we press 0, it's showing a menu. We have to work on the menu list so it will be a menu for AI coding CLI. It only needs a command pattern menu. Ask me clarification questions about who the menu items should be for so that we can add menu items related to our project. 
 
@@ -55,9 +55,9 @@ Make it like this:
 
 Awesome now add a keyboard shortcut submenu at the bottom of the back menu item. Please put a toggle add, like the theme menu, where by default we are just viewing. When we toggle it will record the key press on every selected menu we highlight so that we can change the menu trigger on the fly from the menu keyboard shortcut menu 
 
-Today is 24th March 2026 and I am creating a TUI for Codex Rust CLI. Now I have used Yazi's Rust codebase for showing files and a file browser in my TUI. Now the TUI UI is almost complete. I have created the TUI separately so that when the TUI is done I can configure it with Codex Rust CLI.
-Now the files and folders are in here in Yazi's codebase so the slug-based is to make this Yazi's codebase like our dx codebase. What should we do? Like, suggest me things to so that in Codex Rust codebasewe can configure our tui fast to make this fork our dx instead of Yazi. The folders are obviously slack-based but are looking bad. Maybe give me suggestions so that we can make these slug-based folder names nicer for our dx. Please do the latest web search about Codex-Rust CLI and give me the best plan and suggestions
+Today is 24th March 2026 and I am creating a TUI for Codex Rust CLI. Now I have used dx's Rust codebase for showing files and a file browser in my TUI. Now the TUI UI is almost complete. I have created the TUI separately so that when the TUI is done I can configure it with Codex Rust CLI.
+Now the files and folders are in here in dx's codebase so the slug-based is to make this dx's codebase like our dx codebase. What should we do? Like, suggest me things to so that in Codex Rust codebasewe can configure our tui fast to make this fork our dx instead of dx. The folders are obviously slack-based but are looking bad. Maybe give me suggestions so that we can make these slug-based folder names nicer for our dx. Please do the latest web search about Codex-Rust CLI and give me the best plan and suggestions
 
-how about to move all yazi-* to root "file_browser" folder and remove the yazi slug from the folder names and only keep the yazi-fm in the root and put its files and folder to root src folder and there you can find the tui folder to just be in the root src folder and yazi related codes to a dedicated folder file_browser folder so in the root src folder there will only be 2 folders - menu and file_broswer and the file browser will have all the folder that are in the yazi-fm src folder root other than the tui
+how about to move all dx-* to root "file_browser" folder and remove the dx slug from the folder names and only keep the dx-fm in the root and put its files and folder to root src folder and there you can find the tui folder to just be in the root src folder and dx related codes to a dedicated folder file_browser folder so in the root src folder there will only be 2 folders - menu and file_broswer and the file browser will have all the folder that are in the dx-fm src folder root other than the tui
 
 now in the crates please do "cargo add {all crates names}" so we will get all latest crates version

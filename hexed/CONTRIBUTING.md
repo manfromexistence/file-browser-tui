@@ -1,6 +1,6 @@
-# Contributing to Yazi
+# Contributing to dx
 
-Thank you for your interest in contributing to Yazi! We welcome contributions in the form of bug reports, feature requests, documentation improvements, and code changes.
+Thank you for your interest in contributing to dx! We welcome contributions in the form of bug reports, feature requests, documentation improvements, and code changes.
 
 This guide will help you understand how to contribute to the project.
 
@@ -23,16 +23,16 @@ Before you begin, ensure you have met the following requirements:
 
 ### Fork the Repository
 
-1. Fork the [Yazi repository](https://github.com/sxyazi/yazi) to your GitHub account.
+1. Fork the [dx repository](https://github.com/sxdx/dx) to your GitHub account.
 2. Clone your fork to your local machine:
 
    ```sh
-   git clone https://github.com/<your-username>/yazi.git
+   git clone https://github.com/<your-username>/dx.git
    ```
 
 3. Set up the upstream remote:
    ```sh
-   git remote add upstream https://github.com/sxyazi/yazi.git
+   git remote add upstream https://github.com/sxdx/dx.git
    ```
 
 ## Project Structure
@@ -45,24 +45,24 @@ A brief overview of the project's structure:
 ├── nix/                # Nix-related configurations
 ├── scripts/            # Helper scripts used by CI/CD
 ├── snap/               # Snapcraft configuration
-├── yazi-adapter/       # Yazi image adapter
-├── yazi-binding/       # Yazi Lua bindings
-├── yazi-boot/          # Yazi bootstrapper
-├── yazi-cli/           # Yazi command-line interface
-├── yazi-codegen/       # Yazi code generator
-├── yazi-config/        # Yazi configuration file parser
-├── yazi-core/          # Yazi core logic
-├── yazi-dds/           # Yazi data distribution service
-├── yazi-ffi/           # Yazi foreign function interface
-├── yazi-fm/            # Yazi file manager
-├── yazi-fs/            # Yazi file system
-├── yazi-macro/         # Yazi macros
-├── yazi-plugin/        # Yazi plugin system
-├── yazi-proxy/         # Yazi event proxy
-├── yazi-scheduler/     # Yazi task scheduler
-├── yazi-shared/        # Yazi shared library
-├── yazi-term/          # Yazi terminal extensions
-├── yazi-widgets/       # Yazi user interface widgets
+├── dx-adapter/       # dx image adapter
+├── dx-binding/       # dx Lua bindings
+├── dx-boot/          # dx bootstrapper
+├── dx-cli/           # dx command-line interface
+├── dx-codegen/       # dx code generator
+├── dx-config/        # dx configuration file parser
+├── dx-core/          # dx core logic
+├── dx-dds/           # dx data distribution service
+├── dx-ffi/           # dx foreign function interface
+├── dx-fm/            # dx file manager
+├── dx-fs/            # dx file system
+├── dx-macro/         # dx macros
+├── dx-plugin/        # dx plugin system
+├── dx-proxy/         # dx event proxy
+├── dx-scheduler/     # dx task scheduler
+├── dx-shared/        # dx shared library
+├── dx-term/          # dx terminal extensions
+├── dx-widgets/       # dx user interface widgets
 ├── .github/            # GitHub-specific files and workflows
 ├── Cargo.toml          # Rust workflow configuration
 └── README.md           # Project overview
@@ -100,19 +100,19 @@ A brief overview of the project's structure:
 
 ### Reporting Bugs
 
-If you encounter a bug and have found a way to reliably reproduce it on the latest `main` branch, please file a [bug report](https://github.com/sxyazi/yazi/issues/new?template=bug.yml) with a [minimal reproducer](https://stackoverflow.com/help/minimal-reproducible-example).
+If you encounter a bug and have found a way to reliably reproduce it on the latest `main` branch, please file a [bug report](https://github.com/sxdx/dx/issues/new?template=bug.yml) with a [minimal reproducer](https://stackoverflow.com/help/minimal-reproducible-example).
 
 ### Suggesting Features
 
-If you want to request a feature, please file a [feature request](https://github.com/sxyazi/yazi/issues/new?template=feature.yml). Please make sure to search for existing issues and discussions before submitting.
+If you want to request a feature, please file a [feature request](https://github.com/sxdx/dx/issues/new?template=feature.yml). Please make sure to search for existing issues and discussions before submitting.
 
 ### Improving Documentation
 
-Yazi's documentation placed at [yazi-rs/yazi-rs.github.io](https://github.com/yazi-rs/yazi-rs.github.io), contributions related to documentation need to be made there.
+dx's documentation placed at [dx-rs/dx-rs.github.io](https://github.com/dx-rs/dx-rs.github.io), contributions related to documentation need to be made there.
 
 ### Improving Icons
 
-Yazi's icon originates from [`nvim-web-devicons`](https://github.com/nvim-tree/nvim-web-devicons), and it is periodically grabbed and updated with the latest changes from upstream via [`generate.lua`](https://github.com/sxyazi/yazi/blob/main/scripts/icons/generate.lua).
+dx's icon originates from [`nvim-web-devicons`](https://github.com/nvim-tree/nvim-web-devicons), and it is periodically grabbed and updated with the latest changes from upstream via [`generate.lua`](https://github.com/sxdx/dx/blob/main/scripts/icons/generate.lua).
 
 Contributions related to the icon should be made upstream to facilitate easier automation of this process.
 
@@ -124,7 +124,7 @@ Contributions related to the icon should be made upstream to facilitate easier a
    git checkout -b your-branch-name
    ```
 
-2. Make your changes. Ensure that your code follows the project's [coding style](https://github.com/sxyazi/yazi/blob/main/rustfmt.toml) and passes all tests.
+2. Make your changes. Ensure that your code follows the project's [coding style](https://github.com/sxdx/dx/blob/main/rustfmt.toml) and passes all tests.
 3. Commit your changes with a descriptive commit message:
 
    ```sh

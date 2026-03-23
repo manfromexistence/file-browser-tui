@@ -1,8 +1,8 @@
-# Yazi UI Layout Changes
+# dx UI Layout Changes
 
 ## Overview
 
-Modified the Yazi TUI to have a more compact, modern layout with all status information in the header and borders around the interface.
+Modified the dx TUI to have a more compact, modern layout with all status information in the header and borders around the interface.
 
 ## Changes Made
 
@@ -11,15 +11,15 @@ Modified the Yazi TUI to have a more compact, modern layout with all status info
 All status bar items (mode, size, permissions, position, percent) have been moved from the bottom of the screen to the top header bar, next to the current working directory path.
 
 **Modified Files:**
-- `yazi/yazi-plugin/preset/components/header.lua` - Added status bar methods and items
-- `yazi/yazi-plugin/preset/components/root.lua` - Removed status bar from layout
+- `dx/dx-plugin/preset/components/header.lua` - Added status bar methods and items
+- `dx/dx-plugin/preset/components/root.lua` - Removed status bar from layout
 
 ### 2. Added Borders Around TUI
 
-Borders now wrap the Yazi interface using `ui.Bar` components on all four edges (top, bottom, left, right).
+Borders now wrap the dx interface using `ui.Bar` components on all four edges (top, bottom, left, right).
 
 **Modified Files:**
-- `yazi/yazi-plugin/preset/components/root.lua` - Added border bars in the build() function
+- `dx/dx-plugin/preset/components/root.lua` - Added border bars in the build() function
 
 ## Layout Structure
 
@@ -95,15 +95,15 @@ The borders use the existing theme color from `th.pick.border` which is set to `
 To test the changes:
 
 ```bash
-cd yazi
+cd dx
 cargo build
-cargo run -p yazi-fm
+cargo run -p dx-fm
 ```
 
-Or from the yazi-fm directory:
+Or from the dx-fm directory:
 
 ```bash
-cd yazi/yazi-fm
+cd dx/dx-fm
 cargo run
 ```
 
@@ -117,12 +117,12 @@ The interface should now display with:
 
 If the UI doesn't display correctly:
 
-1. Make sure no yazi processes are running: `Get-Process yazi | Stop-Process -Force`
+1. Make sure no dx processes are running: `Get-Process dx | Stop-Process -Force`
 2. Rebuild: `cargo clean && cargo build`
 3. Check for Lua errors in the terminal output
 
 ## Reverting Changes
 
 To revert to the original layout, restore these files from git:
-- `yazi/yazi-plugin/preset/components/root.lua`
-- `yazi/yazi-plugin/preset/components/header.lua`
+- `dx/dx-plugin/preset/components/root.lua`
+- `dx/dx-plugin/preset/components/header.lua`
