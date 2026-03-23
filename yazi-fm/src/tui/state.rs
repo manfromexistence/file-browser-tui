@@ -78,6 +78,8 @@ impl AnimationType {
 
 pub struct ChatState {
     pub theme: ChatTheme,
+    pub theme_mode: crate::tui::theme::ThemeVariant, // Track current theme mode
+    pub current_theme_name: String, // Track current theme name for reloading
     pub input: InputState,
     pub messages: Vec<Message>,
     pub is_loading: bool,
@@ -152,6 +154,8 @@ impl ChatState {
 
         Self {
             theme: theme.clone(),
+            theme_mode: crate::tui::theme::ThemeVariant::Dark,
+            current_theme_name: "vercel".to_string(), // Default theme
             input: InputState::new(),
             messages: Vec::new(),
             is_loading: false,
@@ -224,6 +228,35 @@ impl ChatState {
     #[allow(dead_code)]
     pub fn toggle_file_picker(&mut self) {
         self.show_file_picker = !self.show_file_picker;
+    }
+    
+    /// Toggle between light and dark theme mode
+    pub fn toggle_theme_mode(&mut self) {
+        use crate::tui::theme::{ChatTheme, ThemeVariant};
+        
+        // Toggle the mode
+        self.theme_mode = match self.theme_mode {
+            ThemeVariant::Dark => ThemeVariant::Light,
+            ThemeVariant::Light => ThemeVariant::Dark,
+        };
+        
+        // Reload the current theme with the new mode
+        if let Some(new_theme) = ChatTheme::by_name(&self.current_theme_name, self.theme_mode) {
+            self.theme = new_theme.clone();
+            self.menu.theme = new_theme;
+        }
+    }
+    
+    /// Apply a theme by name and mode
+    pub fn apply_theme(&mut self, theme_name: &str, mode: crate::tui::theme::ThemeVariant) {
+        use crate::tui::theme::ChatTheme;
+        
+        if let Some(new_theme) = ChatTheme::by_name(theme_name, mode) {
+            self.theme = new_theme.clone();
+            self.menu.theme = new_theme;
+            self.current_theme_name = theme_name.to_string();
+            self.theme_mode = mode;
+        }
     }
     
     pub fn add_user_message(&mut self, content: String) {

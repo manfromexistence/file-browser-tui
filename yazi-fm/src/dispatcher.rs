@@ -10,7 +10,7 @@ use yazi_macro::{act, emit, succ};
 use yazi_shared::{data::Data, event::{ActionCow, Event, NEED_RENDER}};
 use yazi_widgets::input::InputMode;
 
-use crate::{Executor, Router, app::App, tui::theme::ChatTheme};
+use crate::{Executor, Router, app::App};
 
 pub(super) struct Dispatcher<'a> {
 	app: &'a mut App,
@@ -110,10 +110,7 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.select_prev_menu_item();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -122,10 +119,7 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.select_next_menu_item();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -134,10 +128,7 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.page_up(10);
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -146,10 +137,7 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.page_down(10);
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -158,10 +146,7 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.jump_to_top();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
@@ -170,13 +155,18 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.menu.jump_to_bottom();
 					// Apply theme preview if in theme submenu
 					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-							self.app.bridge.chat_state.theme = new_theme.clone();
-							self.app.bridge.chat_state.menu.theme = new_theme;
-						}
+						self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
+				}
+				KeyCode::Char('t') | KeyCode::Char('T') => {
+					// Toggle light/dark mode when in theme submenu
+					if self.app.bridge.chat_state.menu.current_submenu == Some(0) {
+						self.app.bridge.chat_state.toggle_theme_mode();
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					}
 				}
 				KeyCode::Enter => {
 					// Get the current theme name before selecting
@@ -303,10 +293,7 @@ impl<'a> Dispatcher<'a> {
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, false) {
 						// Apply theme preview if hovering over a theme
 						if let Some(theme_name) = self.app.bridge.chat_state.menu.get_hovered_theme_name() {
-							if let Some(new_theme) = ChatTheme::by_name(&theme_name, crate::tui::theme::ThemeVariant::Dark) {
-								self.app.bridge.chat_state.theme = new_theme.clone();
-								self.app.bridge.chat_state.menu.theme = new_theme;
-							}
+							self.app.bridge.chat_state.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
 						}
 					}
 					NEED_RENDER.store(1, Ordering::Relaxed);

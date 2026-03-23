@@ -1236,7 +1236,7 @@ impl ChatState {
         if self.show_tachyon_menu || self.menu_is_closing {
             // Only render the menu content if it's visible (not closing)
             if self.show_tachyon_menu {
-                self.menu.render_in_area(area, buf);
+                self.menu.render_in_area(area, buf, &self.theme_mode);
             }
             
             // Apply the active effect to the content area (for both open and close)

@@ -440,7 +440,7 @@ impl Menu {
         self.selected_menu_item = self.menu_items.len() - 1;
     }
 
-    pub fn render_in_area(&mut self, area: Rect, buf: &mut Buffer) {
+    pub fn render_in_area(&mut self, area: Rect, buf: &mut Buffer, theme_mode: &crate::tui::theme::ThemeVariant) {
             // Use theme colors for consistency
             let content_bg = self.theme.card;
 
@@ -466,7 +466,17 @@ impl Menu {
                 // In submenu - show parent menu name and item count (excluding "Back")
                 let parent_name = self.main_menu[submenu_idx].0.trim_start_matches(|c: char| c.is_numeric() || c == '.' || c.is_whitespace());
                 let item_count = self.menu_items.len() - 1; // Exclude "Back" from count
-                format!("{} ({} items)", parent_name, item_count)
+                
+                // If in theme submenu, show current mode
+                if submenu_idx == 0 {
+                    let mode_str = match theme_mode {
+                        crate::tui::theme::ThemeVariant::Dark => "Dark",
+                        crate::tui::theme::ThemeVariant::Light => "Light",
+                    };
+                    format!("{} - {} Mode ({} items) [Press T to toggle]", parent_name, mode_str, item_count)
+                } else {
+                    format!("{} ({} items)", parent_name, item_count)
+                }
             } else {
                 // In main menu
                 let item_count = self.menu_items.len();
