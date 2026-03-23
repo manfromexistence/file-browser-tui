@@ -37,51 +37,38 @@ impl Menu {
         let effects = EffectsRepository::new(theme.clone(), &mut rng);
         let active_effect = effects.get_random_opening_effect(&mut rng);
 
-        // Main menu - simple flat structure with reorganized categories
+        // Main menu - restructured in priority order (25 items)
         let main_menu = vec![
-            ("1. Providers", ""),
-            ("2. Theme", ""),
-            ("3. Keyboard Shortcuts", ""),
-            ("4. Worktree", ""),
-            ("5. Sandbox", ""),
-            ("6. Model Configuration", ""),
-            ("7. Approval Policy", ""),
-            ("8. Web Search", ""),
-            ("9. MCP Servers", ""),
-            ("10. Profiles", ""),
-            ("11. Feature Flags", ""),
+            ("1. Theme", ""),
+            ("2. Keyboard Shortcuts", ""),
+            ("3. Providers", ""),
+            ("4. Plugins & Apps", ""),
+            ("5. Skills", ""),
+            ("6. Sandbox", ""),
+            ("7. Web Search", ""),
+            ("8. MCP Servers", ""),
+            ("9. Memory & History", ""),
+            ("10. Multi-Agent", ""),
+            ("11. Notifications", ""),
             ("12. Voice / Realtime", ""),
-            ("13. Notifications", ""),
-            ("14. Memory & History", ""),
-            ("15. Shell Environment", ""),
-            ("16. Multi-Agent", ""),
-            ("17. Skills", ""),
-            ("18. Execution Rules", ""),
-            ("19. Authentication", ""),
-            ("20. Developer Instructions", ""),
-            ("21. Image & Vision", ""),
-            ("22. Project Trust", ""),
-            ("23. Plugins & Apps", ""),
-            ("24. Session Resume", ""),
-            ("25. Network & Proxy", ""),
-            ("26. Hooks & Events", ""),
+            ("13. Image & Vision", ""),
+            ("14. Profiles", ""),
+            ("15. Worktree", ""),
+            ("16. Authentication", ""),
+            ("17. Network & Proxy", ""),
+            ("18. Hooks & Events", ""),
+            ("19. Session Resume", ""),
+            ("20. Approval Policy", ""),
+            ("21. Shell Environment", ""),
+            ("22. Execution Rules", ""),
+            ("23. Project Trust", ""),
+            ("24. Developer Instructions", ""),
+            ("25. Feature Flags", ""),
         ];
 
         // Submenus for each category (indexed by main menu position)
         let submenus = vec![
-            // 1. Providers submenu (index 0)
-            vec![
-                ("1. OpenAI Provider", ""),
-                ("2. Anthropic Provider", ""),
-                ("3. Local LLM Provider", ""),
-                ("4. Custom Provider", ""),
-                ("5. Provider Priority", ""),
-                ("6. API Key Management", ""),
-                ("7. Model Selection", ""),
-                ("8. Token Limits", ""),
-                ("9. Rate Limiting", ""),
-            ],
-            // 2. Theme submenu (index 1)
+            // 1. Theme submenu (index 0)
             vec![
                 ("1. Theme Selector", ""),
                 ("2. Dark Themes", ""),
@@ -93,7 +80,7 @@ impl Menu {
                 ("8. Icon Theme", ""),
                 ("9. Transparency", ""),
             ],
-            // 3. Keyboard Shortcuts submenu (index 2)
+            // 2. Keyboard Shortcuts submenu (index 1)
             vec![
                 ("1. View Shortcuts", ""),
                 ("2. Edit Shortcuts", ""),
@@ -104,17 +91,32 @@ impl Menu {
                 ("7. Emacs Mode", ""),
                 ("8. Shortcut Conflicts", ""),
             ],
-            // 4. Worktree submenu (index 3)
+            // 3. Providers submenu (index 2)
             vec![
-                ("1. Worktree Manager", ""),
-                ("2. Create Worktree", ""),
-                ("3. Switch Worktree", ""),
-                ("4. Remove Worktree", ""),
-                ("5. Worktree Status", ""),
-                ("6. Branch Management", ""),
-                ("7. Worktree Settings", ""),
+                ("1. OpenAI Provider", ""),
+                ("2. Anthropic Provider", ""),
+                ("3. Local LLM Provider", ""),
+                ("4. Custom Provider", ""),
+                ("5. Provider Priority", ""),
+                ("6. API Key Management", ""),
+                ("7. Model Selection", ""),
+                ("8. Token Limits", ""),
+                ("9. Rate Limiting", ""),
             ],
-            // 5. Sandbox submenu (index 4)
+            // 4. Plugins & Apps submenu (index 3)
+            vec![
+                ("1. Plugin Management", ""),
+                ("2. Marketplace Discovery", ""),
+                ("3. Connector Apps", ""),
+                ("4. Suggestion Allowlist", ""),
+            ],
+            // 5. Skills submenu (index 4)
+            vec![
+                ("1. Per-Skill Toggle", ""),
+                ("2. Skill Path", ""),
+                ("3. Scan Directories", ""),
+            ],
+            // 6. Sandbox submenu (index 5)
             vec![
                 ("1. Sandbox Environment", ""),
                 ("2. Container Settings", ""),
@@ -125,31 +127,14 @@ impl Menu {
                 ("7. Execution Timeout", ""),
                 ("8. Language Runtimes", ""),
             ],
-            // 6. Model Configuration submenu (index 5)
-            vec![
-                ("1. Default Model", ""),
-                ("2. Reasoning Effort", ""),
-                ("3. Model Personality", ""),
-                ("4. Review Model", ""),
-                ("5. Service Tier", ""),
-                ("6. Model Catalog JSON", ""),
-            ],
-            // 7. Approval Policy submenu (index 6)
-            vec![
-                ("1. Policy Mode", ""),
-                ("2. Untrusted Mode", ""),
-                ("3. On-Request Mode", ""),
-                ("4. Never Mode", ""),
-                ("5. Granular Permissions", ""),
-            ],
-            // 8. Web Search submenu (index 7)
+            // 7. Web Search submenu (index 6)
             vec![
                 ("1. Search Mode", ""),
                 ("2. Context Size", ""),
                 ("3. Allowed Domains", ""),
                 ("4. User Location", ""),
             ],
-            // 9. MCP Servers submenu (index 8)
+            // 8. MCP Servers submenu (index 7)
             vec![
                 ("1. STDIO Servers", ""),
                 ("2. HTTP Servers", ""),
@@ -157,7 +142,42 @@ impl Menu {
                 ("4. OAuth Callback Port", ""),
                 ("5. Server Management", ""),
             ],
-            // 10. Profiles submenu (index 9)
+            // 9. Memory & History submenu (index 8)
+            vec![
+                ("1. Memories Path", ""),
+                ("2. Tool Output Budget", ""),
+                ("3. Session Persistence", ""),
+                ("4. Clear Memories", ""),
+            ],
+            // 10. Multi-Agent submenu (index 9)
+            vec![
+                ("1. Max Threads", ""),
+                ("2. Max Depth", ""),
+                ("3. Job Max Runtime", ""),
+                ("4. Role Definitions", ""),
+            ],
+            // 11. Notifications submenu (index 10)
+            vec![
+                ("1. Notify Script", ""),
+                ("2. TUI Notifications", ""),
+                ("3. Turn Completion", ""),
+            ],
+            // 12. Voice / Realtime submenu (index 11)
+            vec![
+                ("1. Microphone Device", ""),
+                ("2. Speaker Device", ""),
+                ("3. Audio Format", ""),
+                ("4. Voice Pipeline", ""),
+                ("5. TTS Voice", ""),
+                ("6. Realtime Mode", ""),
+            ],
+            // 13. Image & Vision submenu (index 12)
+            vec![
+                ("1. View Image Tool", ""),
+                ("2. Image Generation", ""),
+                ("3. Image Detail Original", ""),
+            ],
+            // 14. Profiles submenu (index 13)
             vec![
                 ("1. Active Profile", ""),
                 ("2. Create Profile", ""),
@@ -165,7 +185,71 @@ impl Menu {
                 ("4. Delete Profile", ""),
                 ("5. Profile Settings", ""),
             ],
-            // 11. Feature Flags submenu (index 10)
+            // 15. Worktree submenu (index 14)
+            vec![
+                ("1. Worktree Manager", ""),
+                ("2. Create Worktree", ""),
+                ("3. Switch Worktree", ""),
+                ("4. Remove Worktree", ""),
+                ("5. Worktree Status", ""),
+                ("6. Branch Management", ""),
+                ("7. Worktree Settings", ""),
+            ],
+            // 16. Authentication submenu (index 15)
+            vec![
+                ("1. Credential Store", ""),
+                ("2. Auth File Path", ""),
+            ],
+            // 17. Network & Proxy submenu (index 16)
+            vec![
+                ("1. OpenAI Base URL", ""),
+                ("2. Sandbox Network", ""),
+                ("3. Custom Providers", ""),
+            ],
+            // 18. Hooks & Events submenu (index 17)
+            vec![
+                ("1. User Prompt Submit", ""),
+                ("2. Notify Hook", ""),
+                ("3. Request Permissions", ""),
+            ],
+            // 19. Session Resume submenu (index 18)
+            vec![
+                ("1. Resume Last", ""),
+                ("2. Resume All", ""),
+                ("3. Fork Session", ""),
+            ],
+            // 20. Approval Policy submenu (index 19)
+            vec![
+                ("1. Policy Mode", ""),
+                ("2. Untrusted Mode", ""),
+                ("3. On-Request Mode", ""),
+                ("4. Never Mode", ""),
+                ("5. Granular Permissions", ""),
+            ],
+            // 21. Shell Environment submenu (index 20)
+            vec![
+                ("1. Policy Type", ""),
+                ("2. Exclude List", ""),
+                ("3. Include Only", ""),
+            ],
+            // 22. Execution Rules submenu (index 21)
+            vec![
+                ("1. Prefix Rules", ""),
+                ("2. Justification", ""),
+                ("3. Rule Management", ""),
+            ],
+            // 23. Project Trust submenu (index 22)
+            vec![
+                ("1. Root Markers", ""),
+                ("2. Trust Mode", ""),
+            ],
+            // 24. Developer Instructions submenu (index 23)
+            vec![
+                ("1. Inline Instructions", ""),
+                ("2. Instructions File", ""),
+                ("3. Project Instructions", ""),
+            ],
+            // 25. Feature Flags submenu (index 24)
             vec![
                 ("1. Unified Exec", ""),
                 ("2. Shell Snapshot", ""),
@@ -194,100 +278,6 @@ impl Menu {
                 ("25. Auto Approval Agent", ""),
                 ("26. Prevent Sleep", ""),
                 ("27. Suppress Warnings", ""),
-            ],
-            // 12. Voice / Realtime submenu (index 11)
-            vec![
-                ("1. Microphone Device", ""),
-                ("2. Speaker Device", ""),
-                ("3. Audio Format", ""),
-                ("4. Voice Pipeline", ""),
-                ("5. TTS Voice", ""),
-                ("6. Realtime Mode", ""),
-            ],
-            // 13. Notifications submenu (index 12)
-            vec![
-                ("1. Notify Script", ""),
-                ("2. TUI Notifications", ""),
-                ("3. Turn Completion", ""),
-            ],
-            // 14. Memory & History submenu (index 13)
-            vec![
-                ("1. Memories Path", ""),
-                ("2. Tool Output Budget", ""),
-                ("3. Session Persistence", ""),
-                ("4. Clear Memories", ""),
-            ],
-            // 15. Shell Environment submenu (index 14)
-            vec![
-                ("1. Policy Type", ""),
-                ("2. Exclude List", ""),
-                ("3. Include Only", ""),
-            ],
-            // 16. Multi-Agent submenu (index 15)
-            vec![
-                ("1. Max Threads", ""),
-                ("2. Max Depth", ""),
-                ("3. Job Max Runtime", ""),
-                ("4. Role Definitions", ""),
-            ],
-            // 17. Skills submenu (index 16)
-            vec![
-                ("1. Per-Skill Toggle", ""),
-                ("2. Skill Path", ""),
-                ("3. Scan Directories", ""),
-            ],
-            // 18. Execution Rules submenu (index 17)
-            vec![
-                ("1. Prefix Rules", ""),
-                ("2. Justification", ""),
-                ("3. Rule Management", ""),
-            ],
-            // 19. Authentication submenu (index 18)
-            vec![
-                ("1. Credential Store", ""),
-                ("2. Auth File Path", ""),
-            ],
-            // 20. Developer Instructions submenu (index 19)
-            vec![
-                ("1. Inline Instructions", ""),
-                ("2. Instructions File", ""),
-                ("3. Project Instructions", ""),
-            ],
-            // 21. Image & Vision submenu (index 20)
-            vec![
-                ("1. View Image Tool", ""),
-                ("2. Image Generation", ""),
-                ("3. Image Detail Original", ""),
-            ],
-            // 22. Project Trust submenu (index 21)
-            vec![
-                ("1. Root Markers", ""),
-                ("2. Trust Mode", ""),
-            ],
-            // 23. Plugins & Apps submenu (index 22)
-            vec![
-                ("1. Plugin Management", ""),
-                ("2. Marketplace Discovery", ""),
-                ("3. Connector Apps", ""),
-                ("4. Suggestion Allowlist", ""),
-            ],
-            // 24. Session Resume submenu (index 23)
-            vec![
-                ("1. Resume Last", ""),
-                ("2. Resume All", ""),
-                ("3. Fork Session", ""),
-            ],
-            // 25. Network & Proxy submenu (index 24)
-            vec![
-                ("1. OpenAI Base URL", ""),
-                ("2. Sandbox Network", ""),
-                ("3. Custom Providers", ""),
-            ],
-            // 26. Hooks & Events submenu (index 25)
-            vec![
-                ("1. User Prompt Submit", ""),
-                ("2. Notify Hook", ""),
-                ("3. Request Permissions", ""),
             ],
         ];
 
