@@ -26,6 +26,9 @@ pub struct Menu {
     pub scroll_offset: usize,
     pub menu_item_areas: Vec<Rect>, // Store clickable areas for each visible item
     pub menu_area: Rect, // Store the overall menu area
+    pub current_submenu: Option<usize>, // Track which submenu we're in (None = main menu)
+    main_menu: Vec<(&'static str, &'static str)>,
+    submenus: Vec<Vec<(&'static str, &'static str)>>,
 }
 
 impl Menu {
@@ -34,46 +37,73 @@ impl Menu {
         let effects = EffectsRepository::new(theme.clone(), &mut rng);
         let active_effect = effects.get_random_opening_effect(&mut rng);
 
-        let menu_items = vec![
-            ("AI CLI Agent", "Autonomous coding assistant"),
-            ("Command Palette", "Quick access to all commands"),
-            ("Editor Control Panel", "Manage editor settings"),
-            ("Code Search", "Find across all files"),
-            ("Terminal Integration", "Built-in shell access"),
-            ("Auto-complete & Suggestions", "Intelligent code completion"),
-            ("Git Integration", "Version control operations"),
-            ("File Explorer", "Navigate project structure"),
-            ("Debug Console", "Interactive debugging tools"),
-            ("Task Runner", "Execute build and test scripts"),
-            ("Extension Manager", "Install and manage plugins"),
-            ("Workspace Settings", "Configure project preferences"),
-            ("Keyboard Shortcuts", "Customize key bindings"),
-            ("Snippet Manager", "Create and manage code snippets"),
-            ("Refactoring Tools", "Automated code refactoring"),
-            ("Code Formatter", "Format code with style guides"),
-            ("Linter Integration", "Real-time code quality checks"),
-            ("Test Runner", "Execute and manage unit tests"),
-            ("Code Coverage", "View test coverage reports"),
-            ("Performance Profiler", "Analyze code performance"),
-            ("Memory Analyzer", "Debug memory usage"),
-            ("Network Monitor", "Track API calls and requests"),
-            ("Database Explorer", "Browse and query databases"),
-            ("Docker Integration", "Manage containers and images"),
-            ("Kubernetes Dashboard", "Monitor cluster resources"),
-            ("CI/CD Pipeline", "Continuous integration tools"),
-            ("Code Review", "Collaborative code reviews"),
-            ("Issue Tracker", "Manage bugs and features"),
-            ("Documentation Generator", "Auto-generate API docs"),
-            ("Markdown Preview", "Live preview markdown files"),
-            ("REST Client", "Test HTTP endpoints"),
-            ("GraphQL Playground", "Interactive GraphQL IDE"),
-            ("WebSocket Tester", "Test real-time connections"),
-            ("SSH Manager", "Manage remote connections"),
-            ("Environment Variables", "Configure env settings"),
-            ("Secret Manager", "Secure credential storage"),
-            ("API Key Vault", "Manage API keys safely"),
-            ("Theme Customizer", "Personalize editor appearance"),
-            ("Font Settings", "Configure editor fonts"),
+        // Main menu - 5 top-level categories
+        let main_menu = vec![
+            ("Providers", ""),
+            ("Theme", ""),
+            ("Sandbox", ""),
+            ("Worktree", ""),
+            ("Keyboard Shortcuts", ""),
+        ];
+
+        // Submenus for each category
+        let submenus = vec![
+            // Providers submenu (index 0)
+            vec![
+                ("OpenAI Provider", ""),
+                ("Anthropic Provider", ""),
+                ("Local LLM Provider", ""),
+                ("Custom Provider", ""),
+                ("Provider Priority", ""),
+                ("API Key Management", ""),
+                ("Model Selection", ""),
+                ("Token Limits", ""),
+                ("Rate Limiting", ""),
+            ],
+            // Theme submenu (index 1)
+            vec![
+                ("Theme Selector", ""),
+                ("Dark Themes", ""),
+                ("Light Themes", ""),
+                ("Custom Theme", ""),
+                ("Syntax Highlighting", ""),
+                ("UI Colors", ""),
+                ("Font Settings", ""),
+                ("Icon Theme", ""),
+                ("Transparency", ""),
+            ],
+            // Sandbox submenu (index 2)
+            vec![
+                ("Sandbox Environment", ""),
+                ("Container Settings", ""),
+                ("Resource Limits", ""),
+                ("Network Access", ""),
+                ("File System Access", ""),
+                ("Security Policies", ""),
+                ("Execution Timeout", ""),
+                ("Language Runtimes", ""),
+            ],
+            // Worktree submenu (index 3)
+            vec![
+                ("Worktree Manager", ""),
+                ("Create Worktree", ""),
+                ("Switch Worktree", ""),
+                ("Remove Worktree", ""),
+                ("Worktree Status", ""),
+                ("Branch Management", ""),
+                ("Worktree Settings", ""),
+            ],
+            // Keyboard Shortcuts submenu (index 4)
+            vec![
+                ("View Shortcuts", ""),
+                ("Edit Shortcuts", ""),
+                ("Reset Shortcuts", ""),
+                ("Import Keybindings", ""),
+                ("Export Keybindings", ""),
+                ("Vim Mode", ""),
+                ("Emacs Mode", ""),
+                ("Shortcut Conflicts", ""),
+            ],
         ];
 
         Self {
@@ -85,10 +115,13 @@ impl Menu {
             rng,
             selected_menu_item: 0,
             hovered_menu_item: None,
-            menu_items,
+            menu_items: main_menu.clone(),
             scroll_offset: 0,
             menu_item_areas: Vec::new(),
             menu_area: Rect::default(),
+            current_submenu: None,
+            main_menu,
+            submenus,
         }
     }
 
@@ -122,6 +155,45 @@ impl Menu {
             self.selected_menu_item = self.menu_items.len() - 1;
         } else {
             self.selected_menu_item -= 1;
+        }
+    }
+
+    pub fn enter_submenu(&mut self, index: usize) {
+        if index < self.submenus.len() {
+            self.current_submenu = Some(index);
+            // Build submenu with "Back" at the top
+            let mut submenu_items = vec![("← Back", "")];
+            submenu_items.extend_from_slice(&self.submenus[index]);
+            self.menu_items = submenu_items;
+            self.selected_menu_item = 0;
+            self.scroll_offset = 0;
+            self.hovered_menu_item = None;
+        }
+    }
+
+    pub fn go_back_to_main(&mut self) {
+        self.current_submenu = None;
+        self.menu_items = self.main_menu.clone();
+        self.selected_menu_item = 0;
+        self.scroll_offset = 0;
+        self.hovered_menu_item = None;
+    }
+
+    pub fn select_current_item(&mut self) -> bool {
+        if self.current_submenu.is_none() {
+            // In main menu - enter submenu
+            self.enter_submenu(self.selected_menu_item);
+            true
+        } else {
+            // In submenu
+            if self.selected_menu_item == 0 {
+                // "Back" item selected
+                self.go_back_to_main();
+                true
+            } else {
+                // Actual submenu item selected - return false to indicate action needed
+                false
+            }
         }
     }
 
@@ -197,7 +269,7 @@ impl Menu {
             let mut current_y = padded_area.y;
 
             for idx in self.scroll_offset..end_idx {
-                let (title, description) = self.menu_items[idx];
+                let (title, _description) = self.menu_items[idx];
                 let is_selected = idx == self.selected_menu_item;
                 let is_hovered = self.hovered_menu_item == Some(idx);
 
@@ -209,7 +281,7 @@ impl Menu {
                 });
                 current_y += 1;
 
-                let line_text = format!(" {} — {}", title, description);
+                let line_text = format!(" {}", title);
                 let final_text = if line_text.len() > exact_width {
                     let truncate_at = exact_width.saturating_sub(3);
                     format!("{}...", &line_text[..truncate_at])

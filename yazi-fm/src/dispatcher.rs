@@ -136,6 +136,27 @@ impl<'a> Dispatcher<'a> {
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
+				KeyCode::Enter => {
+					// Select current menu item (enter submenu or execute action)
+					self.app.bridge.chat_state.menu.select_current_item();
+					NEED_RENDER.store(1, Ordering::Relaxed);
+					succ!()
+				}
+				KeyCode::Esc | KeyCode::Backspace => {
+					// Go back to main menu if in submenu, otherwise close menu
+					if self.app.bridge.chat_state.menu.current_submenu.is_some() {
+						self.app.bridge.chat_state.menu.go_back_to_main();
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					} else {
+						// Close menu
+						self.app.bridge.chat_state.menu_is_closing = true;
+						self.app.bridge.chat_state.menu.pick_closing_effect();
+						self.app.bridge.chat_state.show_tachyon_menu = false;
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					}
+				}
 				_ => {}
 			}
 		}
@@ -229,8 +250,10 @@ impl<'a> Dispatcher<'a> {
 					NEED_RENDER.store(1, Ordering::Relaxed);
 				}
 				MouseEventKind::Down(_) => {
-					// Handle click
+					// Handle click - select and potentially enter submenu
 					if self.app.bridge.chat_state.menu.handle_mouse(mouse.column, mouse.row, true) {
+						// Item was clicked - now select it (enter submenu or execute)
+						self.app.bridge.chat_state.menu.select_current_item();
 						NEED_RENDER.store(1, Ordering::Relaxed);
 					}
 				}
