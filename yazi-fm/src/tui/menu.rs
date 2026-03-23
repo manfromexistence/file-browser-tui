@@ -29,6 +29,7 @@ pub struct Menu {
     pub current_submenu: Option<usize>, // Track which submenu we're in (None = main menu)
     main_menu: Vec<(&'static str, &'static str)>,
     submenus: Vec<Vec<(&'static str, &'static str)>>,
+    pub recording_mode: bool, // Track if we're in recording mode for keyboard shortcuts
 }
 
 impl Menu {
@@ -75,14 +76,32 @@ impl Menu {
             vec![],
             // 2. Keyboard Shortcuts submenu (index 1)
             vec![
-                ("1. View Shortcuts", ""),
-                ("2. Edit Shortcuts", ""),
-                ("3. Reset Shortcuts", ""),
-                ("4. Import Keybindings", ""),
-                ("5. Export Keybindings", ""),
-                ("6. Vim Mode", ""),
-                ("7. Emacs Mode", ""),
-                ("8. Shortcut Conflicts", ""),
+                ("1. Context Control Panel", "0 or Ctrl+P"),
+                ("2. Theme", "Ctrl+T"),
+                ("3. Keyboard Shortcuts", "Ctrl+K"),
+                ("4. Providers", "Ctrl+Shift+P"),
+                ("5. Plugins & Apps", "Ctrl+Shift+A"),
+                ("6. Skills", "Ctrl+Shift+S"),
+                ("7. Sandbox", "Ctrl+Shift+B"),
+                ("8. Web Search", "Ctrl+Shift+W"),
+                ("9. MCP Servers", "Ctrl+Shift+M"),
+                ("10. Memory & History", "Ctrl+Shift+H"),
+                ("11. Multi-Agent", "Ctrl+Shift+G"),
+                ("12. Notifications", "Ctrl+Shift+N"),
+                ("13. Voice / Realtime", "Ctrl+Shift+V"),
+                ("14. Image & Vision", "Ctrl+Shift+I"),
+                ("15. Profiles", "Ctrl+Shift+R"),
+                ("16. Worktree", "Ctrl+Shift+T"),
+                ("17. Authentication", "Ctrl+Shift+U"),
+                ("18. Network & Proxy", "Ctrl+Shift+X"),
+                ("19. Hooks & Events", "Ctrl+Shift+E"),
+                ("20. Session Resume", "Ctrl+Shift+L"),
+                ("21. Approval Policy", "Ctrl+Shift+O"),
+                ("22. Shell Environment", "Ctrl+Shift+J"),
+                ("23. Execution Rules", "Ctrl+Shift+C"),
+                ("24. Project Trust", "Ctrl+Shift+Y"),
+                ("25. Developer Instructions", "Ctrl+Shift+D"),
+                ("26. Feature Flags", "Ctrl+Shift+F"),
             ],
             // 3. Providers submenu (index 2)
             vec![
@@ -317,7 +336,24 @@ impl Menu {
             self.selected_menu_item = 0;
             self.scroll_offset = 0;
             self.hovered_menu_item = None;
-        } else if index < self.submenus.len() {
+        } 
+        // Special handling for Keyboard Shortcuts submenu (index 1)
+        else if index == 1 {
+            let mut submenu_items = vec![
+                ("Back".to_string(), String::new()),
+                ("Toggle Recording Mode".to_string(), "TOGGLE_RECORDING".to_string()),
+            ];
+            
+            // Add all keyboard shortcut items
+            submenu_items.extend(self.submenus[index].iter().map(|(a, b)| (a.to_string(), b.to_string())));
+            
+            self.menu_items = submenu_items;
+            self.current_submenu = Some(index);
+            self.selected_menu_item = 0;
+            self.scroll_offset = 0;
+            self.hovered_menu_item = None;
+        }
+        else if index < self.submenus.len() {
             self.current_submenu = Some(index);
             
             // Build submenu with "Back" at top, then items
@@ -551,13 +587,26 @@ impl Menu {
                 });
                 current_y += 1;
 
-                // Format the line - add mode indicator for toggle item
+                // Format the line - add mode indicator for toggle item or keyboard shortcut
                 let item_text = if description == "TOGGLE_MODE" {
                     let mode_indicator = match theme_mode {
                         crate::tui::theme::ThemeVariant::Dark => "(Dark)",
                         crate::tui::theme::ThemeVariant::Light => "(Light)",
                     };
                     format!(" {} {}", title, mode_indicator)
+                } else if !description.is_empty() && description != "TOGGLE_MODE" {
+                    // Show keyboard shortcut on the right
+                    let left_part = format!(" {}", title);
+                    let right_part = description;
+                    let available_width = exact_width.saturating_sub(right_part.len() + 2);
+                    
+                    if left_part.len() > available_width {
+                        let truncate_at = available_width.saturating_sub(3);
+                        format!("{}...  {}", &left_part[..truncate_at], right_part)
+                    } else {
+                        let padding = available_width.saturating_sub(left_part.len());
+                        format!("{}{}  {}", left_part, " ".repeat(padding), right_part)
+                    }
                 } else {
                     format!(" {}", title)
                 };

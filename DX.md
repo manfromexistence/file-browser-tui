@@ -45,3 +45,12 @@ One keyboard key place recording on or view toggle in the top
 Show all the menu on the left by serial number
 Show what triggered that menu on the right
 For the Context Control panel, it will be the top and it will toggle on pressing Zero or CTRL+P
+
+Instead of putting all the menu related code on only one file, please split all the code in their own files as this menu concept has become so big. 
+
+Make it like this:
+1. Context Control Panel          0 or Ctrl+P
+2. Theme                          Ctrl+T
+... all the menus items in the command palette as they all have own menu right
+
+Awesome now add a keyboard shortcut submenu at the bottom of the back menu item. Please put a toggle add, like the theme menu, where by default we are just viewing. When we toggle it will record the key press on every selected menu we highlight so that we can change the menu trigger on the fly from the menu keyboard shortcut menu 
