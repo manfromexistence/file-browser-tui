@@ -27,3 +27,13 @@ previously the items were inside the menu but now its around the whole screen so
 Currently the yazi file picker screen file picker screen bottom border is less the full bottom as you can see from the screenshot so please make the bottom border be more in the bottom.
 
 Now when we press 0, it's showing a menu. We have to work on the menu list so it will be a menu for AI coding CLI. It only needs a command pattern menu. Ask me clarification questions about who the menu items should be for so that we can add menu items related to our project. 
+
+Today is 23rd March 2026 now I have forked codex rust cli and creating a brand new tui to create dx - that will have all features of codex rust cli beast unlocked with all providers not only openai specific with best tui - now I am currently creating menus for the tui now we already have these 5 menus:
+1. Providers
+2. Keyboard Shorcuts
+3. Theme
+4. Worktree
+5. Sandbox
+so codex-rust cli has lot more hidden features in configs . toml that people don't know like voice tts and things like that so please add all the features as the menu
+
+Today is 23rd March 2026 now I creating a brand new website and currently using vercel ai sdk now I want to support all providers more than 100+ so please list all npm packages with the most providers
