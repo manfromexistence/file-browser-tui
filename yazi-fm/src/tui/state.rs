@@ -118,6 +118,7 @@ pub struct ChatState {
     #[allow(dead_code)]
     pub focus: u8,
     pub shortcut_index: usize,
+    pub last_shortcut_cycle: Instant, // Timer for cycling shortcut messages
     #[allow(dead_code)]
     pub mode: u8,
     pub selected_local_mode: String,
@@ -194,6 +195,7 @@ impl ChatState {
             last_shortcut_time: Instant::now(),
             focus: 0,
             shortcut_index: 0,
+            last_shortcut_cycle: Instant::now(),
             mode: 0,
             selected_local_mode: "Local".to_string(),
             selected_model: "Qwen3.5-0.8B".to_string(),
@@ -303,6 +305,12 @@ impl ChatState {
     }
     
     pub fn update(&mut self) {
+        // Cycle shortcut messages every 10 seconds
+        if self.last_shortcut_cycle.elapsed().as_secs() >= 10 {
+            self.shortcut_index = (self.shortcut_index + 1) % 3;
+            self.last_shortcut_cycle = Instant::now();
+        }
+        
         // Process LLM response chunks
         if let Ok(chunk) = self.llm_rx.try_recv() {
             if chunk == "\n__END__" {

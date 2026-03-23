@@ -394,8 +394,8 @@ impl ChatState {
     pub fn render_bottom_controls(&self, area: Rect, buf: &mut Buffer) -> (Rect, Rect, Rect, Rect) {
         let shortcuts = [
             "0/Ctrl+P: Toggle Command Palette | Space(Hold): TTS",
-            "Left/Right Arrow: Explore Screen | Ctrl+C: Exit",
-            "1/2/3: Toggle Menus | Ctrl+T: Theme",
+            "Left/Right Arrow: Explore Screens | Ctrl+C: Exit",
+            "1/2/3/(Numbers): Toggle Menus | Ctrl+T: Theme",
         ];
 
         let current_shortcut = shortcuts[self.shortcut_index % shortcuts.len()];
