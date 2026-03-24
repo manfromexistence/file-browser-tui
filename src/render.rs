@@ -14,6 +14,63 @@ impl ChatState {
 		// Update tachyon effects timing
 		let _elapsed = self.last_render.elapsed();
 
+		// PRIORITY 0: Playing intro/outro transition animations
+		if self.playing_intro || self.playing_outro {
+			// Clear the entire area first
+			for y in area.top()..area.bottom() {
+				for x in area.left()..area.right() {
+					buf[(x, y)].reset();
+					buf[(x, y)].set_bg(self.theme_bg_color());
+				}
+			}
+
+			// Render the appropriate transition animation
+			let anim_type = if self.playing_intro { self.intro_animation } else { self.outro_animation };
+
+			match anim_type {
+				AnimationType::Matrix => {
+					self.render_matrix_animation_in_area(area, buf);
+				}
+				AnimationType::Confetti => {
+					self.render_confetti_animation_in_area(area, buf);
+				}
+				AnimationType::GameOfLife => {
+					self.render_gameoflife_animation_in_area(area, buf);
+				}
+				AnimationType::Starfield => {
+					self.render_starfield_animation_in_area(area, buf);
+				}
+				AnimationType::Rain => {
+					self.render_rain_animation_in_area(area, buf);
+				}
+				AnimationType::NyanCat => {
+					self.render_nyancat_animation_in_area(area, buf);
+				}
+				AnimationType::DVDLogo => {
+					self.render_dvdlogo_animation_in_area(area, buf);
+				}
+				AnimationType::Fire => {
+					self.render_fire_animation_in_area(area, buf);
+				}
+				AnimationType::Plasma => {
+					self.render_plasma_animation_in_area(area, buf);
+				}
+				AnimationType::Waves => {
+					self.render_waves_animation_in_area(area, buf);
+				}
+				AnimationType::Fireworks => {
+					self.render_fireworks_animation_in_area(area, buf);
+				}
+				_ => {
+					// For Splash or Yazi, just show a blank screen during transition
+				}
+			}
+
+			// Render toast notification (on top of everything)
+			self.render_toast(area, buf);
+			return;
+		}
+
 		// Both animations show in full screen, no input or controls
 		if self.show_train_animation || self.show_matrix_animation {
 			// Clear the entire area first
@@ -76,6 +133,9 @@ impl ChatState {
 				// Render animation in the main area
 				self.render_matrix_animation_in_area(chunks[0], buf);
 
+				// Render intro/outro indicators (top-left corner)
+				self.render_animation_indicators(chunks[0], current_anim, buf);
+
 				// Render input box and bottom controls
 				self.render_input_box(chunks[1], buf);
 				let (plan_area, model_area, _token_area, local_area) =
@@ -88,6 +148,9 @@ impl ChatState {
 				if self.show_tachyon_menu || self.menu_is_closing {
 					self.render_menu_in_area(area, buf);
 				}
+
+				// Render toast notification (on top of everything)
+				self.render_toast(area, buf);
 				return;
 			}
 
@@ -136,9 +199,9 @@ impl ChatState {
 				AnimationType::Plasma => {
 					self.render_plasma_animation_in_area(chunks[0], buf);
 				}
-				AnimationType::Spinners => {
-					self.render_spinners_animation_in_area(chunks[0], buf);
-				}
+				// AnimationType::Spinners => {
+				// 	self.render_spinners_animation_in_area(chunks[0], buf);
+				// } // COMMENTED OUT: Temporary screen removed
 				AnimationType::Waves => {
 					self.render_waves_animation_in_area(chunks[0], buf);
 				}
@@ -151,6 +214,9 @@ impl ChatState {
 					return;
 				}
 			}
+
+			// Render intro/outro indicators (top-left corner)
+			self.render_animation_indicators(chunks[0], current_anim, buf);
 
 			// Render input box and bottom controls
 			self.render_input_box(chunks[1], buf);
@@ -166,6 +232,9 @@ impl ChatState {
 			if self.show_tachyon_menu || self.menu_is_closing {
 				self.render_menu_in_area(area, buf);
 			}
+
+			// Render toast notification (on top of everything)
+			self.render_toast(area, buf);
 			return;
 		}
 
@@ -224,6 +293,9 @@ impl ChatState {
 		if self.show_tachyon_menu || self.menu_is_closing {
 			self.render_menu_in_area(area, buf);
 		}
+
+		// Render toast notification (on top of everything)
+		self.render_toast(area, buf);
 	}
 
 	pub fn render_dimmed(&mut self, area: Rect, full_area: Rect, buf: &mut Buffer) {
@@ -255,6 +327,9 @@ impl ChatState {
 		if self.show_tachyon_menu || self.menu_is_closing {
 			self.render_menu_in_area(full_area, buf);
 		}
+
+		// Render toast notification (on top of everything)
+		self.render_toast(full_area, buf);
 	}
 }
 
@@ -551,5 +626,102 @@ impl ChatState {
 		let paragraph = Paragraph::new(lines).block(block).style(Style::default().fg(self.theme.fg));
 
 		paragraph.render(overlay_area, buf);
+	}
+}
+
+
+impl ChatState {
+	/// Render toast notification in top-right corner
+	pub fn render_toast(&self, area: Rect, buf: &mut Buffer) {
+		if let Some(ref message) = self.toast_message {
+			// Toast dimensions
+			let toast_width = (message.len() as u16 + 4).min(area.width);
+			let toast_height = 3;
+
+			// Position in top-right corner
+			let toast_x = area.width.saturating_sub(toast_width);
+			let toast_y = 0;
+
+			let toast_area = Rect {
+				x: toast_x,
+				y: toast_y,
+				width: toast_width,
+				height: toast_height,
+			};
+
+			// Create toast with border
+			let block = Block::default()
+				.borders(Borders::ALL)
+				.border_style(Style::default().fg(self.theme.accent))
+				.border_type(ratatui::widgets::BorderType::Rounded)
+				.style(Style::default().bg(self.theme.bg));
+
+			let inner = block.inner(toast_area);
+			block.render(toast_area, buf);
+
+			// Render message text
+			let text = Paragraph::new(message.as_str())
+				.style(Style::default().fg(self.theme.fg))
+				.alignment(ratatui::layout::Alignment::Center);
+
+			text.render(inner, buf);
+		}
+	}
+
+	/// Render intro/outro indicators in top-left corner (for carousel screens)
+	pub fn render_animation_indicators(&self, area: Rect, current_anim: AnimationType, buf: &mut Buffer) {
+		// Only show on carousel animations (not Splash or Yazi)
+		if current_anim == AnimationType::Splash || current_anim == AnimationType::Yazi {
+			return;
+		}
+
+		let mut lines = Vec::new();
+		
+		// Show intro indicator
+		if self.intro_animation == current_anim {
+			lines.push(Line::from(vec![
+				Span::styled("▲ ", Style::default().fg(self.theme.accent)),
+				Span::styled("INTRO", Style::default().fg(self.theme.fg)),
+			]));
+		}
+		
+		// Show outro indicator
+		if self.outro_animation == current_anim {
+			lines.push(Line::from(vec![
+				Span::styled("▼ ", Style::default().fg(self.theme.accent)),
+				Span::styled("OUTRO", Style::default().fg(self.theme.fg)),
+			]));
+		}
+
+		if lines.is_empty() {
+			return;
+		}
+
+		// Calculate dimensions
+		let indicator_height = lines.len() as u16 + 2; // +2 for border
+		let indicator_width = 12; // Fixed width for "▼ OUTRO" + padding
+
+		let indicator_area = Rect {
+			x: 0,
+			y: 0,
+			width: indicator_width,
+			height: indicator_height,
+		};
+
+		// Create indicator box with border
+		let block = Block::default()
+			.borders(Borders::ALL)
+			.border_style(Style::default().fg(self.theme.accent))
+			.border_type(ratatui::widgets::BorderType::Rounded)
+			.style(Style::default().bg(self.theme.bg));
+
+		let inner = block.inner(indicator_area);
+		block.render(indicator_area, buf);
+
+		// Render indicator text
+		let text = Paragraph::new(lines)
+			.style(Style::default().fg(self.theme.fg));
+
+		text.render(inner, buf);
 	}
 }

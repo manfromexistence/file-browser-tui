@@ -29,7 +29,7 @@ pub enum AnimationType {
 	DVDLogo,
 	Fire,
 	Plasma,
-	Spinners,
+	// Spinners, // COMMENTED OUT: Temporary screen removed
 	Waves,
 	Fireworks,
 	Yazi,
@@ -48,10 +48,27 @@ impl AnimationType {
 			Self::DVDLogo,
 			Self::Fire,
 			Self::Plasma,
-			Self::Spinners,
+			// Self::Spinners, // COMMENTED OUT: Temporary screen removed
 			Self::Waves,
 			Self::Fireworks,
 			Self::Yazi, // Last screen
+		]
+	}
+
+	/// Get only carousel animations (excludes Splash and Yazi)
+	pub fn carousel_animations() -> Vec<Self> {
+		vec![
+			Self::Matrix,
+			Self::Confetti,
+			Self::GameOfLife,
+			Self::Starfield,
+			Self::Rain,
+			Self::NyanCat,
+			Self::DVDLogo,
+			Self::Fire,
+			Self::Plasma,
+			Self::Waves,
+			Self::Fireworks,
 		]
 	}
 
@@ -68,7 +85,7 @@ impl AnimationType {
 			Self::DVDLogo => "DVD Logo",
 			Self::Fire => "Fire Animation",
 			Self::Plasma => "Plasma Effect",
-			Self::Spinners => "Spinners",
+			// Self::Spinners => "Spinners", // COMMENTED OUT
 			Self::Waves => "Ocean Waves",
 			Self::Fireworks => "Fireworks",
 			Self::Yazi => "Yazi File Manager",
@@ -146,6 +163,21 @@ pub struct ChatState {
 	pub show_file_picker: bool,
 	#[allow(dead_code)]
 	pub selected_file: Option<PathBuf>,
+
+	// NEW: Intro/Outro animation selection
+	pub intro_animation: AnimationType,
+	pub outro_animation: AnimationType,
+	
+	// NEW: Toast notification system
+	pub toast_message: Option<String>,
+	pub toast_start_time: Option<Instant>,
+	pub toast_duration: Duration,
+
+	// NEW: Transition animation state
+	pub playing_intro: bool,
+	pub playing_outro: bool,
+	pub transition_start_time: Option<Instant>,
+	pub transition_duration: Duration,
 }
 
 impl ChatState {
@@ -210,6 +242,15 @@ impl ChatState {
 			last_input_render_time: Duration::from_secs(0),
 			show_file_picker: false,
 			selected_file: None,
+			intro_animation: AnimationType::Matrix, // Default intro animation
+			outro_animation: AnimationType::Matrix, // Default outro animation
+			toast_message: None,
+			toast_start_time: None,
+			toast_duration: Duration::from_secs(3), // Toast shows for 3 seconds
+			playing_intro: false,
+			playing_outro: false,
+			transition_start_time: None,
+			transition_duration: Duration::from_secs(2), // Transition animations play for 2 seconds
 		}
 	}
 
@@ -266,9 +307,10 @@ impl ChatState {
 		let message = Message::user(content.clone());
 		self.messages.push(message);
 
-		// Exit animation mode when first message is sent
+		// Play intro animation when first message is sent from animation mode
 		if self.animation_mode {
 			self.animation_mode = false;
+			self.play_intro_animation();
 		}
 
 		// Reset scroll to bottom
@@ -308,6 +350,35 @@ impl ChatState {
 			self.last_shortcut_cycle = Instant::now();
 		}
 
+		// Hide toast after duration
+		if let Some(start_time) = self.toast_start_time {
+			if start_time.elapsed() >= self.toast_duration {
+				self.toast_message = None;
+				self.toast_start_time = None;
+			}
+		}
+
+		// Handle transition animations
+		if self.playing_intro || self.playing_outro {
+			if let Some(start_time) = self.transition_start_time {
+				if start_time.elapsed() >= self.transition_duration {
+					// Transition animation finished
+					if self.playing_intro {
+						self.playing_intro = false;
+						self.transition_start_time = None;
+						// Animation mode is already off, messages are already added
+					} else if self.playing_outro {
+						self.playing_outro = false;
+						self.transition_start_time = None;
+						// Return to splash screen
+						self.animation_mode = true;
+						self.current_animation_index = 0; // Splash
+						self.messages.clear(); // Clear messages
+					}
+				}
+			}
+		}
+
 		// Process LLM response chunks
 		if let Ok(chunk) = self.llm_rx.try_recv() {
 			if chunk == "\n__END__" {
@@ -334,5 +405,25 @@ impl ChatState {
 		if self.is_loading {
 			self.typing_indicator.update();
 		}
+	}
+
+	/// Show a toast notification
+	pub fn show_toast(&mut self, message: String) {
+		self.toast_message = Some(message);
+		self.toast_start_time = Some(Instant::now());
+	}
+
+	/// Start playing intro animation
+	pub fn play_intro_animation(&mut self) {
+		self.playing_intro = true;
+		self.transition_start_time = Some(Instant::now());
+		self.animation_start_time = Some(Instant::now());
+	}
+
+	/// Start playing outro animation
+	pub fn play_outro_animation(&mut self) {
+		self.playing_outro = true;
+		self.transition_start_time = Some(Instant::now());
+		self.animation_start_time = Some(Instant::now());
 	}
 }

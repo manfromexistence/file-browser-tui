@@ -132,27 +132,89 @@ impl<'a> Dispatcher<'a> {
 
 		// If in animation mode, handle navigation keys but allow typing
 		if self.app.bridge.chat_state.animation_mode {
-			let animations = crate::AnimationType::all();
+			let all_animations = crate::AnimationType::all();
+			let current_anim = all_animations[self.app.bridge.chat_state.current_animation_index];
 
-			// Handle navigation keys for animation carousel
+			// Handle navigation keys based on current screen
 			match key.code {
 				KeyCode::Left => {
-					// Previous animation
-					if self.app.bridge.chat_state.current_animation_index == 0 {
-						self.app.bridge.chat_state.current_animation_index = animations.len() - 1;
+					if current_anim == crate::AnimationType::Splash {
+						// From Splash → Go to first carousel animation (Matrix)
+						let carousel = crate::AnimationType::carousel_animations();
+						// Find Matrix in all_animations
+						if let Some(matrix_idx) = all_animations.iter().position(|a| *a == carousel[0]) {
+							self.app.bridge.chat_state.current_animation_index = matrix_idx;
+						}
+					} else if current_anim == crate::AnimationType::Yazi {
+						// From Yazi → Go back to Splash
+						self.app.bridge.chat_state.current_animation_index = 0;
 					} else {
-						self.app.bridge.chat_state.current_animation_index -= 1;
+						// In carousel → Navigate to previous carousel animation
+						let carousel = crate::AnimationType::carousel_animations();
+						if let Some(current_carousel_idx) = carousel.iter().position(|a| *a == current_anim) {
+							let prev_carousel_idx = if current_carousel_idx == 0 {
+								carousel.len() - 1
+							} else {
+								current_carousel_idx - 1
+							};
+							let prev_anim = carousel[prev_carousel_idx];
+							// Find this animation in all_animations
+							if let Some(idx) = all_animations.iter().position(|a| *a == prev_anim) {
+								self.app.bridge.chat_state.current_animation_index = idx;
+							}
+						}
 					}
 					self.app.bridge.chat_state.animation_start_time = Some(Instant::now());
 					NEED_RENDER.store(1, Ordering::Relaxed);
 					succ!()
 				}
 				KeyCode::Right => {
-					// Next animation (but not Enter - Enter submits input)
-					self.app.bridge.chat_state.current_animation_index =
-						(self.app.bridge.chat_state.current_animation_index + 1) % animations.len();
+					if current_anim == crate::AnimationType::Splash {
+						// From Splash → Go to Yazi (file browser)
+						if let Some(yazi_idx) = all_animations.iter().position(|a| *a == crate::AnimationType::Yazi) {
+							self.app.bridge.chat_state.current_animation_index = yazi_idx;
+						}
+					} else if current_anim == crate::AnimationType::Yazi {
+						// From Yazi → Go back to Splash
+						self.app.bridge.chat_state.current_animation_index = 0;
+					} else {
+						// In carousel → Go back to Splash
+						self.app.bridge.chat_state.current_animation_index = 0;
+					}
 					self.app.bridge.chat_state.animation_start_time = Some(Instant::now());
 					NEED_RENDER.store(1, Ordering::Relaxed);
+					succ!()
+				}
+				KeyCode::Up => {
+					// Set current animation as intro animation (only in carousel)
+					if current_anim != crate::AnimationType::Splash
+						&& current_anim != crate::AnimationType::Yazi
+					{
+						self.app.bridge.chat_state.intro_animation = current_anim;
+						let anim_name = current_anim.name();
+						self
+							.app
+							.bridge
+							.chat_state
+							.show_toast(format!("✓ Intro: {}", anim_name));
+						NEED_RENDER.store(1, Ordering::Relaxed);
+					}
+					succ!()
+				}
+				KeyCode::Down => {
+					// Set current animation as outro animation (only in carousel)
+					if current_anim != crate::AnimationType::Splash
+						&& current_anim != crate::AnimationType::Yazi
+					{
+						self.app.bridge.chat_state.outro_animation = current_anim;
+						let anim_name = current_anim.name();
+						self
+							.app
+							.bridge
+							.chat_state
+							.show_toast(format!("✓ Outro: {}", anim_name));
+						NEED_RENDER.store(1, Ordering::Relaxed);
+					}
 					succ!()
 				}
 				_ => {
@@ -472,10 +534,16 @@ impl<'a> Dispatcher<'a> {
 					succ!()
 				}
 				InputAction::Exit => {
-					// Show farewell train animation
-					crate::exit_animation::show_train_farewell();
-					// Exit the application
-					std::process::exit(0);
+					// If we have messages (in chat mode), play outro animation first
+					if !self.app.bridge.chat_state.messages.is_empty() {
+						self.app.bridge.chat_state.play_outro_animation();
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!()
+					} else {
+						// No messages, just show farewell and exit
+						crate::exit_animation::show_train_farewell();
+						std::process::exit(0);
+					}
 				}
 				InputAction::Changed => {
 					NEED_RENDER.store(1, Ordering::Relaxed);
