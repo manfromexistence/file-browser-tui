@@ -482,49 +482,110 @@ cargo run
 3. **Async**: Keep Codex API calls non-blocking with tokio::spawn
 4. **Memory**: Clear old `codex_items` after a threshold (e.g., 1000 items)
 
-## Troubleshooting
+## Step 11: Finding Codex Rust Source
 
-### Codex SDK Not Found
+### Where to Look
 
-```bash
-# Ensure Codex CLI is installed
-npm install -g @openai/codex
+The Codex repository structure (as of March 2026):
 
-# Or via Homebrew
-brew install --cask codex
+```
+openai/codex/
+├── src/                    # TypeScript CLI (main)
+├── rust-tui/              # Rust TUI implementation (what you need!)
+│   ├── src/
+│   │   ├── renderer.rs    # Message rendering
+│   │   ├── events.rs      # Event types
+│   │   ├── items.rs       # Thread items
+│   │   ├── markdown.rs    # Markdown parsing
+│   │   ├── client.rs      # API client
+│   │   └── main.rs        # Entry point
+│   └── Cargo.toml
+└── README.md
 ```
 
-### Authentication Errors
+### If Rust Code Isn't in Main Repo
 
-```bash
-# Set API key
-export CODEX_API_KEY="sk-..."
+Check these locations:
 
-# Or use ChatGPT login
-codex  # Run once to authenticate
+1. **Separate repo**: `openai/codex-rust` or `openai/codex-tui`
+2. **Branch**: Look for `rust-tui` or `tui-rust` branches
+3. **Submodule**: Check `.gitmodules` for Rust submodules
+4. **Releases**: Download Rust source from GitHub releases
+
+### Verify You Have the Right Code
+
+Look for these markers:
+
+```rust
+// Should see Ratatui usage
+use ratatui::{...};
+
+// Should see tui-markdown
+use tui_markdown::...;
+
+// Should see ThreadItem types
+pub enum ThreadItem {
+    Message { ... },
+    ToolCall { ... },
+    ...
+}
 ```
-
-### Rendering Issues
-
-- Check `tui-markdown` version compatibility with Ratatui 0.30.0
-- Verify theme colors are defined for both modes
-- Test with simple messages before complex markdown
 
 ## Next Steps
 
-1. Add streaming support for Codex messages (use `run_streamed`)
-2. Implement tool call approval UI
-3. Add file context injection from file browser
-4. Create unified theme system for both modes
-5. Add mode indicator in status bar
+1. **Fork Codex**: Create your fork on GitHub
+2. **Locate Rust TUI code**: Find the Rust implementation in the repo
+3. **Extract components**: Copy renderer, events, items to `src/codex/`
+4. **Strip branding**: Remove Codex UI elements you don't want
+5. **Integrate**: Wire up with your ChatPanel and MessageList
+6. **Test both modes**: Verify Local and Codex rendering work
+7. **Maintain fork**: Set up upstream tracking for updates
+
+## Troubleshooting
+
+### Can't Find Rust Code in Codex Repo
+
+- Check if there's a separate `codex-rust` repository
+- Look in GitHub releases for Rust source archives
+- Search issues/discussions for "Rust TUI" or "Ratatui"
+- The Rust implementation might be closed-source (check license)
+
+### Compilation Errors After Copying
+
+- Update `Cargo.toml` dependencies to match your versions
+- Adjust imports to match your module structure
+- Replace Codex-specific types with your equivalents
+- Check Rust edition compatibility (2024 vs 2021)
+
+### Rendering Differences
+
+- Codex may use different Ratatui widgets than you
+- Theme color mappings might need adjustment
+- Markdown parser behavior could differ
+- Test with simple messages first, then complex ones
 
 ## References
 
-- [codex-client-sdk docs](https://lib.rs/crates/codex-client-sdk)
-- [Codex GitHub](https://github.com/openai/codex)
-- [tui-markdown](https://lib.rs/crates/tui-markdown)
-- [Ratatui docs](https://ratatui.rs)
+- [Codex GitHub](https://github.com/openai/codex) - Main repository
+- [Ratatui docs](https://ratatui.rs) - TUI framework
+- [tui-markdown](https://lib.rs/crates/tui-markdown) - Markdown rendering
+- [Rust Edition 2024](https://doc.rust-lang.org/edition-guide/) - Latest Rust features
+
+## Fork Strategy Summary
+
+| Approach | Control | Maintenance | Flexibility |
+|----------|---------|-------------|-------------|
+| **SDK Dependency** | ❌ Limited | ✅ Easy | ❌ Constrained |
+| **Fork (Your Choice)** | ✅ Full | ⚠️ Manual | ✅ Unlimited |
+
+You chose the fork strategy for maximum control and customization. This lets you modify Codex's rendering directly, strip branding completely, and integrate deeply with your local LLM system.
 
 ---
 
-**Implementation Time Estimate**: 2-4 hours for basic integration, 1-2 days for polish
+**Implementation Time Estimate**: 
+- Fork setup: 1-2 hours
+- Component extraction: 2-4 hours  
+- Branding removal: 1-2 hours
+- Integration: 2-4 hours
+- Testing & polish: 2-4 hours
+- **Total**: 1-2 days for complete integration
