@@ -365,6 +365,11 @@ impl ChatState {
 		self.render_input_text(padded_inner, buf);
 		self.render_input_cursor(padded_inner, buf);
 
+		// Render spinner on the right side if space is held
+		if self.space_held {
+			self.render_input_spinner(padded_inner, buf);
+		}
+
 		// Record input render time
 		self.last_input_render_time = self.perf_monitor.record_input_render();
 	}
@@ -438,6 +443,27 @@ impl ChatState {
 					cell.set_style(Style::default().bg(rainbow_color).fg(self.theme.bg));
 				}
 			}
+		}
+	}
+
+	fn render_input_spinner(&self, area: Rect, buf: &mut Buffer) {
+		// Block spinner frames
+		let spinner_frames = ['▁', '▃', '▄', '▅', '▆', '▇', '█', '▇', '▆', '▅', '▄', '▃'];
+		let frame_char = spinner_frames[self.spinner_frame % spinner_frames.len()];
+
+		// Position spinner on the far right inside the input box
+		// area is the inner area (already inside the border)
+		let spinner_x = area.right().saturating_sub(1); // 1 char from right edge
+		let spinner_y = area.y + (area.height / 2); // Vertically centered
+
+		if spinner_x < area.right() && spinner_y < area.bottom() {
+			let cell = &mut buf[(spinner_x, spinner_y)];
+			
+			// Use rainbow color for the spinner
+			let color = self.rainbow_animation.current_color();
+			
+			cell.set_char(frame_char);
+			cell.set_style(Style::default().fg(color).add_modifier(Modifier::BOLD));
 		}
 	}
 

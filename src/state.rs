@@ -178,6 +178,13 @@ pub struct ChatState {
 	pub playing_outro: bool,
 	pub transition_start_time: Option<Instant>,
 	pub transition_duration: Duration,
+
+	// NEW: Space key hold state for spinner
+	pub space_held: bool,
+	pub space_hold_start: Option<Instant>,
+	pub spinner_frame: usize,
+	pub last_space_press: Option<Instant>,
+	pub space_press_count: usize,
 }
 
 impl ChatState {
@@ -251,6 +258,11 @@ impl ChatState {
 			playing_outro: false,
 			transition_start_time: None,
 			transition_duration: Duration::from_secs(2), // Transition animations play for 2 seconds
+			space_held: false,
+			space_hold_start: None,
+			spinner_frame: 0,
+			last_space_press: None,
+			space_press_count: 0,
 		}
 	}
 
@@ -355,6 +367,25 @@ impl ChatState {
 			if start_time.elapsed() >= self.toast_duration {
 				self.toast_message = None;
 				self.toast_start_time = None;
+			}
+		}
+
+		// Handle space key hold spinner with proper hold detection
+		if self.space_held {
+			if let Some(last_press) = self.last_space_press {
+				// If no space press for 150ms, consider it released
+				if last_press.elapsed() >= Duration::from_millis(150) {
+					self.space_held = false;
+					self.space_hold_start = None;
+					self.last_space_press = None;
+					self.space_press_count = 0;
+				} else {
+					// Still holding, animate spinner
+					if let Some(start_time) = self.space_hold_start {
+						let elapsed_ms = start_time.elapsed().as_millis();
+						self.spinner_frame = ((elapsed_ms / 100) % 12) as usize;
+					}
+				}
 			}
 		}
 

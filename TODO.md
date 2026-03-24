@@ -22,5 +22,8 @@
 - [x] ~~Implement outro animation playback when exiting message list with Ctrl+C~~ ✅ (completed: 2026-03-25)
 - [x] ~~Show toast notifications on animation carousel screens~~ ✅ (completed: 2026-03-25)
 - [x] ~~Add visual indicators showing which animation is set as intro/outro~~ ✅ (completed: 2026-03-25)
+- [x] ~~Add Block spinner display when Space key is held~~ ✅ (completed: 2026-03-25)
+- [x] ~~Position spinner on right side of chat input box~~ ✅ (completed: 2026-03-25)
+- [x] ~~Update spinner to show only while Space is held (hide on other keys)~~ ✅ (completed: 2026-03-25)
 
 ## Blocked / Failed

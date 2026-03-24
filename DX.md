@@ -22,6 +22,8 @@ Now in our Tui please use this "Block" spinner at the spinner screen and when we
 
 Currently in the chat at input bottom center we are only showing three messages on everywhere and timely animation. That is good. Make sure when we are on the file browser screen we should first show the tips and have related details about the file browser, like how, when you place the left or right arrow, it will go to the slash screen and things like that. When we are in the animation carousel we will show how clicking on the top and bottom arrow key will select the intro and outro and things like that.
 
-Now even in the intro and outro please show the chat bottom and chat action buttons. 
+Please put that spinnter inside the the chat input box that has the border and put that in the most right and the trigger is - space key hold so while its being hold the spinnter will show with its animations
 
 Now give me brutal thruhts do we have any clippy right now or not?? And the clippy allow wanings don't count as those are not critical - silence all wanings that you find and even this wanings "warning: dx-tui@26.2.2: Embedded 113 figlet fonts (221566 bytes compressed)"
+
+Now even in the intro and outro please show the chat bottom and chat action buttons

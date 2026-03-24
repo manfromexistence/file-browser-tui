@@ -504,6 +504,45 @@ impl<'a> Dispatcher<'a> {
 		if self.app.bridge.mode == crate::AppMode::Chat
 			|| self.app.bridge.mode == crate::AppMode::FilePicker
 		{
+			// Handle Space key for spinner - proper hold detection
+			if key.code == KeyCode::Char(' ') && key.modifiers.is_empty() {
+				let now = Instant::now();
+				
+				if let Some(last_press) = self.app.bridge.chat_state.last_space_press {
+					// Check if this is a rapid repeat (holding)
+					if last_press.elapsed() < Duration::from_millis(150) {
+						// This is a hold! Show spinner
+						if !self.app.bridge.chat_state.space_held {
+							self.app.bridge.chat_state.space_held = true;
+							self.app.bridge.chat_state.space_hold_start = Some(now);
+						}
+						self.app.bridge.chat_state.last_space_press = Some(now);
+						self.app.bridge.chat_state.space_press_count += 1;
+						NEED_RENDER.store(1, Ordering::Relaxed);
+						succ!() // Don't type space while holding
+					} else {
+						// Gap too long, this is a new press
+						self.app.bridge.chat_state.last_space_press = Some(now);
+						self.app.bridge.chat_state.space_press_count = 1;
+						// Let it fall through to type the space
+					}
+				} else {
+					// First space press
+					self.app.bridge.chat_state.last_space_press = Some(now);
+					self.app.bridge.chat_state.space_press_count = 1;
+					// Let it fall through to type the space
+				}
+			} else {
+				// Any other key pressed - stop spinner
+				if self.app.bridge.chat_state.space_held {
+					self.app.bridge.chat_state.space_held = false;
+					self.app.bridge.chat_state.space_hold_start = None;
+					self.app.bridge.chat_state.last_space_press = None;
+					self.app.bridge.chat_state.space_press_count = 0;
+					NEED_RENDER.store(1, Ordering::Relaxed);
+				}
+			}
+
 			// Handle scrolling when messages exist and input is empty
 			if !self.app.bridge.chat_state.messages.is_empty()
 				&& self.app.bridge.chat_state.input.content.is_empty()
