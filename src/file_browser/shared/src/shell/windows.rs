@@ -83,13 +83,13 @@ fn split_wide(s: &[u16]) -> std::io::Result<Vec<String>> {
 		fn wcslen(s: PCWSTR) -> usize;
 	}
 
-	let mut argc = MaybeUninit::<i32>::uninit();
-	let argv_p = unsafe { CommandLineToArgvW(s.as_ptr(), argc.as_mut_ptr()) };
+	let mut arg_count = MaybeUninit::<i32>::uninit();
+	let argv_p = unsafe { CommandLineToArgvW(s.as_ptr(), arg_count.as_mut_ptr()) };
 	if argv_p.is_null() {
 		return Err(std::io::Error::last_os_error());
 	}
 
-	let argv = unsafe { std::slice::from_raw_parts(argv_p, argc.assume_init() as usize) };
+	let argv = unsafe { std::slice::from_raw_parts(argv_p, arg_count.assume_init() as usize) };
 	let mut res = vec![];
 	for &arg in argv {
 		let len = unsafe { wcslen(arg) };

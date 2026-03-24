@@ -9,8 +9,10 @@ pub struct Id(pub u64);
 
 impl Id {
 	#[inline]
+	#[must_use]
 	pub const fn get(&self) -> u64 { self.0 }
 
+	#[must_use]
 	pub fn unique() -> Self { Self(crate::timestamp_us()) }
 }
 
@@ -49,6 +51,7 @@ pub struct Ids {
 
 impl Ids {
 	#[inline]
+	#[must_use]
 	pub const fn new() -> Self { Self { next: AtomicU64::new(1) } }
 
 	#[inline]

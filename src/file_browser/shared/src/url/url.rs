@@ -133,6 +133,7 @@ impl<'a> Url<'a> {
 	pub fn is_search(self) -> bool { matches!(self, Self::Search { .. }) }
 
 	#[inline]
+	#[must_use]
 	pub fn kind(self) -> SchemeKind {
 		match self {
 			Self::Regular(_) => SchemeKind::Regular,
@@ -143,31 +144,32 @@ impl<'a> Url<'a> {
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn loc(self) -> PathDyn<'a> {
 		match self {
-			Self::Regular(loc) => loc.as_path(),
-			Self::Search { loc, .. } => loc.as_path(),
-			Self::Archive { loc, .. } => loc.as_path(),
+			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => loc.as_path(),
 			Self::Sftp { loc, .. } => loc.as_path(),
 		}
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn name(self) -> Option<Strand<'a>> {
 		Some(match self {
-			Self::Regular(loc) => loc.file_name()?.as_strand(),
-			Self::Search { loc, .. } => loc.file_name()?.as_strand(),
-			Self::Archive { loc, .. } => loc.file_name()?.as_strand(),
+			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => loc.file_name()?.as_strand(),
 			Self::Sftp { loc, .. } => loc.file_name()?.as_strand(),
 		})
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn os_str(self) -> Cow<'a, OsStr> { self.components().os_str() }
 
 	#[inline]
+	#[must_use]
 	pub fn pair(self) -> Option<(Self, PathDyn<'a>)> { Some((self.parent()?, self.urn())) }
 
+	#[must_use]
 	pub fn parent(self) -> Option<Self> {
 		let uri = self.uri();
 
@@ -201,6 +203,7 @@ impl<'a> Url<'a> {
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn scheme(self) -> SchemeRef<'a> {
 		let (uri, urn) = SchemeCow::retrieve_ports(self);
 		match self {
@@ -212,18 +215,23 @@ impl<'a> Url<'a> {
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn stem(self) -> Option<Strand<'a>> {
 		Some(match self {
-			Self::Regular(loc) => loc.file_stem()?.as_strand(),
-			Self::Search { loc, .. } => loc.file_stem()?.as_strand(),
-			Self::Archive { loc, .. } => loc.file_stem()?.as_strand(),
+			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => loc.file_stem()?.as_strand(),
 			Self::Sftp { loc, .. } => loc.file_stem()?.as_strand(),
 		})
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn to_owned(self) -> UrlBuf { self.into() }
 
+	/// Converts this URL to a search URL with the given domain.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the path cannot be converted to an OS path.
 	pub fn to_search(self, domain: impl AsRef<str>) -> Result<UrlBuf, PathDynError> {
 		Ok(UrlBuf::Search {
 			loc:    LocBuf::<PathBuf>::zeroed(self.loc().to_os_owned()?),
@@ -231,6 +239,7 @@ impl<'a> Url<'a> {
 		})
 	}
 
+	#[must_use]
 	pub fn trail(self) -> Self {
 		let uri = self.uri();
 		match self {
@@ -254,6 +263,7 @@ impl<'a> Url<'a> {
 		}
 	}
 
+	#[must_use]
 	pub fn triple(self) -> (PathDyn<'a>, PathDyn<'a>, PathDyn<'a>) {
 		match self {
 			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => {
@@ -267,12 +277,22 @@ impl<'a> Url<'a> {
 		}
 	}
 
+	/// Checks if this URL ends with the given child URL.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the paths cannot be compared.
 	#[inline]
-	pub fn try_ends_with(self, child: impl AsUrl) -> Result<bool, EndsWithError> {
+	pub fn try_ends_with(self, child: &impl AsUrl) -> Result<bool, EndsWithError> {
 		let child = child.as_url();
 		Ok(self.loc().try_ends_with(child.loc())? && self.scheme().covariant(child.scheme()))
 	}
 
+	/// Joins this URL with the given path.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the paths cannot be joined.
 	pub fn try_join(self, path: impl AsStrand) -> Result<UrlBuf, JoinError> {
 		let joined = self.loc().try_join(path)?;
 
@@ -303,15 +323,18 @@ impl<'a> Url<'a> {
 		})
 	}
 
+	/// Replaces the first `take` components with the given path.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the replacement cannot be performed.
 	pub fn try_replace<'b>(self, take: usize, to: impl AsPathRef<'b>) -> Result<UrlCow<'b>> {
 		self.try_replace_impl(take, to.as_path_ref())
 	}
 
-	fn try_replace_impl<'b>(self, take: usize, rep: PathDyn<'b>) -> Result<UrlCow<'b>> {
+	fn try_replace_impl(self, take: usize, rep: PathDyn<'_>) -> Result<UrlCow<'_>> {
 		let b = rep.encoded_bytes();
-		if take == 0 {
-			return UrlCow::try_from(b);
-		} else if SchemeKind::parse(b)?.is_some() {
+		if take == 0 || SchemeKind::parse(b)?.is_some() {
 			return UrlCow::try_from(b);
 		}
 
@@ -352,13 +375,23 @@ impl<'a> Url<'a> {
 		Ok(url.into())
 	}
 
+	/// Checks if this URL starts with the given base URL.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the paths cannot be compared.
 	#[inline]
-	pub fn try_starts_with(self, base: impl AsUrl) -> Result<bool, StartsWithError> {
+	pub fn try_starts_with(self, base: &impl AsUrl) -> Result<bool, StartsWithError> {
 		let base = base.as_url();
 		Ok(self.loc().try_starts_with(base.loc())? && self.scheme().covariant(base.scheme()))
 	}
 
-	pub fn try_strip_prefix(self, base: impl AsUrl) -> Result<PathDyn<'a>, StripPrefixError> {
+	/// Strips the given base URL prefix from this URL.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the base is not a prefix or the URLs are incompatible.
+	pub fn try_strip_prefix(self, base: &impl AsUrl) -> Result<PathDyn<'a>, StripPrefixError> {
 		use StripPrefixError::{Exotic, NotPrefix};
 		use Url as U;
 
@@ -367,8 +400,6 @@ impl<'a> Url<'a> {
 
 		match (self, base) {
 			// Same scheme
-			(U::Regular(_), U::Regular(_)) => Ok(prefix),
-			(U::Search { .. }, U::Search { .. }) => Ok(prefix),
 			(U::Archive { domain: a, .. }, U::Archive { domain: b, .. }) => {
 				Some(prefix).filter(|_| a == b).ok_or(Exotic)
 			}
@@ -377,8 +408,7 @@ impl<'a> Url<'a> {
 			}
 
 			// Both are local files
-			(U::Regular(_), U::Search { .. }) => Ok(prefix),
-			(U::Search { .. }, U::Regular(_)) => Ok(prefix),
+			(U::Regular(_) | U::Search { .. }, U::Regular(_) | U::Search { .. }) => Ok(prefix),
 
 			// Only the entry of archives is a local file
 			(U::Regular(_), U::Archive { .. }) => {
@@ -395,16 +425,16 @@ impl<'a> Url<'a> {
 			}
 
 			// Independent virtual file space
-			(U::Regular(_), U::Sftp { .. }) => Err(Exotic),
-			(U::Search { .. }, U::Sftp { .. }) => Err(Exotic),
-			(U::Archive { .. }, U::Sftp { .. }) => Err(Exotic),
-			(U::Sftp { .. }, U::Regular(_)) => Err(Exotic),
-			(U::Sftp { .. }, U::Search { .. }) => Err(Exotic),
-			(U::Sftp { .. }, U::Archive { .. }) => Err(Exotic),
+			(U::Regular(_), U::Sftp { .. }) | (U::Search { .. }, U::Sftp { .. }) | (U::Archive { .. }, U::Sftp { .. }) | (U::Sftp { .. }, U::Regular(_)) | (U::Sftp { .. }, U::Search { .. }) | (U::Sftp { .. }, U::Archive { .. }) => Err(Exotic),
 		}
 	}
 
-	pub fn try_strip_suffix(self, other: impl AsUrl) -> Result<PathDyn<'a>, StripSuffixError> {
+	/// Strips the given suffix URL from this URL.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the suffix is not present or the URLs are incompatible.
+	pub fn try_strip_suffix(self, other: &impl AsUrl) -> Result<PathDyn<'a>, StripSuffixError> {
 		use StripSuffixError::{Exotic, NotSuffix};
 		use Url as U;
 
@@ -413,8 +443,6 @@ impl<'a> Url<'a> {
 
 		match (self, other) {
 			// Same scheme
-			(U::Regular(_), U::Regular(_)) => Ok(suffix),
-			(U::Search { .. }, U::Search { .. }) => Ok(suffix),
 			(U::Archive { domain: a, .. }, U::Archive { domain: b, .. }) => {
 				Some(suffix).filter(|_| a == b).ok_or(Exotic)
 			}
@@ -423,8 +451,7 @@ impl<'a> Url<'a> {
 			}
 
 			// Both are local files
-			(U::Regular(_), U::Search { .. }) => Ok(suffix),
-			(U::Search { .. }, U::Regular(_)) => Ok(suffix),
+			(U::Regular(_) | U::Search { .. }, U::Regular(_) | U::Search { .. }) => Ok(suffix),
 
 			// Only the entry of archives is a local file
 			(U::Regular(_), U::Archive { .. }) => {
@@ -441,31 +468,24 @@ impl<'a> Url<'a> {
 			}
 
 			// Independent virtual file space
-			(U::Regular(_), U::Sftp { .. }) => Err(Exotic),
-			(U::Search { .. }, U::Sftp { .. }) => Err(Exotic),
-			(U::Archive { .. }, U::Sftp { .. }) => Err(Exotic),
-			(U::Sftp { .. }, U::Regular(_)) => Err(Exotic),
-			(U::Sftp { .. }, U::Search { .. }) => Err(Exotic),
-			(U::Sftp { .. }, U::Archive { .. }) => Err(Exotic),
+			(U::Regular(_), U::Sftp { .. }) | (U::Search { .. }, U::Sftp { .. }) | (U::Archive { .. }, U::Sftp { .. }) | (U::Sftp { .. }, U::Regular(_)) | (U::Sftp { .. }, U::Search { .. }) | (U::Sftp { .. }, U::Archive { .. }) => Err(Exotic),
 		}
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn uri(self) -> PathDyn<'a> {
 		match self {
-			Self::Regular(loc) => loc.uri().as_path(),
-			Self::Search { loc, .. } => loc.uri().as_path(),
-			Self::Archive { loc, .. } => loc.uri().as_path(),
+			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => loc.uri().as_path(),
 			Self::Sftp { loc, .. } => loc.uri().as_path(),
 		}
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn urn(self) -> PathDyn<'a> {
 		match self {
-			Self::Regular(loc) => loc.urn().as_path(),
-			Self::Search { loc, .. } => loc.urn().as_path(),
-			Self::Archive { loc, .. } => loc.urn().as_path(),
+			Self::Regular(loc) | Self::Search { loc, .. } | Self::Archive { loc, .. } => loc.urn().as_path(),
 			Self::Sftp { loc, .. } => loc.urn().as_path(),
 		}
 	}

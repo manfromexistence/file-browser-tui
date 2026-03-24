@@ -15,7 +15,7 @@ macro_rules! return_unless_equal {
 	};
 }
 
-#[inline(always)]
+#[inline]
 fn compare_left(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> Ordering {
 	let mut l;
 	let mut r;
@@ -24,9 +24,9 @@ fn compare_left(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> Or
 		l = left.get(*li);
 		r = right.get(*ri);
 
-		match (l.is_some_and(|b| b.is_ascii_digit()), r.is_some_and(|b| b.is_ascii_digit())) {
+		match (l.is_some_and(u8::is_ascii_digit), r.is_some_and(u8::is_ascii_digit)) {
 			(true, true) => {
-				return_unless_equal!(unsafe { l.unwrap_unchecked().cmp(r.unwrap_unchecked()) })
+				return_unless_equal!(unsafe { l.unwrap_unchecked().cmp(r.unwrap_unchecked()) });
 			}
 			(true, false) => return Ordering::Greater,
 			(false, true) => return Ordering::Less,
@@ -38,7 +38,7 @@ fn compare_left(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> Or
 	}
 }
 
-#[inline(always)]
+#[inline]
 fn compare_right(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> Ordering {
 	let mut l;
 	let mut r;
@@ -48,7 +48,7 @@ fn compare_right(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> O
 		l = left.get(*li);
 		r = right.get(*ri);
 
-		match (l.is_some_and(|b| b.is_ascii_digit()), r.is_some_and(|b| b.is_ascii_digit())) {
+		match (l.is_some_and(u8::is_ascii_digit), r.is_some_and(u8::is_ascii_digit)) {
 			(true, true) => {
 				if bias == Ordering::Equal {
 					bias = unsafe { l.unwrap_unchecked().cmp(r.unwrap_unchecked()) };
@@ -64,6 +64,7 @@ fn compare_right(left: &[u8], right: &[u8], li: &mut usize, ri: &mut usize) -> O
 	}
 }
 
+#[must_use]
 pub fn natsort(left: &[u8], right: &[u8], insensitive: bool) -> Ordering {
 	let mut li = 0;
 	let mut ri = 0;
@@ -86,10 +87,10 @@ pub fn natsort(left: &[u8], right: &[u8], insensitive: bool) -> Ordering {
 	}
 
 	loop {
-		while l.is_some_and(|c| c.is_ascii_whitespace()) {
+		while l.is_some_and(u8::is_ascii_whitespace) {
 			left_next!();
 		}
-		while r.is_some_and(|c| c.is_ascii_whitespace()) {
+		while r.is_some_and(u8::is_ascii_whitespace) {
 			right_next!();
 		}
 

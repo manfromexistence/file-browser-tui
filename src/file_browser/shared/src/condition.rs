@@ -20,6 +20,7 @@ pub enum ConditionOp {
 }
 
 impl ConditionOp {
+	#[must_use]
 	pub fn new(c: char) -> Self {
 		match c {
 			'|' => Self::Or,
@@ -34,6 +35,7 @@ impl ConditionOp {
 	}
 
 	#[inline]
+	#[must_use]
 	pub fn prec(&self) -> u8 {
 		match self {
 			Self::Or => 1,
@@ -87,7 +89,7 @@ impl Condition {
 					}
 					stack.push(op);
 				}
-				ConditionOp::Space => continue,
+				ConditionOp::Space => {}
 				ConditionOp::LeftParen => stack.push(op),
 				ConditionOp::RightParen => {
 					while matches!(stack.last(), Some(last) if last != &ConditionOp::LeftParen) {

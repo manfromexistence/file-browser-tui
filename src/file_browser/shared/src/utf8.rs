@@ -33,6 +33,7 @@ pub const fn utf8_char_width(b: u8) -> usize { UTF8_CHAR_WIDTH[b as usize] as us
 /// underlying characters aren't split. For example, the emoji 🧑‍🔬 (scientist)
 /// could be split so that the string only includes 🧑 (person) instead.
 #[inline]
+#[must_use]
 pub fn floor_char_boundary(s: &str, index: usize) -> usize {
 	if index >= s.len() {
 		s.len()
@@ -47,6 +48,7 @@ pub fn floor_char_boundary(s: &str, index: usize) -> usize {
 }
 
 #[inline]
+#[allow(clippy::cast_possible_wrap)]
 const fn is_utf8_char_boundary(b: u8) -> bool {
 	// This is bit magic equivalent to: b < 128 || b >= 192
 	(b as i8) >= -0x40

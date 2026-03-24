@@ -84,7 +84,7 @@ pub fn split(s: &str, eoo: bool) -> Result<(Vec<String>, Option<String>), SplitE
 				Some('\'') => SingleQuoted,
 				Some('\"') => DoubleQuoted,
 				Some('\\') => Backslash,
-				Some('\t') | Some(' ') | Some('\n') => Delimiter,
+				Some('\t' | ' ' | '\n') => Delimiter,
 				Some('#') => Comment,
 				Some(c) => {
 					word.push(c);
@@ -111,7 +111,7 @@ pub fn split(s: &str, eoo: bool) -> Result<(Vec<String>, Option<String>), SplitE
 				Some('\'') => SingleQuoted,
 				Some('\"') => DoubleQuoted,
 				Some('\\') => UnquotedBackslash,
-				Some('\t') | Some(' ') | Some('\n') => {
+				Some('\t' | ' ' | '\n') => {
 					flush!();
 					Delimiter
 				}
@@ -152,7 +152,7 @@ pub fn split(s: &str, eoo: bool) -> Result<(Vec<String>, Option<String>), SplitE
 			DoubleQuotedBackslash => match c {
 				None => return Err(SplitError::MissingQuoteAfterSlash),
 				Some('\n') => DoubleQuoted,
-				Some(c @ '$') | Some(c @ '`') | Some(c @ '"') | Some(c @ '\\') => {
+				Some(c @ ('$' | '`' | '"' | '\\')) => {
 					word.push(c);
 					DoubleQuoted
 				}

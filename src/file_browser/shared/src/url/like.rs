@@ -57,7 +57,7 @@ where
 	fn triple(&self) -> (PathDyn<'_>, PathDyn<'_>, PathDyn<'_>) { self.as_url().triple() }
 
 	fn try_ends_with(&self, child: impl AsUrl) -> Result<bool, EndsWithError> {
-		self.as_url().try_ends_with(child)
+		self.as_url().try_ends_with(&child)
 	}
 
 	fn try_join(&self, path: impl AsStrand) -> Result<UrlBuf, JoinError> {
@@ -69,11 +69,11 @@ where
 	}
 
 	fn try_starts_with(&self, base: impl AsUrl) -> Result<bool, StartsWithError> {
-		self.as_url().try_starts_with(base)
+		self.as_url().try_starts_with(&base)
 	}
 
 	fn try_strip_prefix(&self, base: impl AsUrl) -> Result<PathDyn<'_>, StripPrefixError> {
-		self.as_url().try_strip_prefix(base)
+		self.as_url().try_strip_prefix(&base)
 	}
 
 	fn uri(&self) -> PathDyn<'_> { self.as_url().uri() }

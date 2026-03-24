@@ -9,6 +9,7 @@ pub enum CharKind {
 }
 
 impl CharKind {
+	#[must_use]
 	pub fn new(c: char) -> Self {
 		if c.is_whitespace() {
 			Self::Space
@@ -19,11 +20,13 @@ impl CharKind {
 		}
 	}
 
+	#[must_use]
 	pub fn vary(self, other: Self, far: bool) -> bool {
 		if far { (self == Self::Space) != (other == Self::Space) } else { self != other }
 	}
 }
 
+#[must_use]
 pub fn strip_trailing_newline(mut s: String) -> String {
 	while s.ends_with('\n') || s.ends_with('\r') {
 		s.pop();
@@ -75,6 +78,7 @@ where
 	Cow::Owned(result + unsafe { src.get_unchecked(last..) })
 }
 
+#[must_use]
 pub fn replace_vec_cow<'a>(v: &'a [u8], from: &[u8], to: &[u8]) -> Cow<'a, [u8]> {
 	let mut it = memchr::memmem::find_iter(v, from);
 	let Some(mut last) = it.next() else { return Cow::Borrowed(v) };
@@ -94,6 +98,7 @@ pub fn replace_vec_cow<'a>(v: &'a [u8], from: &[u8], to: &[u8]) -> Cow<'a, [u8]>
 	Cow::Owned(out)
 }
 
+#[must_use]
 pub fn replace_to_printable(b: &[u8], lf: bool, tab_size: u8, replacement: bool) -> Cow<'_, [u8]> {
 	// Fast path to skip over printable chars at the beginning of the string
 	let printable_len = b.iter().take_while(|&&c| !c.is_ascii_control()).count();

@@ -1,3 +1,9 @@
+#![allow(unsafe_code)]
+#![allow(clippy::all)]
+#![allow(clippy::pedantic)]
+#![allow(clippy::nursery)]
+#![allow(clippy::cargo)]
+
 mod macros;
 
 fb_macro::mod_pub!(fetch file hook plugin preload process size);

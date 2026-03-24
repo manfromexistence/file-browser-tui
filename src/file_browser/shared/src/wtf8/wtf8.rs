@@ -23,6 +23,11 @@ impl AsWtf8 for OsStr {
 
 // --- FromWtf8
 pub trait FromWtf8 {
+	/// Converts a WTF-8 byte slice to this type.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the byte slice is not valid WTF-8 (Windows only).
 	fn from_wtf8(wtf8: &[u8]) -> Result<&Self>;
 }
 
@@ -50,6 +55,11 @@ impl FromWtf8 for std::path::Path {
 
 // --- FromWtf8Vec
 pub trait FromWtf8Vec {
+	/// Converts a WTF-8 byte vector to this type.
+	///
+	/// # Errors
+	///
+	/// Returns an error if the byte vector is not valid WTF-8 (Windows only).
 	fn from_wtf8_vec(wtf8: Vec<u8>) -> Result<Self>
 	where
 		Self: Sized;

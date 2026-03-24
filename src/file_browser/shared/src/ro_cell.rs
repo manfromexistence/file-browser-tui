@@ -13,6 +13,7 @@ unsafe impl<T> Sync for RoCell<T> {}
 
 impl<T> RoCell<T> {
 	#[inline]
+	#[must_use]
 	pub const fn new() -> Self {
 		Self {
 			inner:                                UnsafeCell::new(MaybeUninit::uninit()),
@@ -30,6 +31,11 @@ impl<T> RoCell<T> {
 		}
 	}
 
+	/// Initializes the cell with a value.
+	///
+	/// # Panics
+	///
+	/// Panics in debug mode if the cell is already initialized.
 	#[inline]
 	pub fn init(&self, value: T) {
 		unsafe {
@@ -47,6 +53,11 @@ impl<T> RoCell<T> {
 		self.init(f());
 	}
 
+	/// Drops the value from the cell and returns it.
+	///
+	/// # Panics
+	///
+	/// Panics in debug mode if the cell is not initialized.
 	#[inline]
 	pub fn drop(&self) -> T {
 		unsafe {

@@ -13,12 +13,13 @@ pub struct Throttle<T> {
 }
 
 impl<T> Throttle<T> {
+	#[must_use]
 	pub fn new(total: usize, interval: Duration) -> Self {
 		Self {
 			total: AtomicUsize::new(total),
 			interval,
-			last: AtomicU64::new(timestamp_us() - interval.as_micros() as u64),
-			buf: Default::default(),
+			last: AtomicU64::new(timestamp_us().saturating_sub(interval.as_micros().try_into().unwrap_or(u64::MAX))),
+			buf: Mutex::default(),
 		}
 	}
 
@@ -33,7 +34,7 @@ impl<T> Throttle<T> {
 
 		let last = self.last.load(Ordering::Relaxed);
 		let now = timestamp_us();
-		if now > self.interval.as_micros() as u64 + last {
+		if now > self.interval.as_micros().try_into().unwrap_or(u64::MAX).saturating_add(last) {
 			self.last.store(now, Ordering::Relaxed);
 			return self.flush(data, f);
 		}
@@ -48,7 +49,7 @@ impl<T> Throttle<T> {
 	{
 		let mut buf = mem::take(&mut *self.buf.lock());
 		buf.push(data);
-		f(buf)
+		f(buf);
 	}
 }
 

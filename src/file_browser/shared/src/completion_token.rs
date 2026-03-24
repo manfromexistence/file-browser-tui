@@ -14,6 +14,7 @@ impl CompletionToken {
 		self.inner.1.notify_waiters();
 	}
 
+	#[must_use]
 	pub fn completed(&self) -> Option<bool> {
 		let state = self.inner.0.load(Ordering::Relaxed);
 		if state == 0 { None } else { Some(state == 1) }
