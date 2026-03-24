@@ -444,6 +444,43 @@ impl ChatState {
 
 	fn render_input_cursor(&self, area: Rect, buf: &mut Buffer) {
 		if self.cursor_visible {
+			// Check if cursor revert animation is active
+			if self.cursor_revert_animation {
+				if let Some(start_time) = self.cursor_revert_start {
+					let elapsed = start_time.elapsed().as_millis() as f32;
+					let animation_duration = 300.0; // 300ms animation
+					
+					if elapsed < animation_duration {
+						// Calculate interpolation progress (0.0 to 1.0)
+						let progress = elapsed / animation_duration;
+						// Use ease-out cubic for smooth deceleration
+						let eased_progress = 1.0 - (1.0 - progress).powi(3);
+						
+						// Interpolate between old position and new position
+						let from_pos = self.cursor_revert_from_pos as f32;
+						let to_pos = self.input.cursor_position as f32;
+						let animated_pos = from_pos + (to_pos - from_pos) * eased_progress;
+						
+						// Render animated cursor with trail effect
+						let cursor_x = area.x + (animated_pos as u16 % area.width);
+						let cursor_y = area.y + (animated_pos as u16 / area.width);
+						
+						if cursor_x < area.right() && cursor_y < area.bottom() {
+							let cell = &mut buf[(cursor_x, cursor_y)];
+							let rainbow_color = self.rainbow_cursor.current_color();
+							
+							// Pulsing effect during animation
+							let pulse_char = if (elapsed as u32 / 50) % 2 == 0 { '◆' } else { '◇' };
+							cell.set_char(pulse_char);
+							cell.set_style(Style::default().fg(rainbow_color));
+						}
+						
+						return;
+					}
+				}
+			}
+			
+			// Normal cursor rendering
 			let cursor_x = area.x + (self.input.cursor_position as u16 % area.width);
 			let cursor_y = area.y + (self.input.cursor_position as u16 / area.width);
 

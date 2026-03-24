@@ -515,6 +515,36 @@ impl<'a> Dispatcher<'a> {
 				if is_repeat || is_timing_repeat {
 					// Key is being held! Activate voice mode (spinner)
 					if !self.app.bridge.chat_state.space_held {
+						// Save cursor position before reverting (this is where cursor is AFTER typing space)
+						let old_cursor_pos = self.app.bridge.chat_state.input.cursor_position;
+						
+						self.app.bridge.chat_state.cursor_revert_from_pos = old_cursor_pos;
+						
+						// Remove ALL trailing spaces that were typed during the hold detection
+						// We need to remove potentially 2 spaces: the first press + the repeat that triggered detection
+						let mut new_pos = old_cursor_pos;
+						let mut spaces_removed = 0;
+						
+						while new_pos > 0 && spaces_removed < 2 {
+							let content_before = &self.app.bridge.chat_state.input.content[..new_pos];
+							if content_before.ends_with(' ') {
+								new_pos -= 1;
+								self.app.bridge.chat_state.input.content.remove(new_pos);
+								spaces_removed += 1;
+							} else {
+								break;
+							}
+						}
+						
+						if spaces_removed > 0 {
+							self.app.bridge.chat_state.input.cursor_position = new_pos;
+						}
+						
+						// Start cursor revert animation
+						self.app.bridge.chat_state.cursor_revert_animation = true;
+						self.app.bridge.chat_state.cursor_revert_start = Some(now);
+						
+						// Activate voice mode
 						self.app.bridge.chat_state.space_held = true;
 						self.app.bridge.chat_state.space_hold_start = Some(now);
 					}
@@ -527,6 +557,8 @@ impl<'a> Dispatcher<'a> {
 						self.app.bridge.chat_state.space_held = false;
 						self.app.bridge.chat_state.space_hold_start = None;
 						self.app.bridge.chat_state.last_space_press = None;
+						self.app.bridge.chat_state.cursor_revert_animation = false;
+						self.app.bridge.chat_state.cursor_revert_start = None;
 						NEED_RENDER.store(1, Ordering::Relaxed);
 					}
 					succ!()
@@ -548,6 +580,8 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.space_held = false;
 					self.app.bridge.chat_state.space_hold_start = None;
 					self.app.bridge.chat_state.last_space_press = None;
+					self.app.bridge.chat_state.cursor_revert_animation = false;
+					self.app.bridge.chat_state.cursor_revert_start = None;
 					NEED_RENDER.store(1, Ordering::Relaxed);
 				}
 			}

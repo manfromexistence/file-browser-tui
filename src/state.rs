@@ -185,6 +185,11 @@ pub struct ChatState {
 	pub spinner_frame: usize,
 	pub last_space_press: Option<Instant>,
 	pub space_press_count: usize,
+
+	// NEW: Cursor revert animation
+	pub cursor_revert_animation: bool,
+	pub cursor_revert_start: Option<Instant>,
+	pub cursor_revert_from_pos: usize,
 }
 
 impl ChatState {
@@ -263,6 +268,9 @@ impl ChatState {
 			spinner_frame: 0,
 			last_space_press: None,
 			space_press_count: 0,
+			cursor_revert_animation: false,
+			cursor_revert_start: None,
+			cursor_revert_from_pos: 0,
 		}
 	}
 
