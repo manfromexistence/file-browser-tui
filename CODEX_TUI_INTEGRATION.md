@@ -423,7 +423,7 @@ KeyCode::Enter => {
 }
 ```
 
-## Step 7: Stripping Codex Branding/Menus
+## Step 8: Handle Mode Switching in Main Loop
 
 The key to stripping Codex branding is to:
 
