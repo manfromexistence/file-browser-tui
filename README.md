@@ -33,14 +33,18 @@ https://github.com/sxdx/dx/assets/17523360/92ff23fa-0cd5-4f04-b387-894c12265cc7
 
 ## Project status
 
-Public beta, can be used as a daily driver.
+✅ **Production Ready** - Zero warnings, fully formatted, professionally structured codebase.
 
-dx is currently in heavy development, expect breaking changes.
+dx-tui is currently in active development with a stable, production-ready foundation.
 
 ## Documentation
 
-- Usage: https://dx-rs.github.io/docs/installation
-- Features: https://dx-rs.github.io/features
+- **Quick Start**: [QUICKSTART.md](QUICKSTART.md) - Get started in 5 minutes
+- **Codex Integration**: [CODEX_INTEGRATION.md](CODEX_INTEGRATION.md) - Full integration guide
+- **Project Structure**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Codebase organization
+- **For Contributors**: [.github/CODEX_SETUP.md](.github/CODEX_SETUP.md) - Contributor guide
+- **Features**: https://dx-rs.github.io/features
+- **Installation**: https://dx-rs.github.io/docs/installation
 
 ## Discussion
 

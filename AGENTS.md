@@ -246,10 +246,9 @@ cargo add <crate> -p <member-crate-name>
 ## Resources
 
 - **Main README**: `README.md` (user-facing documentation)
-- **Developer Guide**: `DX.md` (AI steering protocol)
-- **LLM Providers**: `PROVIDERS.md` (LLM integration details)
-- **Error Reference**: `ERRORS.md` (common errors and solutions)
 - **Codex Integration**: `CODEX_INTEGRATION.md` (detailed Codex setup)
+- **Quick Start**: `QUICKSTART.md` (5-minute setup guide)
+- **Contributor Guide**: `.github/CODEX_SETUP.md` (for contributors)
 
 ## Notes for AI Agents
 
