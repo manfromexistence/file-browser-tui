@@ -19,9 +19,6 @@ Cargo.lock
 # Logs
 *.log
 
-# Development artifacts
-/hexed/
-
 # Environment
 .env
 .env.local
