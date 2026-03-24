@@ -6,8 +6,6 @@
 
 ## Pending
 
-- [ ] Save intro/outro animation selections to config file (optional enhancement)
-
 ## Completed
 
 - [x] ~~Comment out Spinners animation from AnimationType enum and all references~~ ✅ (completed: 2026-03-25)
@@ -25,5 +23,10 @@
 - [x] ~~Add Block spinner display when Space key is held~~ ✅ (completed: 2026-03-25)
 - [x] ~~Position spinner on right side of chat input box~~ ✅ (completed: 2026-03-25)
 - [x] ~~Update spinner to show only while Space is held (hide on other keys)~~ ✅ (completed: 2026-03-25)
+- [x] ~~Add context-aware shortcuts/tips based on current screen~~ ✅ (completed: 2026-03-25)
 
 ## Blocked / Failed
+
+- [x] ~~Create AGENTS.md for Codex CLI integration~~ ✅ (completed: 2026-03-25 15:30)
+- [x] ~~Create CODEX_INTEGRATION.md documentation~~ ✅ (completed: 2026-03-25 15:35)
+- [x] ~~Update DX.md with current date (25 March 2026)~~ ✅ (completed: 2026-03-25 15:36)

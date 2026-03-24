@@ -16,9 +16,17 @@ impl ChatState {
 
 		// PRIORITY 0: Playing intro/outro transition animations
 		if self.playing_intro || self.playing_outro {
-			// Clear the entire area first
-			for y in area.top()..area.bottom() {
-				for x in area.left()..area.right() {
+			// Split screen: animation area + input + controls (like animation carousel)
+			let chunks = Layout::default()
+				.direction(Direction::Vertical)
+				.constraints([Constraint::Min(10), Constraint::Length(3), Constraint::Length(1)])
+				.split(area);
+
+			self.input_area = chunks[1];
+
+			// Clear the animation area first
+			for y in chunks[0].top()..chunks[0].bottom() {
+				for x in chunks[0].left()..chunks[0].right() {
 					buf[(x, y)].reset();
 					buf[(x, y)].set_bg(self.theme_bg_color());
 				}
@@ -29,42 +37,50 @@ impl ChatState {
 
 			match anim_type {
 				AnimationType::Matrix => {
-					self.render_matrix_animation_in_area(area, buf);
+					self.render_matrix_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Confetti => {
-					self.render_confetti_animation_in_area(area, buf);
+					self.render_confetti_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::GameOfLife => {
-					self.render_gameoflife_animation_in_area(area, buf);
+					self.render_gameoflife_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Starfield => {
-					self.render_starfield_animation_in_area(area, buf);
+					self.render_starfield_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Rain => {
-					self.render_rain_animation_in_area(area, buf);
+					self.render_rain_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::NyanCat => {
-					self.render_nyancat_animation_in_area(area, buf);
+					self.render_nyancat_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::DVDLogo => {
-					self.render_dvdlogo_animation_in_area(area, buf);
+					self.render_dvdlogo_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Fire => {
-					self.render_fire_animation_in_area(area, buf);
+					self.render_fire_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Plasma => {
-					self.render_plasma_animation_in_area(area, buf);
+					self.render_plasma_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Waves => {
-					self.render_waves_animation_in_area(area, buf);
+					self.render_waves_animation_in_area(chunks[0], buf);
 				}
 				AnimationType::Fireworks => {
-					self.render_fireworks_animation_in_area(area, buf);
+					self.render_fireworks_animation_in_area(chunks[0], buf);
 				}
 				_ => {
 					// For Splash or Yazi, just show a blank screen during transition
 				}
 			}
+
+			// Render input box and bottom controls
+			self.render_input_box(chunks[1], buf);
+			let (plan_area, model_area, _token_area, local_area) =
+				self.render_bottom_controls(chunks[2], buf);
+			self.plan_button_area = plan_area;
+			self.model_button_area = model_area;
+			self.local_button_area = local_area;
 
 			// Render toast notification (on top of everything)
 			self.render_toast(area, buf);
@@ -458,23 +474,68 @@ impl ChatState {
 
 		if spinner_x < area.right() && spinner_y < area.bottom() {
 			let cell = &mut buf[(spinner_x, spinner_y)];
-			
+
 			// Use rainbow color for the spinner
 			let color = self.rainbow_animation.current_color();
-			
+
 			cell.set_char(frame_char);
 			cell.set_style(Style::default().fg(color).add_modifier(Modifier::BOLD));
 		}
 	}
 
 	pub fn render_bottom_controls(&self, area: Rect, buf: &mut Buffer) -> (Rect, Rect, Rect, Rect) {
-		let shortcuts = [
-			"0/Ctrl+P: Toggle Command Palette | Space(Hold): TTS",
-			"Left/Right Arrow: Explore Screens | Ctrl+C: Exit",
-			"1/2/3/(Numbers): Toggle Menus | Ctrl+T: Theme",
-		];
+		// Context-aware shortcuts based on current screen
+		let shortcuts = if self.animation_mode {
+			let animations = crate::AnimationType::all();
+			let current_anim = animations[self.current_animation_index];
 
-		let current_shortcut = shortcuts[self.shortcut_index % shortcuts.len()];
+			if current_anim == crate::AnimationType::Yazi {
+				// File Browser tips
+				[
+					"Left/Right Arrow: Return to Splash | Navigate files with arrows",
+					"Enter: Select file | Tab: Switch panes | /: Search",
+					"Space: Select multiple | d: Delete | r: Rename | y: Copy",
+				]
+			} else if current_anim == crate::AnimationType::Splash {
+				// Splash screen tips
+				[
+					"Right Arrow: File Browser | Left Arrow: Animation Carousel",
+					"Type a message and press Enter to start chatting",
+					"0/Ctrl+P: Command Palette | Ctrl+T: Theme | Ctrl+C: Exit",
+				]
+			} else {
+				// Animation Carousel tips
+				[
+					"Up Arrow: Set as INTRO animation | Down Arrow: Set as OUTRO animation",
+					"Left Arrow: Previous animation | Right Arrow: Return to Splash",
+					"Intro plays when entering chat | Outro plays when exiting (Ctrl+C)",
+				]
+			}
+		} else {
+			// Normal chat mode tips (rotating)
+			[
+				"0/Ctrl+P: Toggle Command Palette | Space(Hold): Voice Input",
+				"Left/Right Arrow: Explore Screens | Ctrl+C: Exit to Splash",
+				"1/2/3/(Numbers): Toggle Menus | Ctrl+T: Theme",
+			]
+		};
+
+		let current_shortcut = if self.animation_mode {
+			// In animation mode, show all tips without rotation
+			let animations = crate::AnimationType::all();
+			let current_anim = animations[self.current_animation_index];
+			if current_anim == crate::AnimationType::Yazi || current_anim == crate::AnimationType::Splash
+			{
+				// Show first tip for Yazi and Splash
+				shortcuts[0]
+			} else {
+				// Rotate tips for animation carousel
+				shortcuts[self.shortcut_index % shortcuts.len()]
+			}
+		} else {
+			// Normal rotation for chat mode
+			shortcuts[self.shortcut_index % shortcuts.len()]
+		};
 
 		let mode_text = "Agent"; // Simplified for minimal version
 
@@ -655,7 +716,6 @@ impl ChatState {
 	}
 }
 
-
 impl ChatState {
 	/// Render toast notification in top-right corner
 	pub fn render_toast(&self, area: Rect, buf: &mut Buffer) {
@@ -668,12 +728,7 @@ impl ChatState {
 			let toast_x = area.width.saturating_sub(toast_width);
 			let toast_y = 0;
 
-			let toast_area = Rect {
-				x: toast_x,
-				y: toast_y,
-				width: toast_width,
-				height: toast_height,
-			};
+			let toast_area = Rect { x: toast_x, y: toast_y, width: toast_width, height: toast_height };
 
 			// Create toast with border
 			let block = Block::default()
@@ -695,14 +750,19 @@ impl ChatState {
 	}
 
 	/// Render intro/outro indicators in top-left corner (for carousel screens)
-	pub fn render_animation_indicators(&self, area: Rect, current_anim: AnimationType, buf: &mut Buffer) {
+	pub fn render_animation_indicators(
+		&self,
+		area: Rect,
+		current_anim: AnimationType,
+		buf: &mut Buffer,
+	) {
 		// Only show on carousel animations (not Splash or Yazi)
 		if current_anim == AnimationType::Splash || current_anim == AnimationType::Yazi {
 			return;
 		}
 
 		let mut lines = Vec::new();
-		
+
 		// Show intro indicator
 		if self.intro_animation == current_anim {
 			lines.push(Line::from(vec![
@@ -710,7 +770,7 @@ impl ChatState {
 				Span::styled("INTRO", Style::default().fg(self.theme.fg)),
 			]));
 		}
-		
+
 		// Show outro indicator
 		if self.outro_animation == current_anim {
 			lines.push(Line::from(vec![
@@ -727,12 +787,7 @@ impl ChatState {
 		let indicator_height = lines.len() as u16 + 2; // +2 for border
 		let indicator_width = 12; // Fixed width for "▼ OUTRO" + padding
 
-		let indicator_area = Rect {
-			x: 0,
-			y: 0,
-			width: indicator_width,
-			height: indicator_height,
-		};
+		let indicator_area = Rect { x: 0, y: 0, width: indicator_width, height: indicator_height };
 
 		// Create indicator box with border
 		let block = Block::default()
@@ -745,8 +800,7 @@ impl ChatState {
 		block.render(indicator_area, buf);
 
 		// Render indicator text
-		let text = Paragraph::new(lines)
-			.style(Style::default().fg(self.theme.fg));
+		let text = Paragraph::new(lines).style(Style::default().fg(self.theme.fg));
 
 		text.render(inner, buf);
 	}

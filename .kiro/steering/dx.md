@@ -4,7 +4,7 @@ inclusion: always
 
 # Universal AI Steering Protocol v1.1
 
-**CURRENT DATE: 19 March 2026**
+**CURRENT DATE: 25 March 2026**
 
 > This file governs AI behavior across ALL projects, languages, and frameworks.
 > Every instruction here is non-negotiable unless the user explicitly overrides it.

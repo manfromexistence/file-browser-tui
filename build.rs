@@ -76,11 +76,7 @@ fn main() -> io::Result<()> {
 	}
 	writeln!(output, "];")?;
 
-	println!(
-		"cargo:warning=Embedded {} figlet fonts ({} bytes compressed)",
-		fonts.len(),
-		binary_data.len()
-	);
+	// Silenced: println!("cargo:warning=Embedded {} figlet fonts ({} bytes compressed)", fonts.len(), binary_data.len());
 
 	Ok(())
 }

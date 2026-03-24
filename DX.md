@@ -27,3 +27,8 @@ Please put that spinnter inside the the chat input box that has the border and p
 Now give me brutal thruhts do we have any clippy right now or not?? And the clippy allow wanings don't count as those are not critical - silence all wanings that you find and even this wanings "warning: dx-tui@26.2.2: Embedded 113 figlet fonts (221566 bytes compressed)"
 
 Now even in the intro and outro please show the chat bottom and chat action buttons
+
+So currently this project task is to be configured with a big project called Codex-rust CLI. You can do research about it. Today is the 25th March 2026 and we are creating this TOI so that we can configure the Codex-rust CLI with our current TOI. Do the finishing task so that it is easy for us to configure Codex-rust CLI with our current TOI, like:
+making every file and link and format
+making clear documentation about how to configure with Codex-rust CLI
+actually creating the docs about it correctly

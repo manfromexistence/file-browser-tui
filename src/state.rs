@@ -167,7 +167,7 @@ pub struct ChatState {
 	// NEW: Intro/Outro animation selection
 	pub intro_animation: AnimationType,
 	pub outro_animation: AnimationType,
-	
+
 	// NEW: Toast notification system
 	pub toast_message: Option<String>,
 	pub toast_start_time: Option<Instant>,
