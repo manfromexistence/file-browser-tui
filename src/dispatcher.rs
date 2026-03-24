@@ -498,75 +498,62 @@ impl<'a> Dispatcher<'a> {
 		if self.app.bridge.mode == crate::AppMode::Chat
 			|| self.app.bridge.mode == crate::AppMode::FilePicker
 		{
-			// Handle Space key for spinner - proper hold detection
+			// Handle Space key for voice mode - hybrid hold detection
 			if key.code == KeyCode::Char(' ') && key.modifiers.is_empty() {
+				use crossterm::event::KeyEventKind;
+				
 				let now = Instant::now();
-
-				if let Some(last_press) = self.app.bridge.chat_state.last_space_press {
-					// Check if this is a rapid repeat (holding)
-					if last_press.elapsed() < Duration::from_millis(150) {
-						// This is a hold! Show spinner
-						if !self.app.bridge.chat_state.space_held {
-							self.app.bridge.chat_state.space_held = true;
-							self.app.bridge.chat_state.space_hold_start = Some(now);
-						}
-						self.app.bridge.chat_state.last_space_press = Some(now);
-						self.app.bridge.chat_state.space_press_count += 1;
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!() // Don't type space while holding
-					} else {
-						// Gap too long, this is a new single space press
-						self.app.bridge.chat_state.last_space_press = Some(now);
-						self.app.bridge.chat_state.space_press_count = 1;
+				let is_repeat = key.kind == KeyEventKind::Repeat;
+				
+				// Check if this is a rapid repeat using timing (fallback for terminals without enhancement flags)
+				let is_timing_repeat = if let Some(last_press) = self.app.bridge.chat_state.last_space_press {
+					last_press.elapsed() < Duration::from_millis(100)
+				} else {
+					false
+				};
+				
+				if is_repeat || is_timing_repeat {
+					// Key is being held! Activate voice mode (spinner)
+					if !self.app.bridge.chat_state.space_held {
+						self.app.bridge.chat_state.space_held = true;
+						self.app.bridge.chat_state.space_hold_start = Some(now);
+					}
+					self.app.bridge.chat_state.last_space_press = Some(now);
+					NEED_RENDER.store(1, Ordering::Relaxed);
+					succ!() // Don't type spaces while holding
+				} else if key.kind == KeyEventKind::Release {
+					// Space released - deactivate voice mode
+					if self.app.bridge.chat_state.space_held {
 						self.app.bridge.chat_state.space_held = false;
 						self.app.bridge.chat_state.space_hold_start = None;
-						// Type the space immediately since it's not a hold
-						let action = self.app.bridge.chat_state.input.handle_key(key);
-						match action {
-							InputAction::Changed => {
-								NEED_RENDER.store(1, Ordering::Relaxed);
-								succ!()
-							}
-							_ => succ!()
-						}
+						self.app.bridge.chat_state.last_space_press = None;
+						NEED_RENDER.store(1, Ordering::Relaxed);
 					}
+					succ!()
 				} else {
-					// First space press - don't type yet, wait to see if it's a hold
+					// First press - type the space normally
 					self.app.bridge.chat_state.last_space_press = Some(now);
-					self.app.bridge.chat_state.space_press_count = 1;
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!() // Don't type the first space immediately
+					let action = self.app.bridge.chat_state.input.handle_key(key);
+					match action {
+						InputAction::Changed => {
+							NEED_RENDER.store(1, Ordering::Relaxed);
+							succ!()
+						}
+						_ => succ!()
+					}
 				}
 			} else {
-				// Any other key pressed - check if we need to type a pending space first
-				if let Some(last_press) = self.app.bridge.chat_state.last_space_press {
-					// If we had a single space press that wasn't followed by another space quickly
-					if !self.app.bridge.chat_state.space_held && self.app.bridge.chat_state.space_press_count == 1 {
-						// Type the pending space first
-						let space_key = KeyEvent::new(KeyCode::Char(' '), crossterm::event::KeyModifiers::empty());
-						let _ = self.app.bridge.chat_state.input.handle_key(space_key);
-					}
-					// Clear space tracking state
-					self.app.bridge.chat_state.last_space_press = None;
-					self.app.bridge.chat_state.space_press_count = 0;
-				}
-				
-				// Stop spinner if active
+				// Any other key pressed - deactivate voice mode
 				if self.app.bridge.chat_state.space_held {
 					self.app.bridge.chat_state.space_held = false;
 					self.app.bridge.chat_state.space_hold_start = None;
+					self.app.bridge.chat_state.last_space_press = None;
 					NEED_RENDER.store(1, Ordering::Relaxed);
 				}
 			}
 
-			// If spinner is active (space held), don't process any input - just return
+			// If voice mode is active (spinner showing), don't process any input - just return
 			if self.app.bridge.chat_state.space_held {
-				NEED_RENDER.store(1, Ordering::Relaxed);
-				succ!()
-			}
-			
-			// If this is a space key, it's already been handled above
-			if key.code == KeyCode::Char(' ') && key.modifiers.is_empty() {
 				NEED_RENDER.store(1, Ordering::Relaxed);
 				succ!()
 			}
