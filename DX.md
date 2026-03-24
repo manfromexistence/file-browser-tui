@@ -32,3 +32,7 @@ So currently this project task is to be configured with a big project called Cod
 making every file and link and format
 making clear documentation about how to configure with Codex-rust CLI
 actually creating the docs about it correctly
+
+what is agents.overrifde please remove all stray markdown and scrilpts files to root cursed folder and make this codebase production ready - professional and 10 out 10 codebase
+
+Now still even I hold the space its doing some space with the cursor so please make it so that when we are holding the space it don't have space in the cursor

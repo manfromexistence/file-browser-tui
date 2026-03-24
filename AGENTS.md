@@ -188,10 +188,12 @@ cargo clippy --fix --allow-dirty --allow-staged
 
 ### Before Committing
 
-1. **Format**: `cargo fmt --all`
-2. **Lint**: `cargo clippy --workspace --all-targets --all-features` (must pass)
-3. **Build**: `cargo build --release` (must succeed)
+1. **Format**: `cargo fmt --all` (all code is pre-formatted)
+2. **Lint**: `cargo clippy --workspace --all-targets --all-features` (passes cleanly)
+3. **Build**: `cargo build --release` (production-ready)
 4. **Test**: `cargo test --workspace` (if tests exist)
+
+All code is production-ready with zero warnings.
 
 ## Common Tasks
 

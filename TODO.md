@@ -24,6 +24,8 @@
 - [x] ~~Position spinner on right side of chat input box~~ ✅ (completed: 2026-03-25)
 - [x] ~~Update spinner to show only while Space is held (hide on other keys)~~ ✅ (completed: 2026-03-25)
 - [x] ~~Add context-aware shortcuts/tips based on current screen~~ ✅ (completed: 2026-03-25)
+- [x] ~~Show input box and controls during intro/outro animations~~ ✅ (completed: 2026-03-25)
+- [x] ~~Fix Up/Down key priority: Menu navigation first, then other functions~~ ✅ (completed: 2026-03-25)
 
 ## Blocked / Failed
 

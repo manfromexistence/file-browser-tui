@@ -393,181 +393,6 @@ impl<'a> Dispatcher<'a> {
 			}
 		}
 
-		// Global menu navigation keys - work when menu is visible on ANY screen
-		if self.app.bridge.chat_state.show_tachyon_menu {
-			// Check if we're in recording mode in keyboard shortcuts submenu
-			if self.app.bridge.chat_state.menu.recording_mode
-				&& self.app.bridge.chat_state.menu.current_submenu == Some(1)
-			{
-				// Get the selected shortcut index (skip "Back" and "Toggle Recording Mode")
-				if let Some(action_index) = self.app.bridge.chat_state.menu.get_selected_shortcut_index() {
-					// Format the key press into a shortcut string
-					let shortcut = format_key_event(&key);
-
-					// Don't record navigation keys or special menu keys
-					if !matches!(
-						key.code,
-						KeyCode::Up
-							| KeyCode::Down
-							| KeyCode::PageUp
-							| KeyCode::PageDown
-							| KeyCode::Home
-							| KeyCode::End
-							| KeyCode::Esc
-							| KeyCode::Enter
-							| KeyCode::Char('j')
-							| KeyCode::Char('k')
-							| KeyCode::Char('g')
-							| KeyCode::Char('G')
-					) {
-						// Update the keyboard shortcut
-						self.app.bridge.chat_state.menu.update_keyboard_shortcut(action_index, shortcut);
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					}
-				}
-			}
-
-			match key.code {
-				KeyCode::Up | KeyCode::Char('k') => {
-					self.app.bridge.chat_state.menu.select_prev_menu_item();
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::Down | KeyCode::Char('j') => {
-					self.app.bridge.chat_state.menu.select_next_menu_item();
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::PageUp => {
-					self.app.bridge.chat_state.menu.page_up(10);
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::PageDown => {
-					self.app.bridge.chat_state.menu.page_down(10);
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::Home | KeyCode::Char('g') => {
-					self.app.bridge.chat_state.menu.jump_to_top();
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::End | KeyCode::Char('G') => {
-					self.app.bridge.chat_state.menu.jump_to_bottom();
-					// Apply theme preview if in theme submenu
-					if let Some(theme_name) = self.app.bridge.chat_state.menu.get_highlighted_theme_name() {
-						self
-							.app
-							.bridge
-							.chat_state
-							.apply_theme(&theme_name, self.app.bridge.chat_state.theme_mode);
-					}
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::Char('t') | KeyCode::Char('T') => {
-					// Toggle light/dark mode when in theme submenu
-					if self.app.bridge.chat_state.menu.current_submenu == Some(0) {
-						self.app.bridge.chat_state.toggle_theme_mode();
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					}
-				}
-				KeyCode::Enter => {
-					// Check if toggle mode button is selected
-					if self.app.bridge.chat_state.menu.is_toggle_mode_selected() {
-						// Toggle the theme mode
-						self.app.bridge.chat_state.toggle_theme_mode();
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					}
-
-					// Check if toggle recording button is selected
-					if self.app.bridge.chat_state.menu.is_toggle_recording_selected() {
-						// Toggle the recording mode
-						self.app.bridge.chat_state.menu.toggle_recording_mode();
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					}
-
-					// Get the current theme name before selecting
-					let theme_name = self.app.bridge.chat_state.menu.get_selected_theme_name();
-
-					// Select current menu item (enter submenu or execute action)
-					let _should_close = !self.app.bridge.chat_state.menu.select_current_item();
-
-					// If we were in theme submenu and selected a theme, just close the menu
-					// (theme is already applied from navigation/hover)
-					if theme_name.is_some() {
-						self.app.bridge.chat_state.menu_is_closing = true;
-						self.app.bridge.chat_state.menu.pick_closing_effect();
-						self.app.bridge.chat_state.show_tachyon_menu = false;
-					}
-
-					NEED_RENDER.store(1, Ordering::Relaxed);
-					succ!()
-				}
-				KeyCode::Esc => {
-					// Go back to main menu if in submenu, otherwise close menu
-					if self.app.bridge.chat_state.menu.current_submenu.is_some() {
-						self.app.bridge.chat_state.menu.go_back_to_main();
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					} else {
-						// Close menu
-						self.app.bridge.chat_state.menu_is_closing = true;
-						self.app.bridge.chat_state.menu.pick_closing_effect();
-						self.app.bridge.chat_state.show_tachyon_menu = false;
-						NEED_RENDER.store(1, Ordering::Relaxed);
-						succ!()
-					}
-				}
-				_ => {}
-			}
-		}
-
 		// Global '0' key handler - toggle menu overlay on ANY screen
 		if key.code == KeyCode::Char('0') {
 			if self.app.bridge.chat_state.show_tachyon_menu {
@@ -710,6 +535,12 @@ impl<'a> Dispatcher<'a> {
 					self.app.bridge.chat_state.space_press_count = 0;
 					NEED_RENDER.store(1, Ordering::Relaxed);
 				}
+			}
+
+			// If spinner is active (space held), don't process any input - just return
+			if self.app.bridge.chat_state.space_held {
+				NEED_RENDER.store(1, Ordering::Relaxed);
+				succ!()
 			}
 
 			// Handle scrolling when messages exist and input is empty

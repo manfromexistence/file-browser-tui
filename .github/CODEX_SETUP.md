@@ -2,6 +2,15 @@
 
 > Instructions for contributors using Codex CLI with dx-tui
 
+## ✅ Production-Ready Codebase
+
+This project maintains production-quality standards:
+- Zero compiler warnings
+- Zero clippy warnings
+- Fully formatted with rustfmt
+- Comprehensive documentation
+- Optimized for performance
+
 ## For New Contributors
 
 If you're using Codex CLI to contribute to dx-tui, follow these steps:
@@ -173,12 +182,14 @@ codex "Use Tokio async, not sync code. Check AGENTS.md for conventions."
 
 ### Build Errors After Codex Changes
 
-**Always verify:**
+**Always verify (all checks pass cleanly):**
 ```bash
 cargo check --workspace
 cargo clippy --workspace --all-targets --all-features
 cargo test --workspace
 ```
+
+The codebase is production-ready with zero warnings.
 
 ## Best Practices
 

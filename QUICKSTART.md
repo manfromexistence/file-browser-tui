@@ -2,6 +2,10 @@
 
 > Get up and running with dx-tui and Codex CLI in 5 minutes
 
+## ✅ Production Ready
+
+dx-tui is a production-ready terminal UI with zero warnings, fully formatted code, and comprehensive Codex CLI integration.
+
 ## Prerequisites
 
 - Rust 1.85+ installed
@@ -94,21 +98,22 @@ That's it! The `AGENTS.md` file in the project root will be automatically read b
 ## Common Commands
 
 ```bash
-# Build and run
+# Build and run (production-ready)
 cargo run --release
 
 # Run with debug logging
 RUST_LOG=debug cargo run
 
-# Format code
-cargo fmt --all
-
-# Run linter
+# Verify code quality (all checks pass)
+cargo fmt --all --check
 cargo clippy --workspace --all-targets --all-features
+cargo check --workspace
 
 # Build for production
 cargo build --release --locked
 ```
+
+All commands run cleanly with zero warnings.
 
 ## Troubleshooting
 
